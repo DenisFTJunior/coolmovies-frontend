@@ -27,11 +27,15 @@ const QUERY = gql`
         title
         userCreatorId
       }
+      pageInfo {
+        hasNextPage
+        hasPreviousPage
+      }
     }
   }
 `;
 
-const getMovieQuery = (vars: MoviesVars) => {
+const getMoviesQuery = (vars: MoviesVars) => {
   return useQuery<Movies, MoviesVars>(QUERY, {
     fetchPolicy: "network-only",
     nextFetchPolicy: "cache-first",
@@ -40,4 +44,4 @@ const getMovieQuery = (vars: MoviesVars) => {
   });
 };
 
-export default getMovieQuery;
+export default getMoviesQuery;
