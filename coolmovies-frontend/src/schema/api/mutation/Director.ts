@@ -1,4 +1,8 @@
-export interface DirectorInput {
+export interface SaveDirectorInput {
+  input: SaveDirectorVars;
+}
+
+export interface SaveDirectorVars {
   movieDirector: {
     name: string;
     age: number;
@@ -6,6 +10,10 @@ export interface DirectorInput {
 }
 
 export interface UpdateDirectorInput {
+  input: UpdateDirectorVars;
+}
+
+export interface UpdateDirectorVars {
   id?: string;
   nodeId?: string;
   movieDirectorPatch: {
@@ -15,6 +23,10 @@ export interface UpdateDirectorInput {
 }
 
 export interface DeleteDirectorInput {
+  input: DeleteDirectorVars;
+}
+
+export interface DeleteDirectorVars {
   id?: string;
   nodeId?: string;
 }

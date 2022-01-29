@@ -1,4 +1,8 @@
-export interface CommentInput {
+export interface SaveCommentInput {
+  input: SaveCommentVars
+}
+
+export interface SaveCommentVars {
   comment: {
     title: string;
     body: string;
@@ -8,6 +12,10 @@ export interface CommentInput {
 }
 
 export interface UpdateCommentInput {
+  input: UpdateCommentVars;
+}
+
+export interface UpdateCommentVars {
   id?: string;
   nodeId?: string;
   commentPatch: {
@@ -19,6 +27,10 @@ export interface UpdateCommentInput {
 }
 
 export interface DeleteCommentInput {
+  input:DeleteCommentVars
+}
+
+export interface DeleteCommentVars {
   id?: string;
   nodeId?: string;
 }
