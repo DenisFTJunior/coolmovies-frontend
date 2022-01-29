@@ -1,7 +1,8 @@
 import { gql, useQuery } from "@apollo/client";
 
 import { moviesClient } from "../../client/movieClient";
-import { Review, ReviewVars } from "../../../../schema/Review";
+import { Review, ReviewVars } from "../../../../schema/query/Review";
+import { Director, DirectorVars } from "../../../../schema/query/Director";
 
 const DIRECTOR_BY_ID_QUERY = gql`
   query MovieDirector($id: ID!) {
@@ -25,9 +26,9 @@ const DIRECTOR_BY_NODE_ID_QUERY = gql`
   }
 `;
 
-const getReviewQuery = ({ id, nodeId }: ReviewVars) => {
+const getDirectorQuery = ({ id, nodeId }: DirectorVars) => {
   const query = nodeId ? DIRECTOR_BY_NODE_ID_QUERY : DIRECTOR_BY_ID_QUERY;
-  return useQuery<Review, ReviewVars>(query, {
+  return useQuery<Director, DirectorVars>(query, {
     fetchPolicy: "network-only",
     nextFetchPolicy: "cache-first",
     variables: { id: nodeId || id },
@@ -36,4 +37,4 @@ const getReviewQuery = ({ id, nodeId }: ReviewVars) => {
   });
 };
 
-export default getReviewQuery;
+export default getDirectorQuery;

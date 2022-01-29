@@ -1,5 +1,6 @@
 export interface Movie {
     id:string
+    nodeId:string
     movieDirectorId:string
     releaseDate:string
     title:string

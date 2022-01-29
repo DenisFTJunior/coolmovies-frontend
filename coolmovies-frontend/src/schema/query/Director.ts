@@ -1,5 +1,6 @@
 export interface Director {
     id:string
+    nodeId:string
     name:string
     age:number
 }

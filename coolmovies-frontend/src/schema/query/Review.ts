@@ -1,5 +1,6 @@
 export interface Review {
-  id: string;
+  id:string
+  nodeId:string
   body: string;
   movieId: string;
   rating: string;
