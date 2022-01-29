@@ -16,7 +16,7 @@ const saveComment = (input: CommentInput) => {
   return useMutation<Comment, CommentInput>(SAVE_COMMENT_MUTATION, {
     variables: input,
     client: moviesClient,
-    refetchQueries: ["Comment", "Comments"],
+    refetchQueries: ["Comment", "AllComments"],
   });
 };
 

@@ -1,10 +1,10 @@
 import { gql, useMutation } from "@apollo/client";
 
 import { moviesClient } from "../../client/movieClient";
-import { UpdateDirectorInput } from "../../../../schema/api/mutation/Director";
+import { DeleteDirectorInput } from "../../../../schema/api/mutation/Director";
 import { Director } from "../../../../schema/api/Director";
 
-const UPDATE_DIRECTOR_BY_ID_MUTATION = gql`
+const DELETE_DIRECTOR_BY_ID_MUTATION = gql`
   mutation DeleteMovieDirectorById($input: CreateCommentInput) {
     deleteMovieDirectorById(input: $input) {
       id: clientMutationId
@@ -12,7 +12,7 @@ const UPDATE_DIRECTOR_BY_ID_MUTATION = gql`
   }
 `;
 
-const UPDATE_DIRECTOR_BY_NODEID_MUTATION = gql`
+const DELETE_DIRECTOR_BY_NODEID_MUTATION = gql`
   mutation DeleteMovieDirector($input: CreateCommentInput) {
     deleteMovieDirector(input: $input) {
       id: clientMutationId
@@ -20,17 +20,13 @@ const UPDATE_DIRECTOR_BY_NODEID_MUTATION = gql`
   }
 `;
 
-const deleteDirector = ({
-  nodeId,
-  id,
-  movieDirectorPatch,
-}: UpdateDirectorInput) => {
+const deleteDirector = ({ nodeId, id }: DeleteDirectorInput) => {
   const query = nodeId
-    ? UPDATE_DIRECTOR_BY_NODEID_MUTATION
-    : UPDATE_DIRECTOR_BY_ID_MUTATION;
+    ? DELETE_DIRECTOR_BY_NODEID_MUTATION
+    : DELETE_DIRECTOR_BY_ID_MUTATION;
   if (!id && !nodeId) return { error: "Impossible delete :(" };
-  return useMutation<Director, UpdateDirectorInput>(query, {
-    variables: { nodeId, id, movieDirectorPatch },
+  return useMutation<Director, DeleteDirectorInput>(query, {
+    variables: { nodeId, id },
     client: moviesClient,
     refetchQueries: ["MovieDirector", "AllDirectors"],
   });

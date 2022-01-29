@@ -28,7 +28,7 @@ const updateComment = ({ nodeId, id, commentPatch }: UpdateCommentInput) => {
   return useMutation<Comment, UpdateCommentInput>(query, {
     variables: { nodeId, id, commentPatch },
     client: moviesClient,
-    refetchQueries: ["Comment", "Comments"],
+    refetchQueries: ["Comment", "AllComments"],
   });
 };
 

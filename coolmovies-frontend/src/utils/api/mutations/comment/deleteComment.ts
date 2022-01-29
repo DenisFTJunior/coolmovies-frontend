@@ -22,7 +22,7 @@ const DELETE_COMMENT_BY_NODEID_MUTATION = gql`
   }
 `;
 
-const updateComment = ({ nodeId, id }: DeleteCommentInput) => {
+const deleteComment = ({ nodeId, id }: DeleteCommentInput) => {
   const query = nodeId
     ? DELETE_COMMENT_BY_NODEID_MUTATION
     : DELETE_COMMENT_BY_ID_MUTATION;
@@ -30,8 +30,8 @@ const updateComment = ({ nodeId, id }: DeleteCommentInput) => {
   return useMutation<Comment, DeleteCommentInput>(query, {
     variables: { nodeId, id },
     client: moviesClient,
-    refetchQueries: ["Comment", "Comments"],
+    refetchQueries: ["Comment", "AllComments"],
   });
 };
 
-export default updateComment;
+export default deleteComment;
