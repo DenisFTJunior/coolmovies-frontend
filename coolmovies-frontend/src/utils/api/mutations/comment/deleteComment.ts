@@ -27,7 +27,6 @@ const deleteComment = ({ nodeId, id }: DeleteCommentVars) => {
   const query = nodeId
     ? DELETE_COMMENT_BY_NODEID_MUTATION
     : DELETE_COMMENT_BY_ID_MUTATION;
-  if (!id && !nodeId) return { error: "Impossible delete :(" };
   return useMutation<Comment, DeleteCommentInput>(query, {
     variables: { input: { nodeId, id } },
     client: moviesClient,

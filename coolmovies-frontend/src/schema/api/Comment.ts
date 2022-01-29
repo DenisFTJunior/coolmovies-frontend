@@ -8,7 +8,7 @@ export interface Comment {
 }
 
 export interface CommentVars {
-  id: string;
+  id?: string;
   nodeId?: string;
 }
 

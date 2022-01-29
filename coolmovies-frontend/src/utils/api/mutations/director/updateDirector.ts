@@ -31,7 +31,6 @@ const deleteDirector = ({
   const query = nodeId
     ? UPDATE_DIRECTOR_BY_NODEID_MUTATION
     : UPDATE_DIRECTOR_BY_ID_MUTATION;
-  if (!id && !nodeId) return { error: "Impossible delete :(" };
   return useMutation<Director, UpdateDirectorInput>(query, {
     variables: { input: { nodeId, id, movieDirectorPatch } },
     client: moviesClient,

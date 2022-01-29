@@ -27,7 +27,6 @@ const updateComment = ({ nodeId, id, commentPatch }: UpdateCommentVars) => {
   const query = nodeId
     ? UPDATE_COMMENT_BY_NODEID_MUTATION
     : UPDATE_COMMENT_BY_ID_MUTATION;
-  if (!id && !nodeId) return { error: "Impossible update :(" };
   return useMutation<Comment, UpdateCommentInput>(query, {
     variables: { input: { nodeId, id, commentPatch } },
     client: moviesClient,
