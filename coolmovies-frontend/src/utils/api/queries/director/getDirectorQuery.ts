@@ -1,7 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 
 import { moviesClient } from "../../client/movieClient";
-import { Review, ReviewVars } from "../../../../schema/query/Review";
 import { Director, DirectorVars } from "../../../../schema/query/Director";
 
 const DIRECTOR_BY_ID_QUERY = gql`

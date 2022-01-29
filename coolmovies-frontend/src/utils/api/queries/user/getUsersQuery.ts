@@ -1,30 +1,32 @@
 import { gql, useQuery } from "@apollo/client";
 
 import { moviesClient } from "../../client/movieClient";
-import { Directors, DirectorsVars } from "../../../../schema/query/Directors";
+import { Users, UsersVars } from "../../../../schema/query/Users";
 
 const QUERY = gql`
-  query AllDirectors(
-    $orderBy: [MovieDirectorsOrderBy!] = NATURAL
+  query Users(
+    $orderBy: [UsersOrderBy!] = NATURAL
+    $condition: UserCondition = {}
+    $filter: UserFilter = {}
     $offset: Int = 10
     $last: Int = 10
     $first: Int = 10
-    $filter: MovieDirectorFilter = {}
-    $condition: MovieDirectorCondition = {}
   ) {
-    allMovieDirectors(
+    allUsers(
+      condition: $condition
+      filter: $filter
       orderBy: $orderBy
       offset: $offset
       last: $last
       first: $first
-      filter: $filter
-      condition: $condition
     ) {
-      directors: nodes {
+      users: nodes {
         id
         nodeId
-        age
-        name
+        movieDirectorId
+        releaseDate
+        title
+        userCreatorId
       }
       pageInfo {
         hasNextPage
@@ -34,8 +36,8 @@ const QUERY = gql`
   }
 `;
 
-const getDirectorsQuery = (vars: DirectorsVars) => {
-  return useQuery<Directors, DirectorsVars>(QUERY, {
+const getUsersQuery = (vars: UsersVars) => {
+  return useQuery<Users, UsersVars>(QUERY, {
     fetchPolicy: "network-only",
     nextFetchPolicy: "cache-first",
     variables: vars,
@@ -43,4 +45,4 @@ const getDirectorsQuery = (vars: DirectorsVars) => {
   });
 };
 
-export default getDirectorsQuery;
+export default getUsersQuery;
