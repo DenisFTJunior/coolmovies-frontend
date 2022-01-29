@@ -8,5 +8,6 @@ export interface Review {
 }
 
 export interface ReviewVars {
-  id: string;
+  id?: string;
+  nodeId?:string
 }
