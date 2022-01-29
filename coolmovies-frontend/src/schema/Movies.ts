@@ -14,22 +14,24 @@ enum OrderType {
   }
 
 export interface Movies{
-    movies:Movie[]
+    allMovies:{
+        movies:Movie[]
+    }
 }
 
-export interface MovieVars {
-    condition :{
+export interface MoviesVars {
+    condition? :{
         id:string,
         movieDirectorId:string,
         releaseDate:string,
         title:string,
         userCreatorId:string,
     }
-    filter:Filter
-    orderBy: OrderType
-    offset: number,
-    last:number,
-    first:number
+    filter?:Filter
+    orderBy?: OrderType
+    offset?: number,
+    last?:number,
+    first?:number
 }
 
 interface Filter {

@@ -5,7 +5,7 @@ import { Movie, MovieVars } from '../../../../schema/Movie';
 
 const QUERY = gql`
   query Movie($id: ID!) {
-    movieById(id: $id) {
+    movieById: movie(id: $id) {
         id
         movieDirectorId
         releaseDate
