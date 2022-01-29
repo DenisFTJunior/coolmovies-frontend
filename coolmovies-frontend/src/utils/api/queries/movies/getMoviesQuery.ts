@@ -13,15 +13,16 @@ const QUERY = gql`
     $first: Int = 10
   ) {
     allMovies(
-        condition: $condition
-        filter: $filter
-        orderBy: $orderBy
-        offset: $offset
-        last: $last
-        first: $first
-      ) {
-      movies:nodes {
+      condition: $condition
+      filter: $filter
+      orderBy: $orderBy
+      offset: $offset
+      last: $last
+      first: $first
+    ) {
+      movies: nodes {
         id
+        nodeId
         movieDirectorId
         releaseDate
         title
