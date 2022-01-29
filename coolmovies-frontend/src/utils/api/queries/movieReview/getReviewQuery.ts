@@ -1,7 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 
 import { moviesClient } from "../../client/movieClient";
-import { Review, ReviewVars } from "../../../../schema/query/Review";
+import { Review, ReviewVars } from "../../../../schema/api/Review";
 
 const REVIEW_BY_ID_QUERY = gql`
   query MovieReview($id: ID!) {

@@ -1,7 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 
 import { moviesClient } from "../../client/movieClient";
-import { Comments, CommentsVars } from "../../../../schema/query/Comments";
+import { Comments, CommentsVars } from "../../../../schema/api/Comments";
 
 const QUERY = gql`
   query AllComments(

@@ -1,7 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 
 import { moviesClient } from "../../client/movieClient";
-import { User, UserVars } from "../../../../schema/query/User";
+import { User, UserVars } from "../../../../schema/api/User";
 
 const USER_BY_ID_QUERY = gql`
   query User($id: ID!) {
