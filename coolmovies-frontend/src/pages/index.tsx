@@ -1,12 +1,10 @@
 import type { NextPage } from 'next';
-import { exampleActions, useAppDispatch, useAppSelector } from '../../example/redux';
 
-const primary = '#1976d2';
+import LandingPage from './landingPage';
+
 
 const Home: NextPage = () => {
-  return <></>
+  return <LandingPage/>
 };
-
-
 
 export default Home;
