@@ -13,7 +13,7 @@ export const epicFetchUser: Epic = (
   action$.pipe(
     filter(actions.fetchUser.match),
     switchMap(async (action) => {
-      const { data, error } = await getUserQuery(action.payload.data);
+      const { data, error } = await getUserQuery(action.payload.vars);
       if (error)
         return actions.loadUserError({ error: "Sorry, cannot fetch data" });
       return actions.loadedUser({ data });

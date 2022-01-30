@@ -13,8 +13,8 @@ export const epicDeleteReview: Epic = (
   action$.pipe(
     filter(actions.deleteReview.match),
     switchMap(async (action) => {
-      const { data } = action.payload;
-      const [remove, { error }] = deleteReview(data);
+      const { vars } = action.payload;
+      const [remove, { error }] = deleteReview(vars);
       await remove();
       if (error)
         return actions.loadReviewError({

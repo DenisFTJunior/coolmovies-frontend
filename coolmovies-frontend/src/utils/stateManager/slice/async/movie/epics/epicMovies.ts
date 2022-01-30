@@ -14,11 +14,11 @@ export const epicFetchMovies: Epic = (
     filter(actions.fetchMovies.match),
     switchMap(async (action) => {
       const { data, error, fetchMore } = await getMoviesQuery(
-        action.payload.data
+        action.payload.vars
       );
       if (action.payload.fetchMore)
         fetchMore({
-          variables: action.payload.data,
+          variables: action.payload.vars,
         });
       if (error)
         return actions.loadMovieError({ error: "Sorry, cannot fetch data" });

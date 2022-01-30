@@ -13,8 +13,8 @@ export const epicDeleteMovie: Epic = (
   action$.pipe(
     filter(actions.deleteMovie.match),
     switchMap(async (action) => {
-      const { data } = action.payload;
-      const [remove, { error }] = deleteMovie(data);
+      const { vars } = action.payload;
+      const [remove, { error }] = deleteMovie(vars);
       await remove();
       if (error)
         return actions.loadMovieError({

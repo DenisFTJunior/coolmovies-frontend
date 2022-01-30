@@ -13,8 +13,8 @@ export const epicSaveMovie: Epic = (
   action$.pipe(
     filter(actions.saveMovie.match),
     switchMap(async (action) => {
-      const { data } = action.payload;
-      const [save, { error }] = saveMovie(data);
+      const { vars } = action.payload;
+      const [save, { error }] = saveMovie(vars);
       await save();
       if (error)
         return actions.loadMovieError({

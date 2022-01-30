@@ -13,8 +13,8 @@ export const epicSaveReview: Epic = (
   action$.pipe(
     filter(actions.saveReview.match),
     switchMap(async (action) => {
-      const { data } = action.payload;
-      const [save, { error }] = saveReview(data);
+      const { vars } = action.payload;
+      const [save, { error }] = saveReview(vars);
       await save();
       if (error)
         return actions.loadReviewError({

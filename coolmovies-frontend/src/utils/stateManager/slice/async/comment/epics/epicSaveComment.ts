@@ -12,8 +12,8 @@ export const epicSaveComment: Epic = (
   action$.pipe(
     filter(actions.saveComment.match),
     switchMap(async (action) => {
-      const { data } = action.payload;
-      const [save, { error }] = saveComment(data);
+      const { vars } = action.payload;
+      const [save, { error }] = saveComment(vars);
       await save();
       if (error)
         return actions.loadCommentError({

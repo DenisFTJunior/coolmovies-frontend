@@ -13,8 +13,8 @@ export const epicSaveDirector: Epic = (
   action$.pipe(
     filter(actions.saveDirector.match),
     switchMap(async (action) => {
-      const { data } = action.payload;
-      const [save, { error }] = saveDirector(data);
+      const { vars } = action.payload;
+      const [save, { error }] = saveDirector(vars);
       await save();
       if (error)
         return actions.loadDirectorError({

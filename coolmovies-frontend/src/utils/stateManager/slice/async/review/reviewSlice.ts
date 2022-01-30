@@ -19,15 +19,15 @@ export const reviewSlice = createSlice({
   initialState,
   name: "review",
   reducers: {
-    fetchReview: (state, action: PayloadAction<{ data: ReviewVars }>) => {},
-    saveReview: (state, action: PayloadAction<{ data: SaveReviewVars }>) => {},
+    fetchReview: (state, action: PayloadAction<{ vars: ReviewVars }>) => {},
+    saveReview: (state, action: PayloadAction<{ vars: SaveReviewVars }>) => {},
     deleteReview: (
       state,
-      action: PayloadAction<{ data: DeleteReviewVars }>
+      action: PayloadAction<{ vars: DeleteReviewVars }>
     ) => {},
     updateReview: (
       state,
-      action: PayloadAction<{ data: UpdateReviewVars }>
+      action: PayloadAction<{ vars: UpdateReviewVars }>
     ) => {},
     clearReviewData: (state) => {
       state.fetchedReview = undefined;

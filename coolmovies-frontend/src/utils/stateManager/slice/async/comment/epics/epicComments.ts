@@ -13,11 +13,11 @@ export const epicFetchComments: Epic = (
     filter(actions.fetchComments.match),
     switchMap(async (action) => {
       const { data, error, fetchMore } = await getCommentsQuery(
-        action.payload.data
+        action.payload.vars
       );
       if (action.payload.fetchMore)
         fetchMore({
-          variables: action.payload.data,
+          variables: action.payload.vars,
         });
       if (error)
         return actions.loadCommentError({ error: "Sorry, cannot fetch data" });

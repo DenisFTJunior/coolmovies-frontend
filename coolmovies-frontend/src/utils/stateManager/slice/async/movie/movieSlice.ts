@@ -16,22 +16,22 @@ export const movieSlice = createSlice({
   initialState,
   name: "movie",
   reducers: {
-    fetchMovie: (state, action: PayloadAction<{ data: MovieVars }>) => {},
+    fetchMovie: (state, action: PayloadAction<{ vars: MovieVars }>) => {},
     fetchMovies: (
       state,
-      action: PayloadAction<{ fetchMore?: boolean; data: MoviesVars }>
+      action: PayloadAction<{ fetchMore?: boolean; vars: MoviesVars }>
     ) => {},
     saveMovie: (
       state,
-      action: PayloadAction<{ data: SaveMovieVars }>
+      action: PayloadAction<{ vars: SaveMovieVars }>
     ) => {},
     deleteMovie: (
       state,
-      action: PayloadAction<{ data: DeleteMovieVars }>
+      action: PayloadAction<{ vars: DeleteMovieVars }>
     ) => {},
     updateMovie: (
       state,
-      action: PayloadAction<{ data: UpdateMovieVars }>
+      action: PayloadAction<{ vars: UpdateMovieVars }>
     ) => {},
     clearMovieData: (state) => {
       state.fetchedMovies = undefined;

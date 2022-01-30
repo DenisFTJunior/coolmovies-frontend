@@ -13,7 +13,7 @@ export const epicFetchReview: Epic = (
   action$.pipe(
     filter(actions.fetchReview.match),
     switchMap(async (action) => {
-      const { data, error } = await getReviewQuery(action.payload.data);
+      const { data, error } = await getReviewQuery(action.payload.vars);
       if (error)
         return actions.loadReviewError({ error: "Sorry, cannot fetch data" });
       return actions.loadedReview({ data });

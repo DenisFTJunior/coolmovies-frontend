@@ -13,8 +13,8 @@ export const epicUpdateMovie: Epic = (
   action$.pipe(
     filter(actions.updateMovie.match),
     switchMap(async (action) => {
-      const { data } = action.payload;
-      const [update, { error }] = updateMovie(data);
+      const { vars } = action.payload;
+      const [update, { error }] = updateMovie(vars);
       await update();
       if (error)
         return actions.loadMovieError({

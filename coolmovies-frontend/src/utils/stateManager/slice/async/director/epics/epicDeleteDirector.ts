@@ -13,8 +13,8 @@ export const epicDeleteDirector: Epic = (
   action$.pipe(
     filter(actions.deleteDirector.match),
     switchMap(async (action) => {
-      const { data } = action.payload;
-      const [remove, { error }] = deleteDirector(data);
+      const { vars } = action.payload;
+      const [remove, { error }] = deleteDirector(vars);
       await remove();
       if (error)
         return actions.loadDirectorError({

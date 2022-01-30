@@ -12,8 +12,8 @@ export const epicDeleteComment: Epic = (
   action$.pipe(
     filter(actions.deleteComment.match),
     switchMap(async (action) => {
-      const { data } = action.payload;
-      const [remove, { error }] = deleteComment(data);
+      const { vars } = action.payload;
+      const [remove, { error }] = deleteComment(vars);
       await remove();
       if (error)
         return actions.loadCommentError({

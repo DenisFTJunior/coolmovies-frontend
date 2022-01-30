@@ -13,8 +13,8 @@ export const epicUpdateUser: Epic = (
   action$.pipe(
     filter(actions.updateUser.match),
     switchMap(async (action) => {
-      const { data } = action.payload;
-      const [update, { error }] = updateUser(data);
+      const { vars } = action.payload;
+      const [update, { error }] = updateUser(vars);
       await update();
       if (error)
         return actions.loadUserError({

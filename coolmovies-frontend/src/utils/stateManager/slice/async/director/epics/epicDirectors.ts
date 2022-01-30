@@ -14,11 +14,11 @@ export const epicFetchDirectors: Epic = (
     filter(actions.fetchDirectors.match),
     switchMap(async (action) => {
       const { data, error, fetchMore } = await getDirectorsQuery(
-        action.payload.data
+        action.payload.vars
       );
       if (action.payload.fetchMore)
         fetchMore({
-          variables: action.payload.data,
+          variables: action.payload.vars,
         });
       if (error)
         return actions.loadDirectorError({ error: "Sorry, cannot fetch data" });

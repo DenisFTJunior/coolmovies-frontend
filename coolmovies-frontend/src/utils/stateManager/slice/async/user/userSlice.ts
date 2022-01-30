@@ -20,14 +20,14 @@ export const userSlice = createSlice({
   initialState,
   name: "user",
   reducers: {
-    fetchUser: (state, action: PayloadAction<{ data: UserVars }>) => {},
+    fetchUser: (state, action: PayloadAction<{ vars: UserVars }>) => {},
     fetchUsers: (
       state,
-      action: PayloadAction<{ fetchMore?: boolean; data: UsersVars }>
+      action: PayloadAction<{ fetchMore?: boolean; vars: UsersVars }>
     ) => {},
-    saveUser: (state, action: PayloadAction<{ data: SaveUserVars }>) => {},
-    deleteUser: (state, action: PayloadAction<{ data: DeleteUserVars }>) => {},
-    updateUser: (state, action: PayloadAction<{ data: UpdateUserVars }>) => {},
+    saveUser: (state, action: PayloadAction<{ vars: SaveUserVars }>) => {},
+    deleteUser: (state, action: PayloadAction<{ vars: DeleteUserVars }>) => {},
+    updateUser: (state, action: PayloadAction<{ vars: UpdateUserVars }>) => {},
     clearUserData: (state) => {
       state.fetchedUsers = undefined;
     },

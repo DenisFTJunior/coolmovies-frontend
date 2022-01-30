@@ -21,23 +21,23 @@ export const commentSlice = createSlice({
   reducers: {
     fetchComment: (
       state,
-      action: PayloadAction<{ data: CommentVars }>
+      action: PayloadAction<{ vars: CommentVars }>
     ) => {},
     fetchComments: (
       state,
-      action: PayloadAction<{ fetchMore?: boolean; data: CommentsVars }>
+      action: PayloadAction<{ fetchMore?: boolean; vars: CommentsVars }>
     ) => {},
     saveComment: (
       state,
-      action: PayloadAction<{ data: SaveCommentVars }>
+      action: PayloadAction<{ vars: SaveCommentVars }>
     ) => {},
     deleteComment: (
       state,
-      action: PayloadAction<{ data: DeleteCommentVars }>
+      action: PayloadAction<{ vars: DeleteCommentVars }>
     ) => {},
     updateComment: (
       state,
-      action: PayloadAction<{ data: UpdateCommentVars }>
+      action: PayloadAction<{ vars: UpdateCommentVars }>
     ) => {},
     clearCommentData: (state) => {
       state.fetchedComments = undefined;

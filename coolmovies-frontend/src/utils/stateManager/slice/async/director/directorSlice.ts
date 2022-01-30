@@ -20,22 +20,22 @@ export const directorSlice = createSlice({
   initialState,
   name: "director",
   reducers: {
-    fetchDirector: (state, action: PayloadAction<{ data: DirectorVars }>) => {},
+    fetchDirector: (state, action: PayloadAction<{ vars: DirectorVars }>) => {},
     fetchDirectors: (
       state,
-      action: PayloadAction<{ fetchMore?: boolean; data: DirectorsVars }>
+      action: PayloadAction<{ fetchMore?: boolean; vars: DirectorsVars }>
     ) => {},
     saveDirector: (
       state,
-      action: PayloadAction<{ data: SaveDirectorVars }>
+      action: PayloadAction<{ vars: SaveDirectorVars }>
     ) => {},
     deleteDirector: (
       state,
-      action: PayloadAction<{ data: DeleteDirectorVars }>
+      action: PayloadAction<{ vars: DeleteDirectorVars }>
     ) => {},
     updateDirector: (
       state,
-      action: PayloadAction<{ data: UpdateDirectorVars }>
+      action: PayloadAction<{ vars: UpdateDirectorVars }>
     ) => {},
     clearDirectorData: (state) => {
       state.fetchedDirectors = undefined;

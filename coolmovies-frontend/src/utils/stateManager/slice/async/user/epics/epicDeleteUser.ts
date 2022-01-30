@@ -13,8 +13,8 @@ export const epicDeleteUser: Epic = (
   action$.pipe(
     filter(actions.deleteUser.match),
     switchMap(async (action) => {
-      const { data } = action.payload;
-      const [remove, { error }] = deleteUser(data);
+      const { vars } = action.payload;
+      const [remove, { error }] = deleteUser(vars);
       await remove();
       if (error)
         return actions.loadUserError({

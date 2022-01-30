@@ -13,8 +13,8 @@ export const epicSaveUser: Epic = (
   action$.pipe(
     filter(actions.saveUser.match),
     switchMap(async (action) => {
-      const { data } = action.payload;
-      const [save, { error }] = saveUser(data);
+      const { vars } = action.payload;
+      const [save, { error }] = saveUser(vars);
       await save();
       if (error)
         return actions.loadUserError({

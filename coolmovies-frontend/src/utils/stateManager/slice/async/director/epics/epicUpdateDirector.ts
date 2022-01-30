@@ -13,8 +13,8 @@ export const epicUpdateDirector: Epic = (
   action$.pipe(
     filter(actions.updateDirector.match),
     switchMap(async (action) => {
-      const { data } = action.payload;
-      const [update, { error }] = updateDirector(data);
+      const { vars } = action.payload;
+      const [update, { error }] = updateDirector(vars);
       await update();
       if (error)
         return actions.loadDirectorError({
