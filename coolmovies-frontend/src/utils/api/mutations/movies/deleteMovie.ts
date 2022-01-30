@@ -27,7 +27,6 @@ const deleteMovie = ({ nodeId, id }: DeleteMovieVars) => {
   const query = nodeId
     ? DELETE_MOVIE_BY_NODEID_MUTATION
     : DELETE_MOVIE_BY_ID_MUTATION;
-  if (!id && !nodeId) return { error: "Impossible delete :(" };
   return useMutation<Movie, DeleteMovieInput>(query, {
     variables: { input: { nodeId, id } },
     client: moviesClient,

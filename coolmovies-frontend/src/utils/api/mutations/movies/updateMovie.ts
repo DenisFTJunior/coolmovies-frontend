@@ -24,11 +24,10 @@ const updateMovie = ({ nodeId, id, moviePatch }: UpdateMovieVars) => {
   const query = nodeId
     ? UPDATE_MOVIE_BY_NODEID_MUTATION
     : UPDATE_MOVIE_BY_ID_MUTATION;
-  if (!id && !nodeId) return { error: "Impossible delete :(" };
   return useMutation<Movie, UpdateMovieInput>(query, {
     variables: { input: { nodeId, id, moviePatch } },
     client: moviesClient,
-    refetchQueries: ["MovieReview"],
+    refetchQueries: ["Movie", "Movies"],
   });
 };
 
