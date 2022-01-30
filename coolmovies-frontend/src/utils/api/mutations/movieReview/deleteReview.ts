@@ -27,7 +27,6 @@ const deleteReview = ({ nodeId, id }: DeleteReviewVars) => {
   const query = nodeId
     ? DELETE_REVIEW_BY_NODEID_MUTATION
     : DELETE_REVIEW_BY_ID_MUTATION;
-  if (!id && !nodeId) return { error: "Impossible delete :(" };
   return useMutation<Review, DeleteReviewInput>(query, {
     variables: { input: { nodeId, id } },
     client: moviesClient,

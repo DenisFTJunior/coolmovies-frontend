@@ -27,7 +27,6 @@ const updateReview = ({ nodeId, id, movieReviewPatch }: UpdateReviewVars) => {
   const query = nodeId
     ? UPDATE_REVIEW_BY_NODEID_MUTATION
     : UPDATE_REVIEW_BY_ID_MUTATION;
-  if (!id && !nodeId) return { error: "Impossible delete :(" };
   return useMutation<Review, UpdateReviewInput>(query, {
     variables: { input: { nodeId, id, movieReviewPatch } },
     client: moviesClient,
