@@ -3,7 +3,7 @@ import { filter, switchMap } from "rxjs/operators";
 
 import { Epic, StateObservable } from "redux-observable";
 import { RootState } from "../../../../../../schema/stateManager/StoreType";
-import { MovieSliceAction, actions } from "../directorSlice";
+import { MovieSliceAction, actions } from "../movieSlice";
 import saveMovie from "../../../../../api/mutations/movies/saveMovie";
 
 export const epicSaveMovie: Epic = (
