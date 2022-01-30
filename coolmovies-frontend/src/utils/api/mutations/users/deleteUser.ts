@@ -27,7 +27,6 @@ const deleteUser = ({ nodeId, id }: DeleteUserVars) => {
   const query = nodeId
     ? DELETE_USER_BY_NODEID_MUTATION
     : DELETE_USER_BY_ID_MUTATION;
-  if (!id && !nodeId) return { error: "Impossible delete :(" };
   return useMutation<User, DeleteUserInput>(query, {
     variables: { input: { nodeId, id } },
     client: moviesClient,

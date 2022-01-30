@@ -27,7 +27,6 @@ const updateUser = ({ nodeId, id, userPatch }: UpdateUserVars) => {
   const query = nodeId
     ? UPDATE_USER_BY_NODEID_MUTATION
     : UPDATE_USER_BY_ID_MUTATION;
-  if (!id && !nodeId) return { error: "Impossible delete :(" };
   return useMutation<User, UpdateUserInput>(query, {
     variables: { input: { nodeId, id, userPatch } },
     client: moviesClient,
