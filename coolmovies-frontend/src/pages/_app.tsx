@@ -1,4 +1,4 @@
-import "../styles/globals.css";
+import "../style/globals.css";
 import type { AppProps } from "next/app";
 import React, { FC } from "react";
 import { Provider as ReduxProvider } from "react-redux";

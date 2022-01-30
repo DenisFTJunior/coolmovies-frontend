@@ -3,7 +3,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import HomeIcon from "@mui/icons-material/Home";
 import RecommendIcon from "@mui/icons-material/Recommend";
 
-import style from "../styles/navBarStyle";
 import { useStateDispatch } from "../utils/stateManager/hooks/useDispatch";
 import { actions } from "../utils/stateManager/slice/sync/searchSlice";
 
@@ -11,7 +10,13 @@ const NavBar = () => {
   const dispatch = useStateDispatch();
   const { toogleSearch } = actions;
   return (
-    <Box css={style.root}>
+    <Box
+      sx={{
+        position: "absolute",
+        top: "10vh",
+        left: "2vh",
+      }}
+    >
       <ButtonGroup orientation="vertical" aria-label="vertical nav bar">
         <Button key="home" href="/" startIcon={<HomeIcon />}></Button>,
         <Button
