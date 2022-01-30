@@ -11,8 +11,8 @@ export const epicFetchComment: Epic = (
 ) =>
   action$.pipe(
     filter(actions.fetchComment.match),
-    switchMap(async () => {
-      const { data, error } = await getCommentQuery({});
+    switchMap(async (action) => {
+      const { data, error } = await getCommentQuery(action.payload.data);
       if (error) return actions.loadCommentError({error: "Sorry, cannot fetch data"});
       return actions.loadedComment({ data });
     })

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Comment } from "../../../../../schema/api/Comment";
+import { Comment, CommentVars } from "../../../../../schema/api/Comment";
 import { Comments, CommentsVars } from "../../../../../schema/api/Comments";
 import {
   DeleteCommentVars,
@@ -21,11 +21,11 @@ export const commentSlice = createSlice({
   reducers: {
     fetchComment: (
       state,
-      action: PayloadAction<{ fetchMore?: boolean; data?: CommentsVars }>
+      action: PayloadAction<{ data: CommentVars }>
     ) => {},
     fetchComments: (
       state,
-      action: PayloadAction<{ fetchMore?: boolean; data?: CommentsVars }>
+      action: PayloadAction<{ fetchMore?: boolean; data: CommentsVars }>
     ) => {},
     saveComment: (
       state,

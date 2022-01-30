@@ -7,6 +7,6 @@ export interface Director {
 
 
 export interface DirectorVars {
-    id:string
+    id?:string
     nodeId?:string
 }

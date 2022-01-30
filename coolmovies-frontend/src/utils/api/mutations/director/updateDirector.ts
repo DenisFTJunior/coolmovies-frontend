@@ -23,7 +23,7 @@ const UPDATE_DIRECTOR_BY_NODEID_MUTATION = gql`
   }
 `;
 
-const deleteDirector = ({
+const updateDirector = ({
   nodeId,
   id,
   movieDirectorPatch,
@@ -38,4 +38,4 @@ const deleteDirector = ({
   });
 };
 
-export default deleteDirector;
+export default updateDirector;

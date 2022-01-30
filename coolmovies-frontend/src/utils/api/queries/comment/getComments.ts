@@ -36,7 +36,7 @@ const QUERY = gql`
   }
 `;
 
-const getDirectorsQuery = (vars:CommentsVars) => {
+const getCommentsQuery = (vars:CommentsVars) => {
   return useQuery<Comments, CommentsVars>(QUERY, {
     fetchPolicy: "network-only",
     nextFetchPolicy: "cache-first",
@@ -45,4 +45,4 @@ const getDirectorsQuery = (vars:CommentsVars) => {
   });
 };
 
-export default getDirectorsQuery;
+export default getCommentsQuery;
