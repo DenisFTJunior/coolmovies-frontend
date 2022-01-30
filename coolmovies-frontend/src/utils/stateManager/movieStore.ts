@@ -9,6 +9,7 @@ import movieReducer from "./slice/async/movie/movieSlice";
 import reviewReducer from "./slice/async/review/reviewSlice";
 import tempCommentReducer from "./slice/sync/tempCommentSlice";
 import generalReducer from "./slice/sync/generalSlice";
+import searchReducer from "./slice/sync/searchSlice";
 
 //Epics
 import userEpics from "./slice/async/user/userEpics";
@@ -27,6 +28,7 @@ const movieStore = createStore({
     director: directorReducer,
     tempComment: tempCommentReducer,
     general: generalReducer,
+    search: searchReducer,
   },
   epics: [userEpics, movieEpics, directorEpics, reviewEpics, commentEpics],
 });
