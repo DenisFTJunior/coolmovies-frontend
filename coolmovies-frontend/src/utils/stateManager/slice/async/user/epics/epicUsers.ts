@@ -6,7 +6,7 @@ import { RootState } from "../../../../../../schema/stateManager/StoreType";
 import { UserSliceAction, actions } from "../userSlice";
 import getUsersQuery from "../../../../../api/queries/user/getUsersQuery";
 
-export const epicFetchMovies: Epic = (
+export const epicFetchUsers: Epic = (
   action$: Observable<UserSliceAction["fetchUsers"]>,
   state$: StateObservable<RootState>
 ) =>

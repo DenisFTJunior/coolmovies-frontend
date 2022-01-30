@@ -1,14 +1,12 @@
 import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
-import { AnyAction } from "@reduxjs/toolkit";
+import { Reducer } from "@reduxjs/toolkit";
+import { Epic } from "redux-observable";
 import { createStore } from "../../utils/stateManager/store";
-
-export type Reducer = (state: unknown, action: AnyAction) => unknown;
 
 export type CreateStoreOptions = {
   epicDependencies?: EpicDependencies;
-  reducers: {
-    [key:string]: Reducer 
-  }
+  reducers: any;
+  epics: Epic[];
 };
 
 export type EpicDependencies = {

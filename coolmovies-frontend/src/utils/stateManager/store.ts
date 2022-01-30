@@ -1,9 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { combineEpics, createEpicMiddleware } from "redux-observable";
-import { CreateStoreOptions } from "../../schema/stateManager/StoreType";
-// const rootEpic = combineEpics(exampleEpics);
+import { combineEpics, createEpicMiddleware, Epic } from "redux-observable";
 
-export const createStore = ({ epicDependencies, reducers }: CreateStoreOptions) => {
+import { CreateStoreOptions } from "../../schema/stateManager/StoreType";
+
+const rootEpic = (epics: Epic[]) => combineEpics(...epics);
+
+export const createStore = ({
+  epicDependencies,
+  reducers,
+  epics,
+}: CreateStoreOptions) => {
   const epicMiddleware = createEpicMiddleware({
     dependencies: epicDependencies,
   });
@@ -14,12 +20,7 @@ export const createStore = ({ epicDependencies, reducers }: CreateStoreOptions) 
     reducer: reducers,
   });
 
-//   epicMiddleware.run(rootEpic);
+  epicMiddleware.run(rootEpic(epics));
 
   return createdStore;
 };
-
-
-
-
-
