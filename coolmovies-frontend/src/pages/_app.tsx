@@ -3,9 +3,11 @@ import type { AppProps } from "next/app";
 import React, { FC } from "react";
 import { Provider as ReduxProvider } from "react-redux";
 import Head from "next/head";
-import store from "../utils/stateManager/movieStore";
+import movieStore from "../utils/stateManager/movieStore";
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
+  const store = movieStore();
+
   return (
     <>
       <Head>

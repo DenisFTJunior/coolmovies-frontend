@@ -1,5 +1,7 @@
+import { configureStore, EnhancedStore } from "@reduxjs/toolkit";
+import { combineEpics, createEpicMiddleware, Epic } from "redux-observable";
+
 import { moviesClient } from "../api/client/movieClient";
-import { createStore } from "./store";
 
 //Reducers
 import userReducer from "./slice/async/user/userSlice";
@@ -18,19 +20,38 @@ import directorEpics from "./slice/async/director/directorEpics";
 import reviewEpics from "./slice/async/review/reviewEpics";
 import commentEpics from "./slice/async/comment/commentEpics";
 
-const movieStore = createStore({
-  epicDependencies: { client: moviesClient },
-  reducers: {
-    user: userReducer,
-    comment: commentReducer,
-    review: reviewReducer,
-    movie: movieReducer,
-    director: directorReducer,
-    tempComment: tempCommentReducer,
-    general: generalReducer,
-    search: searchReducer,
-  },
-  epics: [userEpics, movieEpics, directorEpics, reviewEpics, commentEpics],
-});
+const rootEpic = combineEpics(
+  userEpics,
+  movieEpics,
+  directorEpics,
+  reviewEpics,
+  commentEpics
+);
+
+const movieStore = (): EnhancedStore => {
+  const epicMiddleware = createEpicMiddleware({
+    dependencies: { client: moviesClient },
+  });
+
+  const store = configureStore({
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(epicMiddleware),
+
+    reducer: {
+      user: userReducer,
+      comment: commentReducer,
+      review: reviewReducer,
+      movie: movieReducer,
+      director: directorReducer,
+      tempComment: tempCommentReducer,
+      general: generalReducer,
+      search: searchReducer,
+    },
+  });
+
+  epicMiddleware.run(rootEpic);
+
+  return store;
+};
 
 export default movieStore;
