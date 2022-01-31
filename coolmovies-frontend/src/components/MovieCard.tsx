@@ -11,7 +11,7 @@ import { actions as reviewActions } from "../utils/stateManager/slice/async/revi
 import { useStateSelector } from "../utils/stateManager/hooks/useSelector";
 import AvatarWithName from "./AvatarWithName";
 import dateFormatter from "./helper/dateFormatter";
-import { Alert } from "@mui/material";
+import { Alert, Rating } from "@mui/material";
 import Loading from "./Loading";
 
 const MovieCard = ({ movie }: { movie: Movie }) => {
@@ -46,13 +46,27 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
   //Component -----------------------------------------------------------
   return (
     <Card
-      sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "20rem",
+      }}
     >
       <CardContent sx={{ flex: "1 0 auto" }}>
         <Box sx={{ display: "flex", flexDirection: "column" }}>
-          <Typography component="div" variant="h5">
-            {movie.title}
-          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <Typography component="div" variant="h5">
+              {movie.title}
+            </Typography>
+            <Rating value={stateReview.fetchedReview.rating} readOnly />
+          </Box>
           <Box
             sx={{
               display: "flex",

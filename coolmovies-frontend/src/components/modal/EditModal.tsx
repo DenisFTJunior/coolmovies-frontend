@@ -46,6 +46,7 @@ const EditModal = ({ items, request }: ModalProps) => {
           justifyContent: "center",
           alignItems: "center",
           flexFlow: "row wrap",
+          width: "20rem",
         }}
       >
         <Alert severity="error">Please, fill all fields!</Alert>

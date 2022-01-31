@@ -27,7 +27,7 @@ const NavBar = () => {
         ,
         <Button
           key="Recommendations"
-          href="/recommended"
+          href="#recommendedMovies"
           startIcon={<RecommendIcon />}
         ></Button>
         ,
