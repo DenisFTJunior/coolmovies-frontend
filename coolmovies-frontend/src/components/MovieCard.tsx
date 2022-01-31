@@ -1,9 +1,7 @@
-import React, { useEffect } from "react";
-import { useTheme } from "@mui/material/styles";
+import React from "react";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
 import { Movie } from "../schema/api/Movie";
@@ -37,7 +35,7 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
 
   //Fetch ---------------------------------------------------------------
   dispatch(fetchDirector({ vars: { id: movie.movieDirectorId } }));
-  dispatch(fetchReview({ vars: { id: movie.id } }));
+  dispatch(fetchReview({ vars: { nodeId: movie.nodeId } }));
 
   //error ---------------------------------------------------------------
   if (stateDirector.error)

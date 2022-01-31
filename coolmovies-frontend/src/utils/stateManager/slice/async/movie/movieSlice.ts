@@ -2,14 +2,19 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { Movie, MovieVars } from "../../../../../schema/api/Movie";
 import { Movies, MoviesVars } from "../../../../../schema/api/Movies";
-import { DeleteMovieVars, SaveMovieVars, UpdateMovieVars } from "../../../../../schema/api/mutation/Movie";
+import {
+  DeleteMovieVars,
+  SaveMovieVars,
+  UpdateMovieVars,
+} from "../../../../../schema/api/mutation/Movie";
 
 interface InitialState {
-  fetchedMovies?: Movies | Movie | Object | undefined;
+  fetchedMovies?: Movies | Movie | undefined;
+  error?: string | undefined;
 }
 
 const initialState: InitialState = {
-  fetchedMovies: [],
+  fetchedMovies: undefined,
 };
 
 export const movieSlice = createSlice({
@@ -21,10 +26,7 @@ export const movieSlice = createSlice({
       state,
       action: PayloadAction<{ fetchMore?: boolean; vars: MoviesVars }>
     ) => {},
-    saveMovie: (
-      state,
-      action: PayloadAction<{ vars: SaveMovieVars }>
-    ) => {},
+    saveMovie: (state, action: PayloadAction<{ vars: SaveMovieVars }>) => {},
     deleteMovie: (
       state,
       action: PayloadAction<{ vars: DeleteMovieVars }>
@@ -35,6 +37,7 @@ export const movieSlice = createSlice({
     ) => {},
     clearMovieData: (state) => {
       state.fetchedMovies = undefined;
+      state.error = undefined;
     },
     loadedMovie: (
       state,
@@ -43,7 +46,7 @@ export const movieSlice = createSlice({
       state.fetchedMovies = action.payload.data;
     },
     loadMovieError: (state, action: PayloadAction<{ error: string }>) => {
-      state.fetchedMovies = [{ error: action.payload.error }];
+      state.error = action.payload.error;
     },
   },
 });

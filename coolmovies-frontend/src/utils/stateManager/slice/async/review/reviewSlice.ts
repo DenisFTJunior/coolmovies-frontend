@@ -8,11 +8,12 @@ import {
 import { Review, ReviewVars } from "../../../../../schema/api/Review";
 
 interface InitialState {
-  fetchedReview?: Review | Object | undefined;
+  fetchedReview?: Review | undefined;
+  error?: string | undefined;
 }
 
 const initialState: InitialState = {
-  fetchedReview: [],
+  fetchedReview: undefined,
 };
 
 export const reviewSlice = createSlice({
@@ -31,6 +32,7 @@ export const reviewSlice = createSlice({
     ) => {},
     clearReviewData: (state) => {
       state.fetchedReview = undefined;
+      state.error = undefined;
     },
     loadedReview: (
       state,
@@ -39,7 +41,7 @@ export const reviewSlice = createSlice({
       state.fetchedReview = action.payload.data;
     },
     loadReviewError: (state, action: PayloadAction<{ error: string }>) => {
-      state.fetchedReview = [{ error: action.payload.error }];
+      state.error = action.payload.error;
     },
   },
 });

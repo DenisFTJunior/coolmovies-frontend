@@ -9,11 +9,12 @@ import { User, UserVars } from "../../../../../schema/api/User";
 import { Users, UsersVars } from "../../../../../schema/api/Users";
 
 interface InitialState {
-  fetchedUsers?: User | Users | Object | undefined;
+  fetchedUsers?: User | Users | undefined;
+  error?: string | undefined;
 }
 
 const initialState: InitialState = {
-  fetchedUsers: [],
+  fetchedUsers: undefined,
 };
 
 export const userSlice = createSlice({
@@ -30,6 +31,7 @@ export const userSlice = createSlice({
     updateUser: (state, action: PayloadAction<{ vars: UpdateUserVars }>) => {},
     clearUserData: (state) => {
       state.fetchedUsers = undefined;
+      state.error = undefined;
     },
     loadedUser: (
       state,
@@ -38,7 +40,7 @@ export const userSlice = createSlice({
       state.fetchedUsers = action.payload.data;
     },
     loadUserError: (state, action: PayloadAction<{ error: string }>) => {
-      state.fetchedUsers = [{ error: action.payload.error }];
+      state.error = action.payload.error;
     },
   },
 });
