@@ -8,21 +8,19 @@ import {
 } from "../../../../../schema/api/mutation/Comment";
 
 interface ExampleState {
-  fetchedComments?: Comments | Comment | Object | undefined;
+  fetchedComments?: Comments | Comment | undefined;
+  error?: string | undefined;
 }
 
 const initialState: ExampleState = {
-  fetchedComments: [],
+  fetchedComments: undefined,
 };
 
 export const commentSlice = createSlice({
   initialState,
   name: "comment",
   reducers: {
-    fetchComment: (
-      state,
-      action: PayloadAction<{ vars: CommentVars }>
-    ) => {},
+    fetchComment: (state, action: PayloadAction<{ vars: CommentVars }>) => {},
     fetchComments: (
       state,
       action: PayloadAction<{ fetchMore?: boolean; vars: CommentsVars }>
@@ -41,6 +39,7 @@ export const commentSlice = createSlice({
     ) => {},
     clearCommentData: (state) => {
       state.fetchedComments = undefined;
+      state.error = undefined;
     },
     loadedComment: (
       state,
@@ -49,7 +48,7 @@ export const commentSlice = createSlice({
       state.fetchedComments = action.payload.data;
     },
     loadCommentError: (state, action: PayloadAction<{ error: string }>) => {
-      state.fetchedComments = [{ error: action.payload.error }];
+      state.error = action.payload.error;
     },
   },
 });

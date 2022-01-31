@@ -9,11 +9,12 @@ import {
 } from "../../../../../schema/api/mutation/Director";
 
 interface InitialState {
-  fetchedDirectors?: Directors | Director | Object | undefined;
+  fetchedDirectors?: Directors | Director | undefined;
+  error?: string;
 }
 
 const initialState: InitialState = {
-  fetchedDirectors: [],
+  fetchedDirectors: undefined,
 };
 
 export const directorSlice = createSlice({
@@ -39,6 +40,7 @@ export const directorSlice = createSlice({
     ) => {},
     clearDirectorData: (state) => {
       state.fetchedDirectors = undefined;
+      state.error = undefined;
     },
     loadedDirector: (
       state,
@@ -47,7 +49,7 @@ export const directorSlice = createSlice({
       state.fetchedDirectors = action.payload.data;
     },
     loadDirectorError: (state, action: PayloadAction<{ error: string }>) => {
-      state.fetchedDirectors = [{ error: action.payload.error }];
+      state.error = action.payload.error;
     },
   },
 });
