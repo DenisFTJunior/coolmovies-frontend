@@ -14,10 +14,11 @@ const editModalItems: Item[] = [
 const detailModalItems: DetailItem[] = [
   { label: "Title", prop: "title" },
   { label: "Release Date", prop: "releaseDate" },
+  
 ];
 
 const LandingPage = () => (
-  
+
   <>
     <MovieListSection />
     <RecommendedSection />

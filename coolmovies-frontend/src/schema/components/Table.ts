@@ -13,10 +13,7 @@ export interface Column {
   prop: any;
   sortOption: {
     entity: string;
-    type: {
-      asc: boolean;
-      desc: boolean;
-    };
+    direction: string;
   };
   render?: (data: any) => JSX.Element;
 }

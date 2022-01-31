@@ -32,7 +32,7 @@ const MoviesRecommended = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-around",
-        flexDirection = "row",
+        flexDirection: "row",
       }}
       id="recommendedMovies"
     >

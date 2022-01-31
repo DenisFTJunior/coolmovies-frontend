@@ -5,44 +5,11 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
 import { Movie } from "../schema/api/Movie";
-import { useStateDispatch } from "../utils/stateManager/hooks/useDispatch";
-import { actions as directorActions } from "../utils/stateManager/slice/async/director/directorSlice";
-import { actions as reviewActions } from "../utils/stateManager/slice/async/review/reviewSlice";
-import { useStateSelector } from "../utils/stateManager/hooks/useSelector";
-import AvatarWithName from "./AvatarWithName";
 import dateFormatter from "./helper/dateFormatter";
-import { Alert, Rating } from "@mui/material";
-import Loading from "./Loading";
+import { ShowReviewByMovieId } from "./show/ShowReview";
+import { ShowDirectorById } from "./show/ShowDirector";
 
 const MovieCard = ({ movie }: { movie: Movie }) => {
-  const dispatch = useStateDispatch();
-
-  //state ---------------------------------------------------------------
-  const stateDirector = useStateSelector((state) => state.director);
-  const stateReview = useStateSelector((state) => state.review);
-
-  //actions -------------------------------------------------------------
-  const { fetchDirector, clearDirectorData } = directorActions;
-  const { clearReviewData, fetchReviews } = reviewActions;
-
-  //clear data ----------------------------------------------------------
-  if (stateDirector.fetchedDirectors) dispatch(clearDirectorData());
-  if (stateReview.fetchedReview) dispatch(clearReviewData());
-
-  //loading -------------------------------------------------------------
-  if (!stateDirector.fetchedDirectors || !stateReview.fetchedReview)
-    return <Loading />;
-
-  //Fetch ---------------------------------------------------------------
-  dispatch(fetchDirector({ vars: { id: movie.movieDirectorId } }));
-  dispatch(fetchReviews({ vars: { condition: { movieId: movie.id } } }));
-
-  //error ---------------------------------------------------------------
-  if (stateDirector.error)
-    return <Alert severity="error">{stateDirector.error}</Alert>;
-  if (stateReview.error)
-    return <Alert severity="error">{stateReview.error}</Alert>;
-
   //Component -----------------------------------------------------------
   return (
     <Card
@@ -65,7 +32,7 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
             <Typography component="div" variant="h5">
               {movie.title}
             </Typography>
-            <Rating value={stateReview.fetchedReview.rating} readOnly />
+            <ShowReviewByMovieId movieId={movie.id} rating />
           </Box>
           <Box
             sx={{
@@ -74,7 +41,7 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
               justifyContent: "space-between",
             }}
           >
-            <AvatarWithName name={stateDirector.fetchedDirectors.name} />
+            <ShowDirectorById directorId={movie.movieDirectorId} />
             <Typography component="span">
               {dateFormatter(movie.releaseDate)}
             </Typography>
@@ -86,16 +53,7 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
               backgroundColor: "#d3d3d3",
             }}
           />
-          <Box
-            sx={{
-              backgroundImage: "linear-gradient(to top, white ,transparent)",
-            }}
-          >
-            <Typography component="p">
-              {stateReview.fetchedReview.body}
-            </Typography>
-          </Box>
-          <Typography variant="h6">See more</Typography>
+          <ShowReviewByMovieId movieId={movie.id} gradient />
         </Box>
       </CardContent>
     </Card>

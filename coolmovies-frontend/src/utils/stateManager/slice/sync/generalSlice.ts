@@ -8,7 +8,10 @@ interface InitialState {
   };
   handleTable: {
     filter: Object | undefined;
-    sort: { entity: string; direction: string } | undefined;
+    sort: {
+      entity: string;
+      direction: string;
+    };
     page: number;
   };
 }
@@ -20,7 +23,10 @@ const initialState: InitialState = {
   },
   handleTable: {
     filter: undefined,
-    sort: undefined,
+    sort: {
+      entity: "",
+      direction: "ASC",
+    },
     page: 1,
   },
 };
@@ -37,7 +43,10 @@ export const generalSlice = createSlice({
     },
     setSort: (
       state,
-      action: PayloadAction<{ entity: string; direction: string }>
+      action: PayloadAction<{
+        entity: string;
+        direction: string;
+      }>
     ) => {
       state.handleTable.sort = action.payload;
     },
@@ -48,8 +57,8 @@ export const generalSlice = createSlice({
       state.handleTable.page = action.payload;
     },
     clearAllForTable: (state) => {
-      state.handleTable.filter = undefined;
-      state.handleTable.sort = undefined;
+      state.handleTable.filter = initialState.handleTable.filter;
+      state.handleTable.sort = initialState.handleTable.sort;
       state.handleTable.page = 1;
     },
   },

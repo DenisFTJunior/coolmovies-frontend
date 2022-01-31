@@ -13,7 +13,7 @@ const TableHeader = ({ columns }: { columns: Column[] }) => {
   if (stateGeneral.sort) clearAllForTable();
 
   const sortDirectionHandler = (column: Column) =>
-    column.sortOption.type === "ASC" ? "asc" : "desc";
+    column.sortOption.direction === "ASC" ? "asc" : "desc";
 
   return (
     <TableHead>
@@ -32,7 +32,7 @@ const TableHeader = ({ columns }: { columns: Column[] }) => {
                     entity: column.sortOption.entity,
                     direction:
                       column.sortOption === stateGeneral.sort
-                        ? stateGeneral.sort.type === "ASC"
+                        ? stateGeneral.sort.direction === "ASC"
                           ? "DESC"
                           : "ASC"
                         : "ASC",
