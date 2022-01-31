@@ -19,7 +19,7 @@ const saveReview = (input: SaveReviewVars) => {
   return useMutation<Review, SaveReviewInput>(SAVE_REVIEW_MUTATION, {
     variables: { input },
     client: moviesClient,
-    refetchQueries: ["MovieReview"],
+    refetchQueries: ["MovieReview", "MovieReviews"],
   });
 };
 

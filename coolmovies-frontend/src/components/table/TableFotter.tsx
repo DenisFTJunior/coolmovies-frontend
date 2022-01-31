@@ -1,8 +1,9 @@
 import { Pagination } from "@mui/material";
+import React from "react"
+
 
 import { Movies } from "../../schema/api/Movies";
 import { useStateDispatch } from "../../utils/stateManager/hooks/useDispatch";
-import { useStateSelector } from "../../utils/stateManager/hooks/useSelector";
 import { actions as generalActions } from "../../utils/stateManager/slice/sync/generalSlice";
 
 const TableFotter = ({ data }: { data: Movies }) => {

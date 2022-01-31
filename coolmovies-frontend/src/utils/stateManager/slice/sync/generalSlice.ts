@@ -35,15 +35,6 @@ export const generalSlice = createSlice({
     clearLocalValue: (state) => {
       state.localValue = undefined;
     },
-    openModal: (state) => {
-      state.modal.isOpen = true;
-    },
-    closeModal: (state) => {
-      state.modal.isOpen = false;
-    },
-    transferDataToModal: (state, action: PayloadAction<Object>) => {
-      state.modal.data = action.payload;
-    },
     setSort: (
       state,
       action: PayloadAction<{ entity: string; direction: string }>

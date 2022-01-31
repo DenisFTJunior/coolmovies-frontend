@@ -5,10 +5,10 @@ import { Directors, DirectorsVars } from "../../../../schema/api/Directors";
 
 const QUERY = gql`
   query AllDirectors(
-    $orderBy: [MovieDirectorsOrderBy!] = NATURAL
-    $offset: Int = 10
-    $last: Int = 10
-    $first: Int = 10
+    $orderBy: [MovieDirectorsOrderBy!]
+    $offset: Int
+    $last: Int
+    $first: Int
     $filter: MovieDirectorFilter = {}
     $condition: MovieDirectorCondition = {}
   ) {

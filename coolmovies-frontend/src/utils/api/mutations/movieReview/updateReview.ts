@@ -30,7 +30,7 @@ const updateReview = ({ nodeId, id, movieReviewPatch }: UpdateReviewVars) => {
   return useMutation<Review, UpdateReviewInput>(query, {
     variables: { input: { nodeId, id, movieReviewPatch } },
     client: moviesClient,
-    refetchQueries: ["MovieReview"],
+    refetchQueries: ["MovieReview", "MovieReviews"],
   });
 };
 

@@ -8,16 +8,26 @@ import { LoadingButton } from "@mui/lab";
 import { useStateDispatch } from "../../utils/stateManager/hooks/useDispatch";
 import { useStateSelector } from "../../utils/stateManager/hooks/useSelector";
 import { actions as generalActions } from "../../utils/stateManager/slice/sync/generalSlice";
+import { actions as modalActions } from "../../utils/stateManager/slice/sync/modalSlice";
 import { ModalProps } from "../../schema/components/Modal";
 
 const EditModal = ({ items, request }: ModalProps) => {
   const [error, setError] = React.useState(false);
   const dispatch = useStateDispatch();
+
+  //general state
   const generalState = useStateSelector((state) => state.general);
-  const { closeModal, setLocalValue, clearLocalValue } = generalActions;
-  const isOpen = generalState.modal.isOpen;
+  const { setLocalValue, clearLocalValue } = generalActions;
   const localValue = generalState.localValue;
   if (localValue) dispatch(clearLocalValue());
+
+  //modal state
+  const modalState = useStateSelector((state) => state.modal);
+  const { toogleModalEdit } = modalActions;
+  const isOpen = modalState.modal.edit.isOpen;
+  const data = modalState.modal.edit.data;
+
+  dispatch(setLocalValue(data));
 
   const validate = () => {
     const validatedItems = items.reduce(
@@ -39,7 +49,7 @@ const EditModal = ({ items, request }: ModalProps) => {
   };
 
   return (
-    <Modal open={isOpen} onClose={() => dispatch(closeModal())}>
+    <Modal open={isOpen} onClose={() => dispatch(toogleModalEdit())}>
       <Box
         sx={{
           display: "flex",
@@ -54,6 +64,7 @@ const EditModal = ({ items, request }: ModalProps) => {
           if (!item.Element) {
             return (
               <TextField
+                value={localValue[item.prop]}
                 id={`${item.prop}-input`}
                 label={item.label}
                 variant="outlined"

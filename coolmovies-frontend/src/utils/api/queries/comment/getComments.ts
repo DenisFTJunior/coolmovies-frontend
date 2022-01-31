@@ -8,9 +8,9 @@ const QUERY = gql`
     $condition: CommentCondition
     $filter: CommentFilter
     $orderBy: [CommentsOrderBy!]
-    $offset: Int = 10
-    $last: Int = 10
-    $first: Int = 10
+    $offset: Int
+    $last: Int
+    $first: Int
   ) {
     allComments(
       orderBy: $orderBy

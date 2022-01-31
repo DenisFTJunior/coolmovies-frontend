@@ -6,9 +6,10 @@ import {
   SaveReviewVars,
 } from "../../../../../schema/api/mutation/Review";
 import { Review, ReviewVars } from "../../../../../schema/api/Review";
+import { Reviews, ReviewsVars } from "../../../../../schema/api/Reviews";
 
 interface InitialState {
-  fetchedReview?: Review | undefined;
+  fetchedReview?: Review | Reviews | undefined;
   error?: string | undefined;
 }
 
@@ -21,6 +22,10 @@ export const reviewSlice = createSlice({
   name: "review",
   reducers: {
     fetchReview: (state, action: PayloadAction<{ vars: ReviewVars }>) => {},
+    fetchReviews: (
+      state,
+      action: PayloadAction<{ fetchMore?: boolean; vars: ReviewsVars }>
+    ) => {},
     saveReview: (state, action: PayloadAction<{ vars: SaveReviewVars }>) => {},
     deleteReview: (
       state,
@@ -36,7 +41,7 @@ export const reviewSlice = createSlice({
     },
     loadedReview: (
       state,
-      action: PayloadAction<{ data: Review | undefined }>
+      action: PayloadAction<{ data: Review | Reviews | undefined }>
     ) => {
       state.fetchedReview = action.payload.data;
     },

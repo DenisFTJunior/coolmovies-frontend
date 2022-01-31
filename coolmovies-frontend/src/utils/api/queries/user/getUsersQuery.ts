@@ -5,12 +5,12 @@ import { Users, UsersVars } from "../../../../schema/api/Users";
 
 const QUERY = gql`
   query Users(
-    $orderBy: [UsersOrderBy!] = NATURAL
+    $orderBy: [UsersOrderBy!]
     $condition: UserCondition = {}
     $filter: UserFilter = {}
-    $offset: Int = 10
-    $last: Int = 10
-    $first: Int = 10
+    $offset: Int
+    $last: Int
+    $first: Int
   ) {
     allUsers(
       condition: $condition

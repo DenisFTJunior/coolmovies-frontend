@@ -23,7 +23,7 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
 
   //actions -------------------------------------------------------------
   const { fetchDirector, clearDirectorData } = directorActions;
-  const { clearReviewData, fetchReview } = reviewActions;
+  const { clearReviewData, fetchReviews } = reviewActions;
 
   //clear data ----------------------------------------------------------
   if (stateDirector.fetchedDirectors) dispatch(clearDirectorData());
@@ -35,7 +35,7 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
 
   //Fetch ---------------------------------------------------------------
   dispatch(fetchDirector({ vars: { id: movie.movieDirectorId } }));
-  dispatch(fetchReview({ vars: { nodeId: movie.nodeId } }));
+  dispatch(fetchReviews({ vars: { condition: { movieId: movie.id } } }));
 
   //error ---------------------------------------------------------------
   if (stateDirector.error)

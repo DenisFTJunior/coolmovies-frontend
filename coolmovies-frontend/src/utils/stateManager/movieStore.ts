@@ -12,6 +12,7 @@ import reviewReducer from "./slice/async/review/reviewSlice";
 import tempCommentReducer from "./slice/sync/tempCommentSlice";
 import generalReducer from "./slice/sync/generalSlice";
 import searchReducer from "./slice/sync/searchSlice";
+import modalReducer from "./slice/sync/modalSlice";
 
 //Epics
 import userEpics from "./slice/async/user/userEpics";
@@ -46,6 +47,7 @@ const movieStore = (): EnhancedStore => {
       tempComment: tempCommentReducer,
       general: generalReducer,
       search: searchReducer,
+      modal: modalReducer
     },
   });
 

@@ -7,17 +7,17 @@ import { LoadingButton } from "@mui/lab";
 
 import { useStateDispatch } from "../../utils/stateManager/hooks/useDispatch";
 import { useStateSelector } from "../../utils/stateManager/hooks/useSelector";
-import { actions as generalActions } from "../../utils/stateManager/slice/sync/generalSlice";
+import { actions as modalActions } from "../../utils/stateManager/slice/sync/modalSlice";
 import { DetailModalProps } from "../../schema/components/Modal";
 
-const EditModal = ({ items }: DetailModalProps) => {
+const DetailsModal = ({ items }: DetailModalProps) => {
   const dispatch = useStateDispatch();
-  const generalState = useStateSelector((state) => state.general);
-  const { closeModal } = generalActions;
-  const isOpen = generalState.modal.isOpen;
+  const modalState = useStateSelector((state) => state.modal);
+  const { toogleModalDetail } = modalActions;
+  const isOpen = modalState.modal.detail.isOpen;
 
   return (
-    <Modal open={isOpen} onClose={() => dispatch(closeModal())}>
+    <Modal open={isOpen} onClose={() => dispatch(toogleModalDetail())}>
       <Box
         sx={{
           display: "flex",
@@ -50,4 +50,4 @@ const EditModal = ({ items }: DetailModalProps) => {
   );
 };
 
-export default EditModal;
+export default DetailsModal;

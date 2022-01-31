@@ -30,7 +30,7 @@ const deleteReview = ({ nodeId, id }: DeleteReviewVars) => {
   return useMutation<Review, DeleteReviewInput>(query, {
     variables: { input: { nodeId, id } },
     client: moviesClient,
-    refetchQueries: ["MovieReview"],
+    refetchQueries: ["MovieReview", "MovieReviews"],
   });
 };
 

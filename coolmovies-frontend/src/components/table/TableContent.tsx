@@ -24,11 +24,11 @@ const Row = ({ columns, data }: { columns: Column[]; data: Movie }) => {
   //Review -----------------------------------------------------------
   const dispatch = useStateDispatch();
   const stateReview = useStateSelector((state) => state.review);
-  const { clearReviewData, fetchReview } = reviewActions;
+  const { clearReviewData, fetchReviews } = reviewActions;
   const review = stateReview.fetchedReview;
   if (review) dispatch(clearReviewData());
   if (!review) return <Loading />;
-  dispatch(fetchReview({ vars: { nodeId: data.nodeId } }));
+  dispatch(fetchReviews({ vars: { condition: { movieId: data.id } } }));
 
   return (
     <>
@@ -42,18 +42,16 @@ const Row = ({ columns, data }: { columns: Column[]; data: Movie }) => {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        {columns.map((column, index) => {
-          if (index === 0)
+        {columns.map((column, columnIndex) => {
+          const newData = { ...data, ...review };
+          if (column.render) return column.render(newData);
+          if (columnIndex === 0)
             return (
               <TableCell component="th" scope="row">
-                {(data as any)[column.dataIndex]}
+                {column.prop(newData)}
               </TableCell>
             );
-          return (
-            <TableCell align="right">
-              {(data as any)[column.dataIndex]}
-            </TableCell>
-          );
+          return <TableCell align="right">{column.prop(newData)}</TableCell>;
         })}
       </TableRow>
       <TableRow>

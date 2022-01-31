@@ -7,10 +7,10 @@ const QUERY = gql`
   query Movies(
     $condition: MovieCondition = {}
     $filter: MovieFilter = {}
-    $orderBy: [MoviesOrderBy!] = NATURAL
-    $offset: Int = 10
-    $last: Int = 10
-    $first: Int = 10
+    $orderBy: [MoviesOrderBy!]
+    $offset: Int
+    $last: Int
+    $first: Int
   ) {
     allMovies(
       condition: $condition
