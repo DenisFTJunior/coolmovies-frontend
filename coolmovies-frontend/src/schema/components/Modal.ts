@@ -12,7 +12,7 @@ export interface Item {
 
 export interface DetailItem {
   label: string;
-  content: string;
+  prop: string;
 }
 
 export interface DetailModalProps {

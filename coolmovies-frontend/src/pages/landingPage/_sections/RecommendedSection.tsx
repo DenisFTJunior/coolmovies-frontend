@@ -3,7 +3,7 @@ import React from "react";
 
 import MoviesRecommended from "../../../components/MoviesRecommended";
 
-const Section = () => (
+const RecommendedSection = () => (
   <Box
     sx={{
       width: "100%",
@@ -16,4 +16,4 @@ const Section = () => (
   </Box>
 );
 
-export default Section;
+export default RecommendedSection;

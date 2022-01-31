@@ -66,7 +66,7 @@ const columns = [
   },
 ];
 
-const Section = () => {
+const MovieListSection = () => {
   const dispatch = useStateDispatch();
   const stateMovie = useStateSelector((state) => state.movie);
   const { clearMovieData, fetchMovies } = movieActions;
@@ -75,4 +75,4 @@ const Section = () => {
   return <Table data={stateMovie} columns={columns} />;
 };
 
-export default Section;
+export default MovieListSection;
