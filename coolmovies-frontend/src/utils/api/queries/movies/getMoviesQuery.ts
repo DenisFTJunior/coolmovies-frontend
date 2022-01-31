@@ -32,6 +32,7 @@ const QUERY = gql`
         hasNextPage
         hasPreviousPage
       }
+      totalCount
     }
   }
 `;

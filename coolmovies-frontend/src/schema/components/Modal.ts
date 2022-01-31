@@ -1,9 +1,11 @@
-export interface ModalItems {
+export interface ModalProps {
   items: Item[];
+  request: any;
 }
 
-interface Item {
+export interface Item {
   prop: string;
   label: string;
   Element: JSX.Element;
+  required: boolean;
 }

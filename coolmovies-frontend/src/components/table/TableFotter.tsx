@@ -11,7 +11,7 @@ const TableFotter = ({ data }: { data: Movies }) => {
 
   return (
     <Pagination
-      count={data.totalCount / 20}
+      count={Math.ceil(data.totalCount / 20)}
       hideNextButton={!data.pageInfo.hasNextPage}
       hidePrevButton={!data.pageInfo.hasPreviousPage}
       variant="outlined"
