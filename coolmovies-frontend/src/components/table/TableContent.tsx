@@ -12,7 +12,6 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 import { Column, TableProps } from "../../schema/components/Table";
 import { Box } from "@mui/system";
-import { Review } from "../../schema/api/Review";
 import { useStateDispatch } from "../../utils/stateManager/hooks/useDispatch";
 import { useStateSelector } from "../../utils/stateManager/hooks/useSelector";
 import { actions as reviewActions } from "../../utils/stateManager/slice/async/review/reviewSlice";
@@ -75,7 +74,7 @@ const Row = ({ columns, data }: { columns: Column[]; data: Movie }) => {
 
 const TableContent = ({ columns, data }: TableProps) => (
   <>
-    {data.map((item) => (
+    {data.allMovies.movies.map((item) => (
       <Row columns={columns} data={item} />
     ))}
   </>
