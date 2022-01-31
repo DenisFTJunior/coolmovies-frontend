@@ -1,6 +1,6 @@
 export interface ModalProps {
   items: Item[];
-  request: any;
+  request?: any;
 }
 
 export interface Item {
@@ -8,4 +8,13 @@ export interface Item {
   label: string;
   Element: JSX.Element;
   required: boolean;
+}
+
+export interface DetailItem {
+  label: string;
+  content: string;
+}
+
+export interface DetailModalProps {
+  items: DetailItem[];
 }
