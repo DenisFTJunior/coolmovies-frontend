@@ -5,6 +5,7 @@ interface InitialState {
     edit: {
       isOpen: boolean;
       data?: Object;
+      request?: any;
     };
     detail: {
       isOpen: boolean;
@@ -35,6 +36,12 @@ export const modalSlice = createSlice({
       action: PayloadAction<{ modal: string; data: Object }>
     ) => {
       (state.modal as any)[action.payload.modal].data = action.payload.data;
+    },
+    setRequest: (
+      state,
+      action: PayloadAction<any>
+    ) => {
+      state.modal.edit.request = action.payload;
     },
   },
 });

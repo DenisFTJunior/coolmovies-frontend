@@ -6,7 +6,7 @@ export interface ModalProps {
 export interface Item {
   prop: string;
   label: string;
-  Element: JSX.Element;
+  render?: (data: any, item: Item) => JSX.Element;
   required: boolean;
 }
 

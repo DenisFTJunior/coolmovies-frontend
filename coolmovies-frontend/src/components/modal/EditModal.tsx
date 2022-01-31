@@ -11,7 +11,7 @@ import { actions as generalActions } from "../../utils/stateManager/slice/sync/g
 import { actions as modalActions } from "../../utils/stateManager/slice/sync/modalSlice";
 import { ModalProps } from "../../schema/components/Modal";
 
-const EditModal = ({ items, request }: ModalProps) => {
+const EditModal = ({ items }: ModalProps) => {
   const [error, setError] = React.useState(false);
   const dispatch = useStateDispatch();
 
@@ -26,6 +26,7 @@ const EditModal = ({ items, request }: ModalProps) => {
   const { toogleModalEdit } = modalActions;
   const isOpen = modalState.modal.edit.isOpen;
   const data = modalState.modal.edit.data;
+  const request = modalState.modal.edit.request
 
   dispatch(setLocalValue(data));
 
@@ -59,9 +60,9 @@ const EditModal = ({ items, request }: ModalProps) => {
           width: "20rem",
         }}
       >
-        <Alert severity="error">Please, fill all fields!</Alert>
+        {!!error && <Alert severity="error">Please, fill all fields!</Alert>}
         {items.map((item) => {
-          if (!item.Element) {
+          if (!item.render) {
             return (
               <TextField
                 value={localValue[item.prop]}
@@ -74,7 +75,7 @@ const EditModal = ({ items, request }: ModalProps) => {
               />
             );
           } else {
-            return item.Element;
+            return item.render(data, item);
           }
         })}
         <LoadingButton
