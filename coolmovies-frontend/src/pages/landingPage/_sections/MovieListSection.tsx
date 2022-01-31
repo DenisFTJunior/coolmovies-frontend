@@ -9,7 +9,7 @@ import { Review } from "../../../schema/api/Review";
 import { useStateDispatch } from "../../../utils/stateManager/hooks/useDispatch";
 import { useStateSelector } from "../../../utils/stateManager/hooks/useSelector";
 import { actions as movieActions } from "../../../utils/stateManager/slice/async/movie/movieSlice";
-import movieListActions from "./_actions/MovieListActions";
+import movieListActions from "./_actions/movieListActions";
 
 const columns = [
   {
@@ -60,7 +60,9 @@ const columns = [
         desc: false,
       },
     },
-    render: (data: Movie | Review) => <TableActions item={data} actions={movieListActions()} />,
+    render: (data: Movie | Review) => (
+      <TableActions item={data} actions={movieListActions()} />
+    ),
   },
 ];
 
