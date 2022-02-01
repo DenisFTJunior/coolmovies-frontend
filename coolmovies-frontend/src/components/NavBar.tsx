@@ -28,26 +28,31 @@ const NavBar = () => {
   console.log("modalState", modalState);
 
   return (
-    <Stack direction="row" spacing={2} alignContent="center" justifyContent="center">
-        <Button key="home" href="/" startIcon={<HomeIcon />} />
-        <Button
-          key="search"
-          onClick={() => dispatch(toogleSearch())}
-          startIcon={<SearchIcon />}
-        >
-          {/* <Autocomplete
+    <Stack
+      direction="row"
+      spacing={1}
+      alignContent="center"
+      justifyContent="center"
+    >
+      <Button key="home" href="/" startIcon={<HomeIcon />} />
+      <Button
+        key="search"
+        onClick={() => dispatch(toogleSearch())}
+        startIcon={<SearchIcon />}
+      >
+        {/* <Autocomplete
             options={stateMovie.fetchedMovies.map(
               (movie: Movie) => movie.title
             )}
             renderInput={(params) => <TextField {...params} label="Search" />}
             onChange={(e, value) => dispatch(setSearch(`${value}`))}
           /> */}
-        </Button>
-        <Button
-          key="Recommendations"
-          href="#recommendedMovies"
-          startIcon={<RecommendIcon />}
-        />
+      </Button>
+      <Button
+        key="Recommendations"
+        href="#recommendedMovies"
+        startIcon={<RecommendIcon />}
+      />
     </Stack>
   );
 };
