@@ -28,9 +28,9 @@ const MovieCard = ({ movie }: { movie: Movie }) => (
           }}
         >
           <Typography component="div" variant="h5">
-            {movie.title}
+            {movie?.title}
           </Typography>
-          <ShowReviewByMovieId movieId={movie.id} onlyRating />
+          <ShowReviewByMovieId movieId={movie?.id} onlyRating />
         </Box>
         <Box
           sx={{
@@ -39,9 +39,9 @@ const MovieCard = ({ movie }: { movie: Movie }) => (
             justifyContent: "space-between",
           }}
         >
-          <ShowDirectorById directorId={movie.movieDirectorId} />
+          <ShowDirectorById directorId={movie?.movieDirectorId} />
           <Typography component="span">
-            {dateFormatter(movie.releaseDate)}
+            {dateFormatter(movie?.releaseDate)}
           </Typography>
         </Box>
         <Box
@@ -51,7 +51,7 @@ const MovieCard = ({ movie }: { movie: Movie }) => (
             backgroundColor: "#d3d3d3",
           }}
         />
-        <ShowReviewByMovieId movieId={movie.id} gradient />
+        <ShowReviewByMovieId movieId={movie?.id} gradient />
       </Box>
     </CardContent>
   </Card>

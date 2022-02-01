@@ -6,14 +6,14 @@ import { actions as movieActions } from "../stateManager/slice/async/movie/movie
 
 const useFetchingMovies = (vars: any = {}) => {
   const dispatch = useStateDispatch();
-  const { clearMovieData, fetchMovies } = movieActions;
+  const { fetchMovies } = movieActions;
   const stateMovie = useStateSelector((state) => state.movie);
-  if (stateMovie) dispatch(clearMovieData());
 
   useEffect(() => {
     dispatch(fetchMovies({ vars }));
   }, []);
 
+  console.log("stateMovie fetch", stateMovie);
   return stateMovie;
 };
 

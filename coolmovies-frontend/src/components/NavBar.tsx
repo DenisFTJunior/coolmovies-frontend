@@ -33,13 +33,7 @@ const NavBar = () => {
         key="search"
         onClick={() => dispatch(toogleSearch())}
         startIcon={<SearchIcon />}
-      >
-        {/* <Autocomplete
-          options={stateMovie.fetchedMovies.map((movie: Movie) => movie.title)}
-          renderInput={(params) => <TextField {...params} label="Search" />}
-          onChange={(e, value) => dispatch(setSearch(`${value}`))}
-        /> */}
-      </Button>
+      ></Button>
       <Button
         key="Recommendations"
         href="#recommendedMovies"

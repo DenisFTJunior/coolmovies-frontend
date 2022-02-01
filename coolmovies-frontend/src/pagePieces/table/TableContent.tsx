@@ -7,6 +7,7 @@ import { Column, TableProps } from "../../schema/components/Table";
 import { useStateSelector } from "../../utils/stateManager/hooks/useSelector";
 import { Movie } from "../../schema/api/Movie";
 import { ShowReviewByMovieId } from "../../components/show/ShowReview";
+import Loading from "../../components/Loading";
 
 const Row = ({ columns, data }: { columns: Column[]; data: Movie }) => {
   const [open, setOpen] = useState(false);
@@ -50,12 +51,16 @@ const Row = ({ columns, data }: { columns: Column[]; data: Movie }) => {
   );
 };
 
-const TableContent = ({ columns, data }: TableProps) => (
-  <>
-    {data.allMovies?.movies.map((item) => (
-      <Row columns={columns} data={item} />
-    ))}
-  </>
-);
+const TableContent = ({ columns, data }: TableProps) => {
+  console.log(`data`, data);
+  if (!data.fetchedMovies) return <Loading />;
+  return (
+    <>
+      {data.fetchedMovies.allMovies?.movies.map((item) => (
+        <Row columns={columns} data={item} />
+      ))}
+    </>
+  );
+};
 
 export default TableContent;

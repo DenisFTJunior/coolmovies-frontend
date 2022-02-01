@@ -4,7 +4,7 @@ import { Review } from "../api/Review";
 
 export interface TableProps {
   columns: Column[];
-  data: Movies;
+  data: { fetchedMovies: Movies };
 }
 
 export interface Column {

@@ -7,9 +7,7 @@ import { actions as directorActions } from "../stateManager/slice/async/director
 const useFetchingDirectors = (directorId: string) => {
   const dispatch = useStateDispatch();
   const stateDirector = useStateSelector((state) => state.director);
-  const { fetchDirector, clearDirectorData } = directorActions;
-
-  if (stateDirector.fetchedDirectors) dispatch(clearDirectorData());
+  const { fetchDirector } = directorActions;
 
   useEffect(() => {
     dispatch(fetchDirector({ vars: { id: directorId } }));

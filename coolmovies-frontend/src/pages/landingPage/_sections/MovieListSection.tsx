@@ -57,7 +57,6 @@ const columns = [
 
 const MovieListSection = () => {
   const stateMovie = useFetchingMovies({ vars: {} });
-  console.log("stateMovie", stateMovie);
   return <Table data={stateMovie} columns={columns} />;
 };
 

@@ -34,18 +34,19 @@ const detailModalItems: DetailItem[] = [
 ];
 
 const LandingPage = () => (
-  <Box
-   
+  <Stack
+    justifyContent="center"
     sx={{
       width: "80%",
       minWidth: "20rem",
+      margin:"0 auto"
     }}
   >
     <MovieListSection />
     {/* <RecommendedSection /> */}
     <EditModal items={editModalItems} />
     <DetailsModal items={detailModalItems} />
-  </Box>
+  </Stack>
 );
 
 export default LandingPage;
