@@ -1,7 +1,7 @@
 import { Observable } from "rxjs";
 import { Epic, StateObservable } from "redux-observable";
 import { RootState } from "../../../../../../schema/stateManager/StoreType";
-import getCommentsQuery from "../../../../../api/queries/comment/getComments";
+import useCommentsQuery from "../../../../../api/queries/comment/useCommentsQuery";
 import { CommentSliceAction, actions } from "../commentSlice";
 import { filter, switchMap } from "rxjs/operators";
 
@@ -12,7 +12,7 @@ export const epicFetchComments: Epic = (
   action$.pipe(
     filter(actions.fetchComments.match),
     switchMap(async (action) => {
-      const { data, error, fetchMore } = await getCommentsQuery(
+      const { data, error, fetchMore } = await useCommentsQuery(
         action.payload.vars
       );
       if (action.payload.fetchMore)

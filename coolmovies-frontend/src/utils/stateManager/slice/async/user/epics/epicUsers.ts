@@ -4,7 +4,7 @@ import { filter, switchMap } from "rxjs/operators";
 import { Epic, StateObservable } from "redux-observable";
 import { RootState } from "../../../../../../schema/stateManager/StoreType";
 import { UserSliceAction, actions } from "../userSlice";
-import getUsersQuery from "../../../../../api/queries/user/getUsersQuery";
+import useUsersQuery from "../../../../../api/queries/user/useUsersQuery";
 
 export const epicFetchUsers: Epic = (
   action$: Observable<UserSliceAction["fetchUsers"]>,
@@ -13,7 +13,7 @@ export const epicFetchUsers: Epic = (
   action$.pipe(
     filter(actions.fetchUsers.match),
     switchMap(async (action) => {
-      const { data, error, fetchMore } = await getUsersQuery(
+      const { data, error, fetchMore } = await useUsersQuery(
         action.payload.vars
       );
       if (action.payload.fetchMore)

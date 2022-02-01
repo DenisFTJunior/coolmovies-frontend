@@ -12,6 +12,8 @@ const TableHeader = ({ columns }: { columns: Column[] }) => {
   const { setSort, clearAllForTable } = generalActions;
   if (stateGeneral.sort) clearAllForTable();
 
+  console.log(stateGeneral);
+
   const sortDirectionHandler = (column: Column) =>
     column.sortOption.direction === "ASC" ? "asc" : "desc";
 
@@ -24,7 +26,7 @@ const TableHeader = ({ columns }: { columns: Column[] }) => {
             sortDirection={sortDirectionHandler(column)}
           >
             <TableSortLabel
-              active={column.sortOption.entity === stateGeneral.sort.entity}
+              active={column.sortOption.entity === stateGeneral?.sort?.entity}
               direction={sortDirectionHandler(column)}
               onClick={() =>
                 dispatch(

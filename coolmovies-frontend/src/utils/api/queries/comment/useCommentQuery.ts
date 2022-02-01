@@ -29,15 +29,16 @@ const COMMENT_BY_NODE_ID_QUERY = gql`
   }
 `;
 
-const getCommentQuery = ({ id, nodeId }: CommentVars) => {
-  const query = nodeId ? COMMENT_BY_NODE_ID_QUERY : COMMENT_BY_ID_QUERY;
-  return useQuery<Comment, CommentVars>(query, {
+const useCommentQuery = ({ id, nodeId }: CommentVars) => {
+  const QUERY = nodeId ? COMMENT_BY_NODE_ID_QUERY : COMMENT_BY_ID_QUERY;
+  const query = useQuery<Comment, CommentVars>(QUERY, {
     fetchPolicy: "network-only",
     nextFetchPolicy: "cache-first",
     variables: { id: nodeId || id },
     skip: !id && !nodeId,
     client: moviesClient,
   });
+  return query;
 };
 
-export default getCommentQuery;
+export default useCommentQuery;

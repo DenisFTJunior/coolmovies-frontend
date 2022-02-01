@@ -1,32 +1,32 @@
 import { gql, useQuery } from "@apollo/client";
 
 import { moviesClient } from "../../client/movieClient";
-import { Users, UsersVars } from "../../../../schema/api/Users";
+import { Comments, CommentsVars } from "../../../../schema/api/Comments";
 
 const QUERY = gql`
-  query Users(
-    $orderBy: [UsersOrderBy!]
-    $condition: UserCondition = {}
-    $filter: UserFilter = {}
+  query AllComments(
+    $condition: CommentCondition
+    $filter: CommentFilter
+    $orderBy: [CommentsOrderBy!]
     $offset: Int
     $last: Int
     $first: Int
   ) {
-    allUsers(
-      condition: $condition
-      filter: $filter
+    allComments(
       orderBy: $orderBy
       offset: $offset
       last: $last
       first: $first
+      filter: $filter
+      condition: $condition
     ) {
-      users: nodes {
+      comments: nodes {
         id
         nodeId
-        movieDirectorId
-        releaseDate
         title
-        userCreatorId
+        body
+        movieReviewId
+        userId
       }
       pageInfo {
         hasNextPage
@@ -36,13 +36,14 @@ const QUERY = gql`
   }
 `;
 
-const getUsersQuery = (vars: UsersVars) => {
-  return useQuery<Users, UsersVars>(QUERY, {
+const useCommentsQuery = (vars: CommentsVars) => {
+  const query = useQuery<Comments, CommentsVars>(QUERY, {
     fetchPolicy: "network-only",
     nextFetchPolicy: "cache-first",
     variables: vars,
     client: moviesClient,
   });
+  return query;
 };
 
-export default getUsersQuery;
+export default useCommentsQuery;

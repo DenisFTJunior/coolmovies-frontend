@@ -32,7 +32,7 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
             <Typography component="div" variant="h5">
               {movie.title}
             </Typography>
-            <ShowReviewByMovieId movieId={movie.id} rating />
+            <ShowReviewByMovieId movieId={movie.id} onlyRating />
           </Box>
           <Box
             sx={{

@@ -23,15 +23,16 @@ const USER_BY_NODE_ID_QUERY = gql`
   }
 `;
 
-const getUserQuery = ({ id, nodeId }: UserVars) => {
-  const query = nodeId ? USER_BY_NODE_ID_QUERY : USER_BY_ID_QUERY;
-  return useQuery<User, UserVars>(query, {
+const useUserQuery = ({ id, nodeId }: UserVars) => {
+  const QUERY = nodeId ? USER_BY_NODE_ID_QUERY : USER_BY_ID_QUERY;
+  const query = useQuery<User, UserVars>(QUERY, {
     fetchPolicy: "network-only",
     nextFetchPolicy: "cache-first",
     variables: { id: nodeId || id },
     skip: !id && !nodeId,
     client: moviesClient,
   });
+  return query;
 };
 
-export default getUserQuery;
+export default useUserQuery;

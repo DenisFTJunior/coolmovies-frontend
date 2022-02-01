@@ -14,7 +14,7 @@ const DetailsModal = ({ items }: DetailModalProps) => {
   const { toogleModalDetail } = modalActions;
   const data = modalState.modal.edit.data;
   const isOpen = modalState.modal.detail.isOpen;
-
+  if(!data) return <></>
   return (
     <Modal open={isOpen} onClose={() => dispatch(toogleModalDetail())}>
       <Stack direction="column" justifyContent="center" alignItems="center">
@@ -31,15 +31,18 @@ const DetailsModal = ({ items }: DetailModalProps) => {
           }}
         >
           {items.map((item) => {
-            if (item.render) return item.render(data, item);
             return (
               <Stack direction="column" spacing={2}>
                 <Typography variant="body1" component="span">
                   {item.label}
                 </Typography>
-                <Typography variant="h6" component="span">
-                  {data[item.prop]}
-                </Typography>
+                {item.render ? (
+                  item.render(data, item)
+                ) : (
+                  <Typography variant="h6" component="span">
+                    {data[item.prop]}
+                  </Typography>
+                )}
               </Stack>
             );
           })}

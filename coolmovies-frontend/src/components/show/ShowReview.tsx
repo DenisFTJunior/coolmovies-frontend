@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Rating, Typography } from "@mui/material";
+import { Box, Rating, Stack, Typography } from "@mui/material";
 
 import { useStateDispatch } from "../../utils/stateManager/hooks/useDispatch";
 import { actions as reviewActions } from "../../utils/stateManager/slice/async/review/reviewSlice";
@@ -8,12 +8,16 @@ import Loading from "../Loading";
 
 export const ShowReviewByMovieId = ({
   movieId,
+  onlyRating,
   rating,
   gradient,
+  editPermited,
 }: {
   movieId: string;
+  onlyRating?: boolean;
   rating?: boolean;
   gradient?: boolean;
+  editPermited?: boolean;
 }) => {
   const dispatch = useStateDispatch();
   const stateReview = useStateSelector((state) => state.review);
@@ -22,20 +26,27 @@ export const ShowReviewByMovieId = ({
   if (review) dispatch(clearReviewData());
   if (!review) return <Loading />;
   dispatch(fetchReviews({ vars: { condition: { movieId } } }));
-  if (rating) return <Rating value={review.rating} readOnly />;
+  if (onlyRating) return <Rating value={review.rating} readOnly />;
   return (
-    <Box
+    <Stack
+      direction="column"
+      justifyContent="center"
+      alignItems="center"
+      spacing={2}
       sx={{
-        margin: 1,
         backgroundImage: gradient
           ? "linear-gradient(to top, white ,transparent)"
           : "",
       }}
     >
-      <Typography variant="h6" gutterBottom component="div">
-        Review - {review.title}
-      </Typography>
+      <Stack direction="row" justifyContent="space-between">
+        <Typography variant="h6" gutterBottom component="div">
+          Review - {review.title}
+        </Typography>
+        {rating && <Rating value={review.rating} readOnly />}
+        {/* {editPermited} */}
+      </Stack>
       <Typography component="div">{review.body}</Typography>
-    </Box>
+    </Stack>
   );
 };

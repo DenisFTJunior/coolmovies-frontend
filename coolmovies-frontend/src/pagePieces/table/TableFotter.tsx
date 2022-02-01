@@ -13,8 +13,8 @@ const TableFotter = ({ data }: { data: Movies }) => {
   return (
     <Pagination
       count={Math.ceil(data.totalCount / 20)}
-      hideNextButton={!data.pageInfo.hasNextPage}
-      hidePrevButton={!data.pageInfo.hasPreviousPage}
+      hideNextButton={!data.pageInfo?.hasNextPage}
+      hidePrevButton={!data.pageInfo?.hasPreviousPage}
       variant="outlined"
       shape="rounded"
       onChange={(event, page) => dispatch(setPage(page))}

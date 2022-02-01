@@ -6,7 +6,7 @@ import Head from "next/head";
 import movieStore from "../utils/stateManager/movieStore";
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
-  const store = movieStore();
+  const createdStore = movieStore();
 
   return (
     <>
@@ -16,7 +16,7 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <ReduxProvider store={store}>
+      <ReduxProvider store={createdStore}>
         <Component {...pageProps} />
       </ReduxProvider>
     </>

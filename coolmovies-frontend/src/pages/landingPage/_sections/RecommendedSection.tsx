@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import React from "react";
 
-import MoviesRecommended from "../../../components/MoviesRecommended";
+import MoviesRecommended from "../../../pagePieces/MoviesRecommended";
 
 const RecommendedSection = () => (
   <Box

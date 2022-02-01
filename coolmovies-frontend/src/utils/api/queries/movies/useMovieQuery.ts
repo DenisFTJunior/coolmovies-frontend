@@ -15,14 +15,15 @@ const QUERY = gql`
   }
 `;
 
-const getMovieQuery = ({ id }: MovieVars) => {
-  return useQuery<Movie, MovieVars>(QUERY, {
+const useMovieQuery = ({ id }: MovieVars) => {
+  const query = useQuery<Movie, MovieVars>(QUERY, {
     fetchPolicy: "network-only",
     nextFetchPolicy: "cache-first",
     variables: { id },
     skip: !id,
     client: moviesClient,
   });
+  return query;
 };
 
-export default getMovieQuery;
+export default useMovieQuery;

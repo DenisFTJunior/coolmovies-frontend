@@ -4,7 +4,7 @@ import { filter, switchMap } from "rxjs/operators";
 import { Epic, StateObservable } from "redux-observable";
 import { RootState } from "../../../../../../schema/stateManager/StoreType";
 import { MovieSliceAction, actions } from "../movieSlice";
-import getMoviesQuery from "../../../../../api/queries/movies/getMoviesQuery";
+import useMoviesQuery from "../../../../../api/queries/movies/useMoviesQuery";
 
 export const epicFetchMovies: Epic = (
   action$: Observable<MovieSliceAction["fetchMovies"]>,
@@ -13,7 +13,7 @@ export const epicFetchMovies: Epic = (
   action$.pipe(
     filter(actions.fetchMovies.match),
     switchMap(async (action) => {
-      const { data, error, fetchMore } = await getMoviesQuery(
+      const { data, error, fetchMore } = await useMoviesQuery(
         action.payload.vars
       );
       if (action.payload.fetchMore)

@@ -52,7 +52,7 @@ const Row = ({ columns, data }: { columns: Column[]; data: Movie }) => {
 
 const TableContent = ({ columns, data }: TableProps) => (
   <>
-    {data.allMovies.movies.map((item) => (
+    {data.allMovies?.movies.map((item) => (
       <Row columns={columns} data={item} />
     ))}
   </>

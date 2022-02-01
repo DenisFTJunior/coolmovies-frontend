@@ -4,7 +4,7 @@ import { filter, switchMap } from "rxjs/operators";
 import { Epic, StateObservable } from "redux-observable";
 import { RootState } from "../../../../../../schema/stateManager/StoreType";
 import { ReviewSliceAction, actions } from "../reviewSlice";
-import getReviewsQuery from "../../../../../api/queries/movieReview/getReviewsQuery";
+import useReviewsQuery from "../../../../../api/queries/movieReview/useReviewsQuery";
 
 export const epicFetchReviews: Epic = (
   action$: Observable<ReviewSliceAction["fetchReviews"]>,
@@ -13,7 +13,7 @@ export const epicFetchReviews: Epic = (
   action$.pipe(
     filter(actions.fetchReviews.match),
     switchMap(async (action) => {
-      const { data, error, fetchMore } = await getReviewsQuery(
+      const { data, error, fetchMore } = await useReviewsQuery(
         action.payload.vars
       );
       if (action.payload.fetchMore)

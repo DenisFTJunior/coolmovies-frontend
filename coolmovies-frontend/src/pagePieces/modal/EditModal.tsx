@@ -27,6 +27,8 @@ const EditModal = ({ items }: ModalProps) => {
   const isOpen = modalState.modal.edit.isOpen;
   const data = modalState.modal.edit.data;
   const request = modalState.modal.edit.request;
+  
+  if (!data) return <></>;
 
   dispatch(setLocalValue(data));
 
@@ -64,21 +66,18 @@ const EditModal = ({ items }: ModalProps) => {
       >
         {!!error && <Alert severity="error">Please, fill all fields!</Alert>}
         {items.map((item) => {
-          if (!item.render) {
-            return (
-              <TextField
-                value={localValue[item.prop]}
-                id={`${item.prop}-input`}
-                label={item.label}
-                variant="outlined"
-                onChange={(e) =>
-                  setLocalValue({ ...localValue, [item.prop]: e.target.value })
-                }
-              />
-            );
-          } else {
-            return item.render(data, item);
-          }
+          if (item.render) return item.render(data, item);
+          return (
+            <TextField
+              value={localValue[item.prop]}
+              id={`${item.prop}-input`}
+              label={item.label}
+              variant="outlined"
+              onChange={(e) =>
+                setLocalValue({ ...localValue, [item.prop]: e.target.value })
+              }
+            />
+          );
         })}
         <LoadingButton
           onClick={handleClick}

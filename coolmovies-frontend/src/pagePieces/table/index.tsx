@@ -8,11 +8,13 @@ import TableHeader from "./TableHeader";
 
 const Table = ({ columns, data }: TableProps) => {
   return (
-    <MarerialTable>
-      <TableHeader columns={columns} />
-      <TableContent columns={columns} data={data} />
+    <>
+      <MarerialTable>
+        <TableHeader columns={columns} />
+        <TableContent columns={columns} data={data} />
+      </MarerialTable>
       <TableFotter data={data} />
-    </MarerialTable>
+    </>
   );
 };
 

@@ -13,7 +13,7 @@ export interface Item {
 
 export interface DetailItem {
   label: string;
-  prop?: string;
+  prop: string;
   render?: (data: any, item: DetailItem) => JSX.Element;
 }
 
