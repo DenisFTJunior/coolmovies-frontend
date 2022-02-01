@@ -4,7 +4,7 @@ import React from "react";
 import { useStateDispatch } from "../utils/stateManager/hooks/useDispatch";
 import { useStateSelector } from "../utils/stateManager/hooks/useSelector";
 import { actions as movieActions } from "../utils/stateManager/slice/async/movie/movieSlice";
-import Loading from "./Loading";
+import Loading from "../components/Loading";
 import MovieCard from "./MovieCard";
 
 const MoviesRecommended = () => {

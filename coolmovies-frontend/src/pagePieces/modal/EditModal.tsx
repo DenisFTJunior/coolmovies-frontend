@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import SaveIcon from "@mui/icons-material/Save";
 import Modal from "@mui/material/Modal";
-import { Alert, TextField } from "@mui/material";
+import { Alert, Stack, TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 
 import { useStateDispatch } from "../../utils/stateManager/hooks/useDispatch";
@@ -26,7 +26,7 @@ const EditModal = ({ items }: ModalProps) => {
   const { toogleModalEdit } = modalActions;
   const isOpen = modalState.modal.edit.isOpen;
   const data = modalState.modal.edit.data;
-  const request = modalState.modal.edit.request
+  const request = modalState.modal.edit.request;
 
   dispatch(setLocalValue(data));
 
@@ -51,13 +51,15 @@ const EditModal = ({ items }: ModalProps) => {
 
   return (
     <Modal open={isOpen} onClose={() => dispatch(toogleModalEdit())}>
-      <Box
+      <Stack
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        spacing={2}
         sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexFlow: "row wrap",
-          width: "20rem",
+          width: "36rem",
+          maxWidth: "100%",
+          flexWrap: "wrap",
         }}
       >
         {!!error && <Alert severity="error">Please, fill all fields!</Alert>}
@@ -87,7 +89,7 @@ const EditModal = ({ items }: ModalProps) => {
         >
           Save
         </LoadingButton>
-      </Box>
+      </Stack>
     </Modal>
   );
 };

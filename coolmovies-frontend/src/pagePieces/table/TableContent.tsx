@@ -6,7 +6,7 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { Column, TableProps } from "../../schema/components/Table";
 import { useStateSelector } from "../../utils/stateManager/hooks/useSelector";
 import { Movie } from "../../schema/api/Movie";
-import { ShowReviewByMovieId } from "../show/ShowReview";
+import { ShowReviewByMovieId } from "../../components/show/ShowReview";
 
 const Row = ({ columns, data }: { columns: Column[]; data: Movie }) => {
   const [open, setOpen] = useState(false);

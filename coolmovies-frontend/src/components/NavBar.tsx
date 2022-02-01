@@ -1,4 +1,10 @@
-import { Autocomplete, Box, Button, ButtonGroup, TextField } from "@mui/material";
+import {
+  Autocomplete,
+  Box,
+  Button,
+  ButtonGroup,
+  TextField,
+} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import HomeIcon from "@mui/icons-material/Home";
 import RecommendIcon from "@mui/icons-material/Recommend";
@@ -34,10 +40,11 @@ const NavBar = () => {
           startIcon={<SearchIcon />}
         >
           <Autocomplete
-            freeSolo
-            options={stateMovie.fetchedMovies.map((movie:Movie) => movie.title)}
+            options={stateMovie.fetchedMovies.map(
+              (movie: Movie) => movie.title
+            )}
             renderInput={(params) => <TextField {...params} label="Search" />}
-            onChange={(e, value) => dispatch(setSearch((`${value}`)))}
+            onChange={(e, value) => dispatch(setSearch(`${value}`))}
           />
         </Button>
         ,

@@ -1,10 +1,9 @@
-import type { NextPage } from 'next';
+import type { NextPage } from "next";
 
-import LandingPage from './landingPage';
-
+import LandingPage from "./landingPage";
 
 const Home: NextPage = () => {
-  return <LandingPage/>
+  return <LandingPage />;
 };
 
 export default Home;

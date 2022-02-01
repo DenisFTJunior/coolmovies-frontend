@@ -5,9 +5,9 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
 import { Movie } from "../schema/api/Movie";
-import dateFormatter from "./helper/dateFormatter";
-import { ShowReviewByMovieId } from "./show/ShowReview";
-import { ShowDirectorById } from "./show/ShowDirector";
+import dateFormatter from "../components/helper/dateFormatter";
+import { ShowReviewByMovieId } from "../components/show/ShowReview";
+import { ShowDirectorById } from "../components/show/ShowDirector";
 
 const MovieCard = ({ movie }: { movie: Movie }) => {
   //Component -----------------------------------------------------------
