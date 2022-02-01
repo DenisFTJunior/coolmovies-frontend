@@ -7,34 +7,28 @@ import { LoadingButton } from "@mui/lab";
 
 import { useStateDispatch } from "../../utils/stateManager/hooks/useDispatch";
 import { useStateSelector } from "../../utils/stateManager/hooks/useSelector";
-import { actions as generalActions } from "../../utils/stateManager/slice/sync/generalSlice";
+import useLocalValue from "../../utils/hooks/useLocalValue";
 import { actions as modalActions } from "../../utils/stateManager/slice/sync/modalSlice";
-import { ModalProps } from "../../schema/components/Modal";
+import { Item, ModalProps } from "../../schema/components/Modal";
 
-const EditModal = ({ items }: ModalProps) => {
+const EditModal = () => {
   const [error, setError] = React.useState(false);
   const dispatch = useStateDispatch();
 
-  //general state
-  const generalState = useStateSelector((state) => state.general);
-  const { setLocalValue, clearLocalValue } = generalActions;
-  const localValue = generalState.localValue;
-  if (localValue) dispatch(clearLocalValue());
-
   //modal state
   const modalState = useStateSelector((state) => state.modal);
-  const { toogleModalEdit } = modalActions;
+  const { closeModal } = modalActions;
   const isOpen = modalState.modal.edit.isOpen;
   const data = modalState.modal.edit.data;
+  const items = modalState.modal.edit.items;
   const request = modalState.modal.edit.request;
-  
-  if (!data) return <></>;
 
-  dispatch(setLocalValue(data));
+  const localValue = useLocalValue(data);
+  const handleChangeLocalValue = (v: any) => useLocalValue(v);
 
   const validate = () => {
     const validatedItems = items.reduce(
-      (acc, v) =>
+      (acc: Object, v: Item) =>
         v.required && !localValue[v.prop]
           ? { ...acc, [`${v.prop}__error`]: true }
           : { error: false },
@@ -52,7 +46,7 @@ const EditModal = ({ items }: ModalProps) => {
   };
 
   return (
-    <Modal open={isOpen} onClose={() => dispatch(toogleModalEdit())}>
+    <Modal open={isOpen} onClose={() => dispatch(closeModal())}>
       <Stack
         direction="row"
         justifyContent="center"
@@ -65,7 +59,7 @@ const EditModal = ({ items }: ModalProps) => {
         }}
       >
         {!!error && <Alert severity="error">Please, fill all fields!</Alert>}
-        {items.map((item) => {
+        {items.map((item: Item) => {
           if (item.render) return item.render(data, item);
           return (
             <TextField
@@ -74,7 +68,10 @@ const EditModal = ({ items }: ModalProps) => {
               label={item.label}
               variant="outlined"
               onChange={(e) =>
-                setLocalValue({ ...localValue, [item.prop]: e.target.value })
+                handleChangeLocalValue({
+                  ...localValue,
+                  [item.prop]: e.target.value,
+                })
               }
             />
           );

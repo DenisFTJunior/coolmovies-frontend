@@ -6,17 +6,19 @@ import { Alert, Stack, Typography } from "@mui/material";
 import { useStateDispatch } from "../../utils/stateManager/hooks/useDispatch";
 import { useStateSelector } from "../../utils/stateManager/hooks/useSelector";
 import { actions as modalActions } from "../../utils/stateManager/slice/sync/modalSlice";
-import { DetailModalProps } from "../../schema/components/Modal";
+import { DetailItem } from "../../schema/components/Modal";
+import Loading from "../../components/Loading";
 
-const DetailsModal = ({ items }: DetailModalProps) => {
+const DetailsModal = () => {
   const dispatch = useStateDispatch();
   const modalState = useStateSelector((state) => state.modal);
-  const { toogleModalDetail } = modalActions;
+  const { closeModal } = modalActions;
   const data = modalState.modal.edit.data;
   const isOpen = modalState.modal.detail.isOpen;
-  if(!data) return <></>
+  const items = modalState.modal.detail.items;
+  if (!data || !items) return <Loading />;
   return (
-    <Modal open={isOpen} onClose={() => dispatch(toogleModalDetail())}>
+    <Modal open={isOpen} onClose={() => dispatch(closeModal())}>
       <Stack direction="column" justifyContent="center" alignItems="center">
         <Alert severity="error">Please, fill all fields!</Alert>
         <Stack
@@ -30,7 +32,7 @@ const DetailsModal = ({ items }: DetailModalProps) => {
             flexWrap: "wrap",
           }}
         >
-          {items.map((item) => {
+          {items.map((item: DetailItem) => {
             return (
               <Stack direction="column" spacing={2}>
                 <Typography variant="body1" component="span">

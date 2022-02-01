@@ -44,8 +44,8 @@ const LandingPage = () => (
   >
     <MovieListSection />
     {/* <RecommendedSection /> */}
-    <EditModal items={editModalItems} />
-    <DetailsModal items={detailModalItems} />
+    <EditModal/>
+    <DetailsModal />
   </Stack>
 );
 

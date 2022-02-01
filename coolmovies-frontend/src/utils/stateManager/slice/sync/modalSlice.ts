@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+import { Item, DetailItem } from "../../../../schema/components/Modal";
+
 interface InitialState {
   modal: {
     edit: {
@@ -25,22 +27,22 @@ export const modalSlice = createSlice({
   initialState,
   name: "modal",
   reducers: {
-    toogleModalEdit: (state) => {
-      state.modal.edit.isOpen = !state.modal.edit.isOpen;
-    },
-    toogleModalDetail: (state) => {
-      state.modal.detail.isOpen = !state.modal.detail.isOpen;
-    },
-    transferDataToModal: (
+    toogleModal: (
       state,
-      action: PayloadAction<{ modal: string; data: Object }>
+      action: PayloadAction<{
+        modal: string;
+        data?: Object;
+        items: Item | DetailItem;
+      }>
     ) => {
+      (state.modal as any)[action.payload.modal].isOpen = true;
       (state.modal as any)[action.payload.modal].data = action.payload.data;
     },
-    setRequest: (
-      state,
-      action: PayloadAction<any>
-    ) => {
+    closeModal: (state) => {
+      state.modal.detail.isOpen = false;
+      state.modal.edit.isOpen = false;
+    },
+    setRequest: (state, action: PayloadAction<any>) => {
       state.modal.edit.request = action.payload;
     },
   },
