@@ -6,18 +6,11 @@ import { useStateSelector } from "../utils/stateManager/hooks/useSelector";
 import { actions as movieActions } from "../utils/stateManager/slice/async/movie/movieSlice";
 import Loading from "../components/Loading";
 import MovieCard from "./MovieCard";
+import useFetchingMovies from "../utils/hooks/useFetchMovies";
 
 const MoviesRecommended = () => {
-  const dispatch = useStateDispatch();
-
-  const stateMovie = useStateSelector((state) => state.movie);
-  const { fetchMovies, clearMovieData } = movieActions;
-
+  const stateMovie = useFetchingMovies();
   const fetchedMovies = stateMovie.fetchedMovies;
-  if (fetchedMovies) dispatch(clearMovieData());
-  if (!fetchedMovies) return <Loading />;
-
-  dispatch(fetchMovies({ vars: {} }));
 
   if (stateMovie.error)
     return <Alert severity="error">{stateMovie.error}</Alert>;

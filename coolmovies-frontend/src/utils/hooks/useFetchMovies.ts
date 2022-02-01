@@ -6,8 +6,8 @@ import { actions as movieActions } from "../stateManager/slice/async/movie/movie
 
 const useFetchingMovies = (vars: any = {}) => {
   const dispatch = useStateDispatch();
-  const stateMovie = useStateSelector((state) => state.movie);
   const { clearMovieData, fetchMovies } = movieActions;
+  const stateMovie = useStateSelector((state) => state.movie);
   if (stateMovie) dispatch(clearMovieData());
 
   useEffect(() => {
