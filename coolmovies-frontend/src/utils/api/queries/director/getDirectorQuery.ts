@@ -25,16 +25,13 @@ const DIRECTOR_BY_NODE_ID_QUERY = gql`
   }
 `;
 
-const useDirectorQuery = ({ id, nodeId }: DirectorVars) => {
+const getDirectorQuery = ({ id, nodeId }: DirectorVars) => {
   const QUERY = nodeId ? DIRECTOR_BY_NODE_ID_QUERY : DIRECTOR_BY_ID_QUERY;
-  const query = useQuery<Director, DirectorVars>(QUERY, {
-    fetchPolicy: "network-only",
-    nextFetchPolicy: "cache-first",
+  return moviesClient.query({
+    query: QUERY,
     variables: { id: nodeId || id },
-    skip: !id && !nodeId,
-    client: moviesClient,
+    fetchPolicy: "network-only",
   });
-  return query;
 };
 
-export default useDirectorQuery;
+export default getDirectorQuery;

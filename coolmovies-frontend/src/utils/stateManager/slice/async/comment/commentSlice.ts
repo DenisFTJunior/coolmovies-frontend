@@ -23,7 +23,7 @@ export const commentSlice = createSlice({
     fetchComment: (state, action: PayloadAction<{ vars: CommentVars }>) => {},
     fetchComments: (
       state,
-      action: PayloadAction<{ fetchMore?: boolean; vars: CommentsVars }>
+      action: PayloadAction<{ vars: CommentsVars }>
     ) => {},
     saveComment: (
       state,

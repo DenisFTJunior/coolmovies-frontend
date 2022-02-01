@@ -29,16 +29,13 @@ const COMMENT_BY_NODE_ID_QUERY = gql`
   }
 `;
 
-const useCommentQuery = ({ id, nodeId }: CommentVars) => {
+const getCommentQuery = ({ id, nodeId }: CommentVars) => {
   const QUERY = nodeId ? COMMENT_BY_NODE_ID_QUERY : COMMENT_BY_ID_QUERY;
-  const query = useQuery<Comment, CommentVars>(QUERY, {
-    fetchPolicy: "network-only",
-    nextFetchPolicy: "cache-first",
+  return moviesClient.query({
+    query: QUERY,
     variables: { id: nodeId || id },
-    skip: !id && !nodeId,
-    client: moviesClient,
+    fetchPolicy: "network-only",
   });
-  return query;
 };
 
-export default useCommentQuery;
+export default getCommentQuery;

@@ -22,10 +22,7 @@ export const movieSlice = createSlice({
   name: "movie",
   reducers: {
     fetchMovie: (state, action: PayloadAction<{ vars: MovieVars }>) => {},
-    fetchMovies: (
-      state,
-      action: PayloadAction<{ fetchMore?: boolean; vars: MoviesVars }>
-    ) => {},
+    fetchMovies: (state, action: PayloadAction<{ vars: MoviesVars }>) => {},
     saveMovie: (state, action: PayloadAction<{ vars: SaveMovieVars }>) => {},
     deleteMovie: (
       state,

@@ -24,7 +24,7 @@ export const reviewSlice = createSlice({
     fetchReview: (state, action: PayloadAction<{ vars: ReviewVars }>) => {},
     fetchReviews: (
       state,
-      action: PayloadAction<{ fetchMore?: boolean; vars: ReviewsVars }>
+      action: PayloadAction<{ vars: ReviewsVars }>
     ) => {},
     saveReview: (state, action: PayloadAction<{ vars: SaveReviewVars }>) => {},
     deleteReview: (

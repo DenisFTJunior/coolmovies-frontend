@@ -4,7 +4,7 @@ import { filter, switchMap } from "rxjs/operators";
 import { Epic, StateObservable } from "redux-observable";
 import { RootState } from "../../../../../../schema/stateManager/StoreType";
 import { DirectorSliceAction, actions } from "../directorSlice";
-import useDirectorQuery from "../../../../../api/queries/director/useDirectorQuery";
+import getDirectorQuery from "../../../../../api/queries/director/getDirectorQuery";
 
 export const epicFetchDirector: Epic = (
   action$: Observable<DirectorSliceAction["fetchDirector"]>,
@@ -13,7 +13,7 @@ export const epicFetchDirector: Epic = (
   action$.pipe(
     filter(actions.fetchDirector.match),
     switchMap(async (action) => {
-      const { data, error } = await useDirectorQuery(action.payload.vars);
+      const { data, error } = await getDirectorQuery(action.payload.vars);
       if (error)
         return actions.loadDirectorError({ error: "Sorry, cannot fetch data" });
       return actions.loadedDirector({ data });

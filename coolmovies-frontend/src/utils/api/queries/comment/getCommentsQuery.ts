@@ -36,14 +36,11 @@ const QUERY = gql`
   }
 `;
 
-const useCommentsQuery = (vars: CommentsVars) => {
-  const query = useQuery<Comments, CommentsVars>(QUERY, {
-    fetchPolicy: "network-only",
-    nextFetchPolicy: "cache-first",
+const getCommentsQuery = (vars: CommentsVars) =>
+  moviesClient.query({
+    query: QUERY,
     variables: vars,
-    client: moviesClient,
+    fetchPolicy: "network-only",
   });
-  return query;
-};
 
-export default useCommentsQuery;
+export default getCommentsQuery;

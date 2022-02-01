@@ -29,16 +29,13 @@ const REVIEW_BY_NODE_ID_QUERY = gql`
   }
 `;
 
-const useReviewQuery = ({ id, nodeId }: ReviewVars) => {
+const getReviewQuery = ({ id, nodeId }: ReviewVars) => {
   const QUERY = nodeId ? REVIEW_BY_NODE_ID_QUERY : REVIEW_BY_ID_QUERY;
-  const query = useQuery<Review, ReviewVars>(QUERY, {
-    fetchPolicy: "network-only",
-    nextFetchPolicy: "cache-first",
+  return moviesClient.query({
+    query: QUERY,
     variables: { id: nodeId || id },
-    skip: !id && !nodeId,
-    client: moviesClient,
+    fetchPolicy: "network-only",
   });
-  return query
 };
 
-export default useReviewQuery;
+export default getReviewQuery;

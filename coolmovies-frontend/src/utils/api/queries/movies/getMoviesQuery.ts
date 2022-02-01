@@ -5,8 +5,8 @@ import { Movies, MoviesVars } from "../../../../schema/api/Movies";
 
 const QUERY = gql`
   query Movies(
-    $condition: MovieCondition = {}
-    $filter: MovieFilter = {}
+    $condition: MovieCondition
+    $filter: MovieFilter
     $orderBy: [MoviesOrderBy!]
     $offset: Int
     $last: Int
@@ -37,14 +37,11 @@ const QUERY = gql`
   }
 `;
 
-const useMoviesQuery = (vars: MoviesVars) => {
-  const query = useQuery<Movies, MoviesVars>(QUERY, {
-    fetchPolicy: "network-only",
-    nextFetchPolicy: "cache-first",
+const getMoviesQuery = (vars: MoviesVars) =>
+  moviesClient.query({
+    query: QUERY,
     variables: vars,
-    client: moviesClient,
+    fetchPolicy: "network-only",
   });
-  return query;
-};
 
-export default useMoviesQuery;
+export default getMoviesQuery;

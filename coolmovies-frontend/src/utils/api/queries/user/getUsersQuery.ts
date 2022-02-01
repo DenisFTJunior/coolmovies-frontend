@@ -36,14 +36,11 @@ const QUERY = gql`
   }
 `;
 
-const useUsersQuery = (vars: UsersVars) => {
-  const query = useQuery<Users, UsersVars>(QUERY, {
-    fetchPolicy: "network-only",
-    nextFetchPolicy: "cache-first",
+const getUsersQuery = (vars: UsersVars) =>
+  moviesClient.query({
+    query: QUERY,
     variables: vars,
-    client: moviesClient,
+    fetchPolicy: "network-only",
   });
-  return query;
-};
 
-export default useUsersQuery;
+export default getUsersQuery;

@@ -34,14 +34,11 @@ const QUERY = gql`
   }
 `;
 
-const useDirectorsQuery = (vars: DirectorsVars) => {
-  const query = useQuery<Directors, DirectorsVars>(QUERY, {
-    fetchPolicy: "network-only",
-    nextFetchPolicy: "cache-first",
-    variables: vars,
-    client: moviesClient,
-  });
-  return query;
-};
+const getDirectorsQuery = (vars: DirectorsVars) =>   moviesClient.query({
+  query: QUERY,
+  variables: vars,
+  fetchPolicy: "network-only",
+});
 
-export default useDirectorsQuery;
+
+export default getDirectorsQuery;

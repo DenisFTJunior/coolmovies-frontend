@@ -5,8 +5,8 @@ import { ReviewsVars, Reviews } from "../../../../schema/api/Reviews";
 
 const QUERY = gql`
   query MovieReviews(
-    $condition: MovieReviewCondition = {}
-    $filter: MovieReviewFilter = {}
+    $condition: MovieReviewCondition
+    $filter: MovieReviewFilter
     $first: Int
     $last: Int
     $offset: Int
@@ -37,14 +37,11 @@ const QUERY = gql`
   }
 `;
 
-const useReviewsQuery = (vars: ReviewsVars) => {
-  const query = useQuery<Reviews, ReviewsVars>(QUERY, {
-    fetchPolicy: "network-only",
-    nextFetchPolicy: "cache-first",
+const getReviewsQuery = (vars: ReviewsVars) =>
+  moviesClient.query({
+    query: QUERY,
     variables: vars,
-    client: moviesClient,
+    fetchPolicy: "network-only",
   });
-  return query;
-};
 
-export default useReviewsQuery;
+export default getReviewsQuery;

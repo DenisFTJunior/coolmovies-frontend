@@ -24,7 +24,7 @@ export const userSlice = createSlice({
     fetchUser: (state, action: PayloadAction<{ vars: UserVars }>) => {},
     fetchUsers: (
       state,
-      action: PayloadAction<{ fetchMore?: boolean; vars: UsersVars }>
+      action: PayloadAction<{ vars: UsersVars }>
     ) => {},
     saveUser: (state, action: PayloadAction<{ vars: SaveUserVars }>) => {},
     deleteUser: (state, action: PayloadAction<{ vars: DeleteUserVars }>) => {},
