@@ -15,7 +15,7 @@ export const epicDeleteUser: Epic = (
     switchMap(async (action) => {
       const { vars } = action.payload;
       const remove = () => deleteUser(vars);
-      const {errors} = await remove();
+      const { errors } = await remove();
       if (errors)
         return actions.loadUserError({
           error: "Sorry, cannot delete item :(",
