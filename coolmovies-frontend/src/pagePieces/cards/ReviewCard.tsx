@@ -4,12 +4,12 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
-import { Movie } from "../../schema/api/Movie";
 import dateFormatter from "../../components/helper/dateFormatter";
-import { ShowReviewByMovieId } from "../../components/show/ShowReview";
+import { ShowReviewById } from "../../components/show/ShowReview";
 import { ShowDirectorById } from "../../components/show/ShowDirector";
+import { Review } from "../../schema/api/Review";
 
-const ReviewCard = ({ movie }: { movie: Movie }) => (
+const ReviewCard = ({ review }: { review: Review }) => (
   <Card
     sx={{
       display: "flex",
@@ -28,9 +28,9 @@ const ReviewCard = ({ movie }: { movie: Movie }) => (
           }}
         >
           <Typography component="div" variant="h5">
-            {movie?.title}
+            {review?.movieByMovieId?.title}
           </Typography>
-          <ShowReviewByMovieId movieId={movie?.id} onlyRating />
+          <ShowReviewById id={review?.id} onlyRating />
         </Box>
         <Box
           sx={{
@@ -39,9 +39,9 @@ const ReviewCard = ({ movie }: { movie: Movie }) => (
             justifyContent: "space-between",
           }}
         >
-          <ShowDirectorById directorId={movie?.movieDirectorId} />
+          <ShowDirectorById id={review?.movieByMovieId?.movieDirectorId} />
           <Typography component="span">
-            {dateFormatter(movie?.releaseDate)}
+            {dateFormatter(review?.movieByMovieId?.releaseDate)}
           </Typography>
         </Box>
         <Box
@@ -51,7 +51,7 @@ const ReviewCard = ({ movie }: { movie: Movie }) => (
             backgroundColor: "#d3d3d3",
           }}
         />
-        <ShowReviewByMovieId movieId={movie?.id} gradient />
+        <ShowReviewById id={review?.id} gradient />
       </Box>
     </CardContent>
   </Card>

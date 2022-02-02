@@ -5,9 +5,9 @@ import Loading from "../Loading";
 import AvatarWithName from "../AvatarWithName";
 import useFetchingDirectors from "../../utils/hooks/useFetchDirectorts";
 
-export const ShowDirectorById = ({ directorId }: { directorId: string }) => {
+export const ShowDirectorById = ({ id }: { id: string }) => {
 
-  const [directors, updateDirectorsQuery, state ] = useFetchingDirectors(directorId);
+  const [directors, updateDirectorsQuery, state ] = useFetchingDirectors(id);
 
   if (!directors) return <Loading />;
   //error ---------------------------------------------------------------
@@ -15,3 +15,4 @@ export const ShowDirectorById = ({ directorId }: { directorId: string }) => {
     return <Alert severity="error">{state.error}</Alert>;
   return <AvatarWithName name={directors.name} />;
 };
+

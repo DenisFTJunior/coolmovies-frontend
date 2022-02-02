@@ -4,21 +4,24 @@ import { Rating, Stack, Typography } from "@mui/material";
 import Loading from "../Loading";
 import useFetchingReviews from "../../utils/hooks/useFetchReview";
 
-export const ShowReviewByMovieId = ({
+export const ShowReviewById = ({
   movieId,
+  id,
   onlyRating,
   rating,
   gradient,
   editPermited,
 }: {
-  movieId: string;
+  movieId?: string;
+  id?: string;
   onlyRating?: boolean;
   rating?: boolean;
   gradient?: boolean;
   editPermited?: boolean;
 }) => {
+  const condition = id ? { id } : { movieId };
   const [review, updateReviewQuery, state] = useFetchingReviews({
-    condition: { movieId },
+    condition: condition,
   });
   if (!review) return <Loading />;
   if (onlyRating) return <Rating value={review.rating} readOnly />;
