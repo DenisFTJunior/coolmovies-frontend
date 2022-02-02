@@ -4,10 +4,10 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
-import { Movie } from "../schema/api/Movie";
-import dateFormatter from "../components/helper/dateFormatter";
-import { ShowReviewByMovieId } from "../components/show/ShowReview";
-import { ShowDirectorById } from "../components/show/ShowDirector";
+import { Movie } from "../../schema/api/Movie";
+import dateFormatter from "../../components/helper/dateFormatter";
+import { ShowReviewByMovieId } from "../../components/show/ShowReview";
+import { ShowDirectorById } from "../../components/show/ShowDirector";
 
 const MovieCard = ({ movie }: { movie: Movie }) => (
   <Card

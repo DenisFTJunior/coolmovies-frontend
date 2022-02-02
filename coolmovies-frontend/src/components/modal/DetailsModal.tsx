@@ -4,21 +4,24 @@ import Modal from "@mui/material/Modal";
 import { Alert, Stack, Typography } from "@mui/material";
 
 import { useStateDispatch } from "../../utils/stateManager/hooks/useDispatch";
-import { useStateSelector } from "../../utils/stateManager/hooks/useSelector";
-import { actions as modalActions } from "../../utils/stateManager/slice/sync/modalSlice";
 import { DetailItem } from "../../schema/components/Modal";
-import Loading from "../../components/Loading";
+import Loading from "../Loading";
+import useModal from "../../utils/hooks/useModal";
 
-const DetailsModal = () => {
+const DetailsModal = ({
+  name,
+  items,
+}: {
+  name: string;
+  items: DetailItem[];
+}) => {
   const dispatch = useStateDispatch();
-  const modalState = useStateSelector((state) => state.modal);
-  const { closeModal } = modalActions;
-  const data = modalState.modal.edit.data;
-  const isOpen = modalState.modal.detail.isOpen;
-  const items = modalState.modal.detail.items;
-  if (!data || !items) return <Loading />;
+  const [{ data, isOpen }, { closeModal }, state] = useModal(name);
+
+  if (!data) return <Loading />;
+
   return (
-    <Modal open={isOpen} onClose={() => dispatch(closeModal())}>
+    <Modal open={isOpen} onClose={() => dispatch(closeModal(name))}>
       <Stack direction="column" justifyContent="center" alignItems="center">
         <Alert severity="error">Please, fill all fields!</Alert>
         <Stack

@@ -20,12 +20,30 @@ export default function EditButton() {
       icon: <VideoCallIcon />,
       name: "add Movie",
       onClick: () => {
-        dispatch(toogleModal({ modal: "edit", items: {} }));
+        dispatch(toogleModal({ modal: "editMovie" }));
       },
     },
-    { icon: <AddBoxIcon />, name: "add Review", onClick: () => {} },
-    { icon: <GroupAddIcon />, name: "add User", onClick: () => {} },
-    { icon: <PersonAddIcon />, name: "add Director", onClick: () => {} },
+    {
+      icon: <AddBoxIcon />,
+      name: "add Review",
+      onClick: () => {
+        dispatch(toogleModal({ modal: "editReview" }));
+      },
+    },
+    {
+      icon: <GroupAddIcon />,
+      name: "add User",
+      onClick: () => {
+        dispatch(toogleModal({ modal: "editUser" }));
+      },
+    },
+    {
+      icon: <PersonAddIcon />,
+      name: "add Director",
+      onClick: () => {
+        dispatch(toogleModal({ modal: "editDirector" }));
+      },
+    },
   ];
 
   return (

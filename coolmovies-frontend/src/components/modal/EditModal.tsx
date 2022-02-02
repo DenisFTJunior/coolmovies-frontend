@@ -1,35 +1,37 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
 import SaveIcon from "@mui/icons-material/Save";
 import Modal from "@mui/material/Modal";
 import { Alert, Stack, TextField } from "@mui/material";
-import { LoadingButton } from "@mui/lab";
 
 import { useStateDispatch } from "../../utils/stateManager/hooks/useDispatch";
-import { useStateSelector } from "../../utils/stateManager/hooks/useSelector";
 import useLocalValue from "../../utils/hooks/useLocalValue";
-import { actions as modalActions } from "../../utils/stateManager/slice/sync/modalSlice";
-import { Item, ModalProps } from "../../schema/components/Modal";
+import { Item } from "../../schema/components/Modal";
+import useModal from "../../utils/hooks/useModal";
+import Loading from "../Loading";
+import { LoadingButton } from "@mui/lab";
 
-const EditModal = () => {
+const EditModal = ({
+  name,
+  items,
+  request,
+}: {
+  name: string;
+  items: Item[];
+  request: any;
+}) => {
   const [error, setError] = React.useState(false);
   const dispatch = useStateDispatch();
 
-  //modal state
-  const modalState = useStateSelector((state) => state.modal);
-  const { closeModal } = modalActions;
-  const isOpen = modalState.modal.edit.isOpen;
-  const data = modalState.modal.edit.data;
-  const items = modalState.modal.edit.items;
-  const request = modalState.modal.edit.request;
+  const [{ data, isOpen }, { closeModal }, state] = useModal(name);
 
+  if (!data) return <Loading />;
   const localValue = useLocalValue(data);
   const handleChangeLocalValue = (v: any) => useLocalValue(v);
 
   const validate = () => {
     const validatedItems = items.reduce(
       (acc: Object, v: Item) =>
-        v.required && !localValue[v.prop]
+        v.required && !(localValue as any)[v.prop]
           ? { ...acc, [`${v.prop}__error`]: true }
           : { error: false },
       { error: false }
@@ -63,7 +65,7 @@ const EditModal = () => {
           if (item.render) return item.render(data, item);
           return (
             <TextField
-              value={localValue[item.prop]}
+              value={(localValue as any)[item.prop]}
               id={`${item.prop}-input`}
               label={item.label}
               variant="outlined"

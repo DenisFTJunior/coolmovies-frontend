@@ -1,7 +1,7 @@
 import { Alert, Stack } from "@mui/material";
 import React from "react";
 
-import MovieCard from "./MovieCard";
+import MovieCard from "./cards/MovieCard";
 import useFetchingMovies from "../utils/hooks/useFetchMovies";
 
 const AleatoryMovies = (): JSX.Element => {

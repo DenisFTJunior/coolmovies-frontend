@@ -1,10 +1,8 @@
 import React from "react";
-import { Box, Rating, Stack, Typography } from "@mui/material";
+import { Rating, Stack, Typography } from "@mui/material";
 
-import { useStateDispatch } from "../../utils/stateManager/hooks/useDispatch";
-import { actions as reviewActions } from "../../utils/stateManager/slice/async/review/reviewSlice";
-import { useStateSelector } from "../../utils/stateManager/hooks/useSelector";
 import Loading from "../Loading";
+import useFetchingReviews from "../../utils/hooks/useFetchReview";
 
 export const ShowReviewByMovieId = ({
   movieId,
@@ -19,13 +17,10 @@ export const ShowReviewByMovieId = ({
   gradient?: boolean;
   editPermited?: boolean;
 }) => {
-  const dispatch = useStateDispatch();
-  const stateReview = useStateSelector((state) => state.review);
-  const { clearReviewData, fetchReviews } = reviewActions;
-  const review = stateReview.fetchedReview;
-  if (review) dispatch(clearReviewData());
+  const [review, updateReviewQuery, state] = useFetchingReviews({
+    condition: { movieId },
+  });
   if (!review) return <Loading />;
-  dispatch(fetchReviews({ vars: { condition: { movieId } } }));
   if (onlyRating) return <Rating value={review.rating} readOnly />;
   return (
     <Stack

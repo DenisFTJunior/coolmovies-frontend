@@ -7,11 +7,11 @@ import useFetchingDirectors from "../../utils/hooks/useFetchDirectorts";
 
 export const ShowDirectorById = ({ directorId }: { directorId: string }) => {
 
-  const stateDirector = useFetchingDirectors(directorId);
+  const [directors, updateDirectorsQuery, state ] = useFetchingDirectors(directorId);
 
-  if (!stateDirector.fetchedDirectors) return <Loading />;
+  if (!directors) return <Loading />;
   //error ---------------------------------------------------------------
-  if (stateDirector.error)
-    return <Alert severity="error">{stateDirector.error}</Alert>;
-  return <AvatarWithName name={stateDirector.fetchedDirectors.name} />;
+  if (state.error)
+    return <Alert severity="error">{state.error}</Alert>;
+  return <AvatarWithName name={directors.name} />;
 };
