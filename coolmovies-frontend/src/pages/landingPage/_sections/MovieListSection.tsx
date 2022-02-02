@@ -56,8 +56,8 @@ const columns = [
 ];
 
 const MovieListSection = () => {
-  const stateMovie = useFetchingMovies({ vars: {} });
-  return <Table data={stateMovie} columns={columns} />;
+  const [movies, updateQuery, stateMovie] = useFetchingMovies({ vars: {} });
+  return <Table data={movies} columns={columns} />;
 };
 
 export default MovieListSection;

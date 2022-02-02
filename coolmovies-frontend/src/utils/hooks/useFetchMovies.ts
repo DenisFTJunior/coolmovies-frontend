@@ -15,7 +15,7 @@ const useFetchingMovies = (vars: any = {}) => {
     action(vars);
   }, []);
 
-  return [stateMovie.localValue, action];
+  return [stateMovie.fetchedMovies, action, stateMovie];
 };
 
 export default useFetchingMovies;

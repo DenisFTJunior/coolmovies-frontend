@@ -15,7 +15,7 @@ const useFetchingDirectors = (directorId: string) => {
     action(directorId);
   }, []);
 
-  return [stateDirector.fetchDirector, action];
+  return [stateDirector.fetchDirector, action, stateDirector];
 };
 
 export default useFetchingDirectors;

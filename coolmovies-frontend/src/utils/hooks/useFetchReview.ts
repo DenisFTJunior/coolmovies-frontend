@@ -7,7 +7,7 @@ import { actions as reviewActions } from "../stateManager/slice/async/review/rev
 const useFetchingReviews = (vars: any = {}) => {
   const dispatch = useStateDispatch();
   const { fetchReviews } = reviewActions;
-  const stateMovie = useStateSelector((state) => state.movie);
+  const stateReview = useStateSelector((state) => state.review);
 
   const action = (v: object) => dispatch(fetchReviews({ vars }));
 
@@ -15,7 +15,7 @@ const useFetchingReviews = (vars: any = {}) => {
     action(vars);
   }, []);
 
-  return [stateMovie.fetchedReview, action];
+  return [stateReview.fetchedReview, action, stateReview];
 };
 
 export default useFetchingReviews;

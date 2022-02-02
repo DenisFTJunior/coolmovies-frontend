@@ -1,26 +1,20 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { Item, DetailItem } from "../../../../schema/components/Modal";
+import modalItems from "./config/modalItems";
 
 interface InitialState {
   modal: {
-    edit: {
+    [key: string]: {
       isOpen: boolean;
       data?: Object;
-      request?: any;
-    };
-    detail: {
-      isOpen: boolean;
-      data?: Object;
+      name: string;
     };
   };
 }
 
 const initialState: InitialState = {
-  modal: {
-    edit: { isOpen: false },
-    detail: { isOpen: false },
-  },
+  modal: modalItems
 };
 
 export const modalSlice = createSlice({
@@ -32,18 +26,18 @@ export const modalSlice = createSlice({
       action: PayloadAction<{
         modal: string;
         data?: Object;
-        items: Item | DetailItem;
       }>
     ) => {
       (state.modal as any)[action.payload.modal].isOpen = true;
       (state.modal as any)[action.payload.modal].data = action.payload.data;
     },
-    closeModal: (state) => {
-      state.modal.detail.isOpen = false;
-      state.modal.edit.isOpen = false;
-    },
-    setRequest: (state, action: PayloadAction<any>) => {
-      state.modal.edit.request = action.payload;
+    closeModal: (
+      state,
+      action: PayloadAction<{
+        modal: string;
+      }>
+    ) => {
+      (state.modal as any)[action.payload.modal].isOpen = false;
     },
   },
 });

@@ -8,14 +8,12 @@ import { useStateSelector } from "../../utils/stateManager/hooks/useSelector";
 import { Movie } from "../../schema/api/Movie";
 import { ShowReviewByMovieId } from "../../components/show/ShowReview";
 import Loading from "../../components/Loading";
+import useFetchingReviews from "../../utils/hooks/useFetchReview";
 
 const Row = ({ columns, data }: { columns: Column[]; data: Movie }) => {
   const [open, setOpen] = useState(false);
 
-  //Review -----------------------------------------------------------
-  const stateReview = useStateSelector((state) => state.review);
-  const review = stateReview.fetchedReview;
-
+  const [review, updateReviewQuery, state] = useFetchingReviews();
   return (
     <>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
@@ -52,11 +50,10 @@ const Row = ({ columns, data }: { columns: Column[]; data: Movie }) => {
 };
 
 const TableContent = ({ columns, data }: TableProps) => {
-  console.log(`data`, data);
-  if (!data.fetchedMovies) return <Loading />;
+  if (!data) return <Loading />;
   return (
     <>
-      {data.fetchedMovies.allMovies?.movies.map((item) => (
+      {data.allMovies?.movies.map((item: Movie) => (
         <Row columns={columns} data={item} />
       ))}
     </>

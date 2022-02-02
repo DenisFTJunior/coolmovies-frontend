@@ -14,7 +14,7 @@ const useLocalValue = (data: object) => {
     action(data);
   }, []);
 
-  return [stateGeneral.localValue, action];
+  return [stateGeneral.localValue, action, stateGeneral];
 };
 
 export default useLocalValue;

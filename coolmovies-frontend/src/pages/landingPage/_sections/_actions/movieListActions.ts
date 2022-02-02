@@ -7,23 +7,20 @@ import { actions as modalActions } from "../../../../utils/stateManager/slice/sy
 const movieListActions = (): Action[] => {
   const dispatch = useStateDispatch();
   const { deleteMovie } = movieActions;
-  const { toogleModalEdit, toogleModalDetail, transferDataToModal } =
-    modalActions;
+  const { toogleModal } = modalActions;
 
   return [
     {
       label: "See Details",
       action: (item: Movie) => {
-        dispatch(transferDataToModal({ modal: "detail", data: item }));
-        dispatch(toogleModalDetail());
+        dispatch(toogleModal({ modal: "detailMovie", data: item }));
       },
       Icon: "Assignment",
     },
     {
       label: "Update",
       action: (item: Movie) => {
-        dispatch(transferDataToModal({ modal: "edit", data: item }));
-        dispatch(toogleModalEdit());
+        dispatch(toogleModal({ modal: "editMovie", data: item }));
       },
       Icon: "Edit",
     },

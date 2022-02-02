@@ -1,13 +1,12 @@
 import React from "react";
-import DetailsModal from "../../pagePieces/modal/DetailsModal";
-import EditModal from "../../pagePieces/modal/EditModal";
+import DetailsModal from "../../components/modal/DetailsModal";
+import EditModal from "../../components/modal/EditModal";
 import { DetailItem, Item } from "../../schema/components/Modal";
 
 import MovieListSection from "./_sections/MovieListSection";
-import RecommendedSection from "./_sections/RecommendedSection";
 import { ShowDirectorById } from "../../components/show/ShowDirector";
 import { ShowReviewByMovieId } from "../../components/show/ShowReview";
-import { Box, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 
 const editModalItems: Item[] = [
   { prop: "title", label: "Title", required: true },
@@ -39,13 +38,10 @@ const LandingPage = () => (
     sx={{
       width: "80%",
       minWidth: "20rem",
-      margin:"0 auto"
+      margin: "0 auto",
     }}
   >
     <MovieListSection />
-    {/* <RecommendedSection /> */}
-    <EditModal/>
-    <DetailsModal />
   </Stack>
 );
 
