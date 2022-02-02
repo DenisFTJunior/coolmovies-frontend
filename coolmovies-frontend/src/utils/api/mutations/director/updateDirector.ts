@@ -28,12 +28,13 @@ const updateDirector = ({
   id,
   movieDirectorPatch,
 }: UpdateDirectorVars) => {
-  const query = nodeId
+  const mutation = nodeId
     ? UPDATE_DIRECTOR_BY_NODEID_MUTATION
     : UPDATE_DIRECTOR_BY_ID_MUTATION;
-  return useMutation<Director, UpdateDirectorInput>(query, {
+
+  return moviesClient.mutate({
+    mutation,
     variables: { input: { nodeId, id, movieDirectorPatch } },
-    client: moviesClient,
     refetchQueries: ["MovieDirector", "AllDirectors"],
   });
 };

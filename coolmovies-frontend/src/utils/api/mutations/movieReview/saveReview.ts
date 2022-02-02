@@ -15,12 +15,11 @@ const SAVE_REVIEW_MUTATION = gql`
   }
 `;
 
-const saveReview = (input: SaveReviewVars) => {
-  return useMutation<Review, SaveReviewInput>(SAVE_REVIEW_MUTATION, {
+const saveReview = (input: SaveReviewVars) =>
+  moviesClient.mutate({
+    mutation: SAVE_REVIEW_MUTATION,
     variables: { input },
-    client: moviesClient,
     refetchQueries: ["MovieReview", "MovieReviews"],
   });
-};
 
 export default saveReview;

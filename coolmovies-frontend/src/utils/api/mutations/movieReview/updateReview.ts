@@ -24,12 +24,13 @@ const UPDATE_REVIEW_BY_NODEID_MUTATION = gql`
 `;
 
 const updateReview = ({ nodeId, id, movieReviewPatch }: UpdateReviewVars) => {
-  const query = nodeId
+  const mutation = nodeId
     ? UPDATE_REVIEW_BY_NODEID_MUTATION
     : UPDATE_REVIEW_BY_ID_MUTATION;
-  return useMutation<Review, UpdateReviewInput>(query, {
+    
+  return moviesClient.mutate({
+    mutation,
     variables: { input: { nodeId, id, movieReviewPatch } },
-    client: moviesClient,
     refetchQueries: ["MovieReview", "MovieReviews"],
   });
 };

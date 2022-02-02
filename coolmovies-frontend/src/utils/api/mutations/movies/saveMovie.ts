@@ -15,12 +15,11 @@ const SAVE_MOVIE_MUTATION = gql`
   }
 `;
 
-const saveMovie = (input: SaveMovieVars) => {
-  return useMutation<Movie, SaveMovieInput>(SAVE_MOVIE_MUTATION, {
+const saveMovie = (input: SaveMovieVars) =>
+  moviesClient.mutate({
+    mutation: SAVE_MOVIE_MUTATION,
     variables: { input },
-    client: moviesClient,
     refetchQueries: ["Movie", "Movies"],
   });
-};
 
 export default saveMovie;

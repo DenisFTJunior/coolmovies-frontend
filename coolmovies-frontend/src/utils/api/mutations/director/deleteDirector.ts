@@ -24,12 +24,13 @@ const DELETE_DIRECTOR_BY_NODEID_MUTATION = gql`
 `;
 
 const deleteDirector = ({ nodeId, id }: DeleteDirectorVars) => {
-  const query = nodeId
+  const mutation = nodeId
     ? DELETE_DIRECTOR_BY_NODEID_MUTATION
     : DELETE_DIRECTOR_BY_ID_MUTATION;
-  return useMutation<Director, DeleteDirectorInput>(query, {
+
+  return moviesClient.mutate({
+    mutation,
     variables: { input: { nodeId, id } },
-    client: moviesClient,
     refetchQueries: ["MovieDirector", "AllDirectors"],
   });
 };

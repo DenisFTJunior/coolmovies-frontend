@@ -24,12 +24,13 @@ const DELETE_MOVIE_BY_NODEID_MUTATION = gql`
 `;
 
 const deleteMovie = ({ nodeId, id }: DeleteMovieVars) => {
-  const query = nodeId
+  const mutation = nodeId
     ? DELETE_MOVIE_BY_NODEID_MUTATION
     : DELETE_MOVIE_BY_ID_MUTATION;
-  return useMutation<Movie, DeleteMovieInput>(query, {
+
+  return moviesClient.mutate({
+    mutation,
     variables: { input: { nodeId, id } },
-    client: moviesClient,
     refetchQueries: ["Movies", "Movie"],
   });
 };

@@ -24,12 +24,13 @@ const DELETE_REVIEW_BY_NODEID_MUTATION = gql`
 `;
 
 const deleteReview = ({ nodeId, id }: DeleteReviewVars) => {
-  const query = nodeId
+  const mutation = nodeId
     ? DELETE_REVIEW_BY_NODEID_MUTATION
     : DELETE_REVIEW_BY_ID_MUTATION;
-  return useMutation<Review, DeleteReviewInput>(query, {
+
+  return moviesClient.mutate({
+    mutation,
     variables: { input: { nodeId, id } },
-    client: moviesClient,
     refetchQueries: ["MovieReview", "MovieReviews"],
   });
 };

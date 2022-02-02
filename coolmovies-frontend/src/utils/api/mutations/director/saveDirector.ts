@@ -15,12 +15,11 @@ const SAVE_DIRECTOR_MUTATION = gql`
   }
 `;
 
-const saveDirector = (input: SaveDirectorVars) => {
-  return useMutation<Director, SaveDirectorInput>(SAVE_DIRECTOR_MUTATION, {
+const saveDirector = (input: SaveDirectorVars) =>
+  moviesClient.mutate({
+    mutation: SAVE_DIRECTOR_MUTATION,
     variables: { input },
-    client: moviesClient,
     refetchQueries: ["MovieDirector", "AllDirectors"],
   });
-};
 
 export default saveDirector;

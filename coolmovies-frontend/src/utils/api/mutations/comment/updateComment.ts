@@ -24,12 +24,13 @@ const UPDATE_COMMENT_BY_NODEID_MUTATION = gql`
 `;
 
 const updateComment = ({ nodeId, id, commentPatch }: UpdateCommentVars) => {
-  const query = nodeId
+  const mutation = nodeId
     ? UPDATE_COMMENT_BY_NODEID_MUTATION
     : UPDATE_COMMENT_BY_ID_MUTATION;
-  return useMutation<Comment, UpdateCommentInput>(query, {
+
+  return moviesClient.mutate({
+    mutation,
     variables: { input: { nodeId, id, commentPatch } },
-    client: moviesClient,
     refetchQueries: ["Comment", "AllComments"],
   });
 };

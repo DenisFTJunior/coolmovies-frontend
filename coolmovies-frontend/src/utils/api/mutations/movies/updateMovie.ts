@@ -1,7 +1,10 @@
 import { gql, useMutation } from "@apollo/client";
 
 import { moviesClient } from "../../client/movieClient";
-import { UpdateMovieInput, UpdateMovieVars } from "../../../../schema/api/mutation/Movie";
+import {
+  UpdateMovieInput,
+  UpdateMovieVars,
+} from "../../../../schema/api/mutation/Movie";
 import { Movie } from "../../../../schema/api/Movie";
 
 const UPDATE_MOVIE_BY_ID_MUTATION = gql`
@@ -21,12 +24,13 @@ const UPDATE_MOVIE_BY_NODEID_MUTATION = gql`
 `;
 
 const updateMovie = ({ nodeId, id, moviePatch }: UpdateMovieVars) => {
-  const query = nodeId
+  const mutation = nodeId
     ? UPDATE_MOVIE_BY_NODEID_MUTATION
     : UPDATE_MOVIE_BY_ID_MUTATION;
-  return useMutation<Movie, UpdateMovieInput>(query, {
+
+  return moviesClient.mutate({
+    mutation,
     variables: { input: { nodeId, id, moviePatch } },
-    client: moviesClient,
     refetchQueries: ["Movie", "Movies"],
   });
 };

@@ -15,12 +15,11 @@ const SAVE_USER_MUTATION = gql`
   }
 `;
 
-const saveUser = (input: SaveUserVars) => {
-  return useMutation<User, SaveUserInput>(SAVE_USER_MUTATION, {
-    variables: { input },
-    client: moviesClient,
+const saveUser = (input: SaveUserVars) => 
+   moviesClient.mutate({
+    mutation:SAVE_USER_MUTATION,
+    variables: { input},
     refetchQueries: ["User", "Users"],
   });
-};
 
 export default saveUser;

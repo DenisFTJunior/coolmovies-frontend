@@ -24,14 +24,16 @@ const UPDATE_USER_BY_NODEID_MUTATION = gql`
 `;
 
 const updateUser = ({ nodeId, id, userPatch }: UpdateUserVars) => {
-  const query = nodeId
+  const mutation = nodeId
     ? UPDATE_USER_BY_NODEID_MUTATION
     : UPDATE_USER_BY_ID_MUTATION;
-  return useMutation<User, UpdateUserInput>(query, {
-    variables: { input: { nodeId, id, userPatch } },
-    client: moviesClient,
-    refetchQueries: ["User", "Users"],
-  });
+
+    return moviesClient.mutate({
+      mutation,
+      variables: { input: { nodeId, id, userPatch }},
+      refetchQueries: ["User", "Users"],
+    });
+
 };
 
 export default updateUser;

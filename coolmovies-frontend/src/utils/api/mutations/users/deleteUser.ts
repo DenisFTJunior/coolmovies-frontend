@@ -24,12 +24,13 @@ const DELETE_USER_BY_NODEID_MUTATION = gql`
 `;
 
 const deleteUser = ({ nodeId, id }: DeleteUserVars) => {
-  const query = nodeId
+  const mutation = nodeId
     ? DELETE_USER_BY_NODEID_MUTATION
     : DELETE_USER_BY_ID_MUTATION;
-  return useMutation<User, DeleteUserInput>(query, {
+
+  return moviesClient.mutate({
+    mutation,
     variables: { input: { nodeId, id } },
-    client: moviesClient,
     refetchQueries: ["User", "Users"],
   });
 };

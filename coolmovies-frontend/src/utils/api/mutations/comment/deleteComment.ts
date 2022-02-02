@@ -24,12 +24,12 @@ const DELETE_COMMENT_BY_NODEID_MUTATION = gql`
 `;
 
 const deleteComment = ({ nodeId, id }: DeleteCommentVars) => {
-  const query = nodeId
+  const mutation = nodeId
     ? DELETE_COMMENT_BY_NODEID_MUTATION
     : DELETE_COMMENT_BY_ID_MUTATION;
-  return useMutation<Comment, DeleteCommentInput>(query, {
+  return moviesClient.mutate({
+    mutation,
     variables: { input: { nodeId, id } },
-    client: moviesClient,
     refetchQueries: ["Comment", "AllComments"],
   });
 };
