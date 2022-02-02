@@ -2,20 +2,20 @@ import { useEffect } from "react";
 
 import { useStateDispatch } from "../stateManager/hooks/useDispatch";
 import { useStateSelector } from "../stateManager/hooks/useSelector";
-import { actions as movieActions } from "../stateManager/slice/async/movie/movieSlice";
+import { actions as reviewActions } from "../stateManager/slice/async/review/reviewSlice";
 
-const useFetchingMovies = (vars: any = {}) => {
+const useFetchingReviews = (vars: any = {}) => {
   const dispatch = useStateDispatch();
-  const { fetchMovies } = movieActions;
+  const { fetchReviews } = reviewActions;
   const stateMovie = useStateSelector((state) => state.movie);
 
-  const action = (v: object) => dispatch(fetchMovies({ vars }));
+  const action = (v: object) => dispatch(fetchReviews({ vars }));
 
   useEffect(() => {
     action(vars);
   }, []);
 
-  return [stateMovie.localValue, action];
+  return [stateMovie.fetchedReview, action];
 };
 
-export default useFetchingMovies;
+export default useFetchingReviews;

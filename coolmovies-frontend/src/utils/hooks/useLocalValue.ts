@@ -1,5 +1,3 @@
-
-
 import { useEffect } from "react";
 
 import { useStateDispatch } from "../stateManager/hooks/useDispatch";
@@ -10,12 +8,13 @@ const useLocalValue = (data: object) => {
   const dispatch = useStateDispatch();
   const stateGeneral = useStateSelector((state) => state.general);
   const { setLocalValue } = generalActions;
+  const action = (v: object) => dispatch(setLocalValue(v));
 
   useEffect(() => {
-    dispatch(setLocalValue(data));
+    action(data);
   }, []);
 
-  return stateGeneral.localValue;
+  return [stateGeneral.localValue, action];
 };
 
 export default useLocalValue;
