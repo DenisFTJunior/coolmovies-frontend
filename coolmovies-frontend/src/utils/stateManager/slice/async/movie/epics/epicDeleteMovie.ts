@@ -14,9 +14,9 @@ export const epicDeleteMovie: Epic = (
     filter(actions.deleteMovie.match),
     switchMap(async (action) => {
       const { vars } = action.payload;
-      const [remove, { error }] = deleteMovie(vars);
-      await remove();
-      if (error)
+      const remove = () => deleteMovie(vars);
+      const { errors } = await remove();
+      if (errors)
         return actions.loadMovieError({
           error: "Sorry, cannot delete item :(",
         });

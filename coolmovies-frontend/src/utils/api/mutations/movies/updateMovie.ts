@@ -1,11 +1,7 @@
-import { gql, useMutation } from "@apollo/client";
+import { gql } from "@apollo/client";
 
 import { moviesClient } from "../../client/movieClient";
-import {
-  UpdateMovieInput,
-  UpdateMovieVars,
-} from "../../../../schema/api/mutation/Movie";
-import { Movie } from "../../../../schema/api/Movie";
+import { UpdateMovieVars } from "../../../../schema/api/mutation/Movie";
 
 const UPDATE_MOVIE_BY_ID_MUTATION = gql`
   mutation UpdateMovieById($input: UpdateMovieByIdInput) {

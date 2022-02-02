@@ -14,9 +14,9 @@ export const epicDeleteReview: Epic = (
     filter(actions.deleteReview.match),
     switchMap(async (action) => {
       const { vars } = action.payload;
-      const [remove, { error }] = deleteReview(vars);
-      await remove();
-      if (error)
+      const remove = () => deleteReview(vars);
+      const { errors } = await remove();
+      if (errors)
         return actions.loadReviewError({
           error: "Sorry, cannot delete item :(",
         });

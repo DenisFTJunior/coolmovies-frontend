@@ -1,11 +1,9 @@
-import { gql, useMutation } from "@apollo/client";
+import { gql } from "@apollo/client";
 
 import { moviesClient } from "../../client/movieClient";
 import {
-  UpdateUserInput,
   UpdateUserVars,
 } from "../../../../schema/api/mutation/User";
-import { User } from "../../../../schema/api/User";
 
 const UPDATE_USER_BY_ID_MUTATION = gql`
   mutation UpdateUserById($input: UpdateUserByIdInput) {
@@ -28,12 +26,11 @@ const updateUser = ({ nodeId, id, userPatch }: UpdateUserVars) => {
     ? UPDATE_USER_BY_NODEID_MUTATION
     : UPDATE_USER_BY_ID_MUTATION;
 
-    return moviesClient.mutate({
-      mutation,
-      variables: { input: { nodeId, id, userPatch }},
-      refetchQueries: ["User", "Users"],
-    });
-
+  return moviesClient.mutate({
+    mutation,
+    variables: { input: { nodeId, id, userPatch } },
+    refetchQueries: ["User", "Users"],
+  });
 };
 
 export default updateUser;

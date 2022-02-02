@@ -1,11 +1,7 @@
-import { gql, useMutation } from "@apollo/client";
+import { gql } from "@apollo/client";
 
 import { moviesClient } from "../../client/movieClient";
-import {
-  SaveUserInput,
-  SaveUserVars,
-} from "../../../../schema/api/mutation/User";
-import { User } from "../../../../schema/api/User";
+import { SaveUserVars } from "../../../../schema/api/mutation/User";
 
 const SAVE_USER_MUTATION = gql`
   mutation CreateUser($input: CreateUserInput) {
@@ -15,10 +11,10 @@ const SAVE_USER_MUTATION = gql`
   }
 `;
 
-const saveUser = (input: SaveUserVars) => 
-   moviesClient.mutate({
-    mutation:SAVE_USER_MUTATION,
-    variables: { input},
+const saveUser = (input: SaveUserVars) =>
+  moviesClient.mutate({
+    mutation: SAVE_USER_MUTATION,
+    variables: { input },
     refetchQueries: ["User", "Users"],
   });
 

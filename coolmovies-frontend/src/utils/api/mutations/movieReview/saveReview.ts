@@ -1,11 +1,7 @@
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
 
 import { moviesClient } from "../../client/movieClient";
-import {
-  SaveReviewInput,
-  SaveReviewVars,
-} from "../../../../schema/api/mutation/Review";
-import { Review } from "../../../../schema/api/Review";
+import { SaveReviewVars } from "../../../../schema/api/mutation/Review";
 
 const SAVE_REVIEW_MUTATION = gql`
   mutation CreateMovieReview($input: CreateMovieReviewInput) {

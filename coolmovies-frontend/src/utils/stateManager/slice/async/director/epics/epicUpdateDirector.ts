@@ -14,9 +14,9 @@ export const epicUpdateDirector: Epic = (
     filter(actions.updateDirector.match),
     switchMap(async (action) => {
       const { vars } = action.payload;
-      const [update, { error }] = updateDirector(vars);
-      await update();
-      if (error)
+      const update = () => updateDirector(vars);
+      const { errors } = await update();
+      if (errors)
         return actions.loadDirectorError({
           error: "Sorry, cannot update item :(",
         });

@@ -1,11 +1,7 @@
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
 
 import { moviesClient } from "../../client/movieClient";
-import {
-  SaveMovieInput,
-  SaveMovieVars,
-} from "../../../../schema/api/mutation/Movie";
-import { Movie } from "../../../../schema/api/Movie";
+import { SaveMovieVars } from "../../../../schema/api/mutation/Movie";
 
 const SAVE_MOVIE_MUTATION = gql`
   mutation CreateMovie($input: CreateMovieInput) {

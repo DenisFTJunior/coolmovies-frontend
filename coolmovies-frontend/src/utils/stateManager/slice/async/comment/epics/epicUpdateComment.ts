@@ -13,9 +13,9 @@ export const epicUpdateComment: Epic = (
     filter(actions.updateComment.match),
     switchMap(async (action) => {
       const { vars } = action.payload;
-      const [update, { error }] = updateComment(vars);
-      await update();
-      if (error)
+      const update = () => updateComment(vars);
+      const { errors } = await update();
+      if (errors)
         return actions.loadCommentError({
           error: "Sorry, cannot update item :(",
         });

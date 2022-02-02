@@ -14,9 +14,9 @@ export const epicDeleteDirector: Epic = (
     filter(actions.deleteDirector.match),
     switchMap(async (action) => {
       const { vars } = action.payload;
-      const [remove, { error }] = deleteDirector(vars);
-      await remove();
-      if (error)
+      const remove = () => deleteDirector(vars);
+      const { errors } = await remove();
+      if (errors)
         return actions.loadDirectorError({
           error: "Sorry, cannot delete item :(",
         });

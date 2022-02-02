@@ -14,9 +14,9 @@ export const epicSaveMovie: Epic = (
     filter(actions.saveMovie.match),
     switchMap(async (action) => {
       const { vars } = action.payload;
-      const [save, { error }] = saveMovie(vars);
-      await save();
-      if (error)
+      const save = () => saveMovie(vars);
+      const { errors } = await save();
+      if (errors)
         return actions.loadMovieError({
           error: "Sorry, cannot save item :(",
         });

@@ -14,9 +14,9 @@ export const epicUpdateMovie: Epic = (
     filter(actions.updateMovie.match),
     switchMap(async (action) => {
       const { vars } = action.payload;
-      const [update, { error }] = updateMovie(vars);
-      await update();
-      if (error)
+      const update = () => updateMovie(vars);
+      const { errors } = await update();
+      if (errors)
         return actions.loadMovieError({
           error: "Sorry, cannot update item :(",
         });

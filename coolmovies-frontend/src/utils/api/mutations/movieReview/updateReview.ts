@@ -1,11 +1,7 @@
-import { gql, useMutation } from "@apollo/client";
+import { gql } from "@apollo/client";
 
 import { moviesClient } from "../../client/movieClient";
-import {
-  UpdateReviewInput,
-  UpdateReviewVars,
-} from "../../../../schema/api/mutation/Review";
-import { Review } from "../../../../schema/api/Review";
+import { UpdateReviewVars } from "../../../../schema/api/mutation/Review";
 
 const UPDATE_REVIEW_BY_ID_MUTATION = gql`
   mutation UpdateMovieReviewById($input: UpdateMovieReviewByIdInput) {
@@ -27,7 +23,7 @@ const updateReview = ({ nodeId, id, movieReviewPatch }: UpdateReviewVars) => {
   const mutation = nodeId
     ? UPDATE_REVIEW_BY_NODEID_MUTATION
     : UPDATE_REVIEW_BY_ID_MUTATION;
-    
+
   return moviesClient.mutate({
     mutation,
     variables: { input: { nodeId, id, movieReviewPatch } },

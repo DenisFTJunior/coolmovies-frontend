@@ -1,9 +1,7 @@
 import { gql, useMutation } from "@apollo/client";
 
 import { moviesClient } from "../../client/movieClient";
-import { Comment } from "../../../../schema/api/Comment";
 import {
-  UpdateCommentInput,
   UpdateCommentVars,
 } from "../../../../schema/api/mutation/Comment";
 

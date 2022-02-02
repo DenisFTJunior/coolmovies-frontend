@@ -1,11 +1,7 @@
-import { gql, useMutation } from "@apollo/client";
+import { gql } from "@apollo/client";
 
 import { moviesClient } from "../../client/movieClient";
-import { Comment } from "../../../../schema/api/Comment";
-import {
-  DeleteCommentInput,
-  DeleteCommentVars,
-} from "../../../../schema/api/mutation/Comment";
+import { DeleteCommentVars } from "../../../../schema/api/mutation/Comment";
 
 const DELETE_COMMENT_BY_ID_MUTATION = gql`
   mutation DeleteCommentById($input: DeleteCommentByIdInput) {

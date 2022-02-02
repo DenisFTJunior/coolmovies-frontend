@@ -1,11 +1,7 @@
-import { gql, useMutation } from "@apollo/client";
+import { gql } from "@apollo/client";
 
 import { moviesClient } from "../../client/movieClient";
-import {
-  DeleteMovieInput,
-  DeleteMovieVars,
-} from "../../../../schema/api/mutation/Movie";
-import { Movie } from "../../../../schema/api/Movie";
+import { DeleteMovieVars } from "../../../../schema/api/mutation/Movie";
 
 const DELETE_MOVIE_BY_ID_MUTATION = gql`
   mutation DeleteMovieById($input: DeleteMovieByIdInput) {

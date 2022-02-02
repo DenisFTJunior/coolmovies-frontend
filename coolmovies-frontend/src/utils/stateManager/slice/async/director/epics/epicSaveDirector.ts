@@ -14,9 +14,9 @@ export const epicSaveDirector: Epic = (
     filter(actions.saveDirector.match),
     switchMap(async (action) => {
       const { vars } = action.payload;
-      const [save, { error }] = saveDirector(vars);
-      await save();
-      if (error)
+      const save = () => saveDirector(vars);
+      const { errors } = await save();
+      if (errors)
         return actions.loadDirectorError({
           error: "Sorry, cannot save item :(",
         });

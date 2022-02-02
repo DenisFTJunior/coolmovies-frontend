@@ -1,11 +1,7 @@
-import { gql, useMutation, useQuery } from "@apollo/client";
+import { gql } from "@apollo/client";
 
 import { moviesClient } from "../../client/movieClient";
-import { Comment } from "../../../../schema/api/Comment";
-import {
-  SaveCommentInput,
-  SaveCommentVars,
-} from "../../../../schema/api/mutation/Comment";
+import { SaveCommentVars } from "../../../../schema/api/mutation/Comment";
 
 const SAVE_COMMENT_MUTATION = gql`
   mutation CreateComment($input: CreateCommentInput) {

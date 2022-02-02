@@ -14,9 +14,9 @@ export const epicSaveUser: Epic = (
     filter(actions.saveUser.match),
     switchMap(async (action) => {
       const { vars } = action.payload;
-      const [save, { error }] = saveUser(vars);
-      await save();
-      if (error)
+      const save = () => saveUser(vars);
+      const { errors } = await save();
+      if (errors)
         return actions.loadUserError({
           error: "Sorry, cannot save item :(",
         });

@@ -14,9 +14,9 @@ export const epicSaveReview: Epic = (
     filter(actions.saveReview.match),
     switchMap(async (action) => {
       const { vars } = action.payload;
-      const [save, { error }] = saveReview(vars);
-      await save();
-      if (error)
+      const save = () => saveReview(vars);
+      const { errors } = await save();
+      if (errors)
         return actions.loadReviewError({
           error: "Sorry, cannot save item :(",
         });

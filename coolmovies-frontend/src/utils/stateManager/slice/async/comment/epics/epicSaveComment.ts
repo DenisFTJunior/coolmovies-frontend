@@ -13,9 +13,9 @@ export const epicSaveComment: Epic = (
     filter(actions.saveComment.match),
     switchMap(async (action) => {
       const { vars } = action.payload;
-      const [save, { error }] = saveComment(vars);
-      await save();
-      if (error)
+      const save = () => saveComment(vars);
+      const { errors } = await save();
+      if (errors)
         return actions.loadCommentError({
           error: "Sorry, cannot save item :(",
         });
