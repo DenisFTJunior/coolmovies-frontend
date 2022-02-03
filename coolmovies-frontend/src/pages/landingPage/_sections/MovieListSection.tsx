@@ -1,15 +1,10 @@
 import { path } from "ramda";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import Table from "../../../pagePieces/table";
 import TableActions from "../../../pagePieces/table/TableActions";
 import { Movie } from "../../../schema/api/Movie";
 import { Movies } from "../../../schema/api/Movies";
-import { Review } from "../../../schema/api/Review";
-import useFetchingMovies from "../../../utils/hooks/useFetchMovies";
-import { useStateDispatch } from "../../../utils/stateManager/hooks/useDispatch";
-import { useStateSelector } from "../../../utils/stateManager/hooks/useSelector";
-import { actions as movieActions } from "../../../utils/stateManager/slice/async/movie/movieSlice";
 import movieListActions from "./_actions/movieListActions";
 
 const columns = [
@@ -49,15 +44,17 @@ const columns = [
       entity: "",
       direction: "",
     },
-    render: (data: Movie | Review) => (
-      <TableActions item={data} actions={movieListActions()} />
-    ),
+    render: (data: Movie) => {
+      const actions = movieListActions();
+      return <TableActions item={data} actions={actions} />;
+    },
   },
 ];
 
-const MovieListSection = () => {
-  const [movies, updateQuery, stateMovie] = useFetchingMovies({ vars: {} });
-  return <Table data={movies} columns={columns} />;
+const MovieListSection = ({ movies }: { movies: Movies }) => {
+  const [data, setData] = useState(movies);
+  useEffect(() => setData(movies), [movies]);
+  return <Table data={data} columns={columns} />;
 };
 
 export default MovieListSection;

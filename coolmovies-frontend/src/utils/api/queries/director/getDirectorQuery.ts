@@ -4,7 +4,7 @@ import { moviesClient } from "../../client/movieClient";
 import { Director, DirectorVars } from "../../../../schema/api/Director";
 
 const DIRECTOR_BY_ID_QUERY = gql`
-  query MovieDirector($id: ID) {
+  query MovieDirector($id: UUID!) {
     movieDirectorById(id: $id) {
       id
       nodeId
@@ -15,7 +15,7 @@ const DIRECTOR_BY_ID_QUERY = gql`
 `;
 
 const DIRECTOR_BY_NODE_ID_QUERY = gql`
-  query MovieDirector($id: ID!) {
+  query MovieDirector($id: UUID!) {
     movieDirector(nodeId: $id) {
       id
       nodeId

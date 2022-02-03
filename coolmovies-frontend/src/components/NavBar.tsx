@@ -1,45 +1,62 @@
-import {
-  Autocomplete,
-  Box,
-  Button,
-  ButtonGroup,
-  Stack,
-  TextField,
-} from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+import React from "react";
+import { Button, Stack } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
-import RecommendIcon from "@mui/icons-material/Recommend";
+import CasinoIcon from "@mui/icons-material/Casino";
+import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 
-import { useStateDispatch } from "../utils/stateManager/hooks/useDispatch";
 import { actions } from "../utils/stateManager/slice/sync/searchSlice";
 import useFetchingMovies from "../utils/hooks/useFetchMovies";
-import { Movie } from "../schema/api/Movie";
+import { useDispatch } from "react-redux";
+import { StateDispatch } from "../schema/stateManager/StoreType";
 
 const NavBar = () => {
-  const dispatch = useStateDispatch();
+  const dispatch = useDispatch<StateDispatch>();
   const { toogleSearch, setSearch } = actions;
 
   const stateMovie = useFetchingMovies();
 
   return (
-    <Stack
-      direction="row"
-      spacing={1}
-      alignContent="center"
-      justifyContent="center"
-    >
-      <Button key="home" href="/" startIcon={<HomeIcon />} />
-      <Button
-        key="search"
-        onClick={() => dispatch(toogleSearch())}
-        startIcon={<SearchIcon />}
-      ></Button>
-      <Button
-        key="Recommendations"
-        href="#recommendedMovies"
-        startIcon={<RecommendIcon />}
-      />
-    </Stack>
+    <>
+      <Stack
+        direction="row"
+        spacing={1}
+        alignContent="center"
+        justifyContent="center"
+        sx={{ display: { xs: "none", md: "flex" } }}
+      >
+        <Button key="home" href="/" startIcon={<HomeIcon />}>
+          Home
+        </Button>
+        <Button key="home" href="/reviews" startIcon={<TextSnippetIcon />}>
+          Reviews
+        </Button>
+
+        <Button
+          key="aleatoryMovies"
+          href="/aleatoryMovies"
+          startIcon={<CasinoIcon />}
+        >
+          I have lucky
+        </Button>
+      </Stack>
+
+      <Stack
+        direction="row"
+        spacing={1}
+        alignContent="center"
+        justifyContent="center"
+        sx={{ display: { xs: "flex", md: "none" } }}
+      >
+        <Button key="home" href="/" startIcon={<HomeIcon />} />
+        <Button key="home" href="/reviews" startIcon={<TextSnippetIcon />} />
+
+        <Button
+          key="aleatoryMovies"
+          href="/aleatoryMovies"
+          startIcon={<CasinoIcon />}
+        />
+      </Stack>
+    </>
   );
 };
 

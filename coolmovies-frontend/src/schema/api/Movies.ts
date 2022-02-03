@@ -16,11 +16,11 @@ enum OrderType {
 export interface Movies {
   allMovies: {
     movies: Movie[];
-  };
-  totalCount: number;
-  pageInfo: {
-    hasNextPage: boolean;
-    hasPreviousPage: boolean;
+    totalCount: number;
+    pageInfo: {
+      hasNextPage: boolean;
+      hasPreviousPage: boolean;
+    };
   };
 }
 

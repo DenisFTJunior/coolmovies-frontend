@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 import { useStateDispatch } from "../stateManager/hooks/useDispatch";
 import { useStateSelector } from "../stateManager/hooks/useSelector";
 import { actions as movieActions } from "../stateManager/slice/async/movie/movieSlice";
@@ -7,13 +5,11 @@ import { actions as movieActions } from "../stateManager/slice/async/movie/movie
 const useFetchingMovies = (vars: any = {}) => {
   const dispatch = useStateDispatch();
   const { fetchMovies } = movieActions;
-  const stateMovie = useStateSelector((state) => state.movie);
 
   const action = (v: object) => dispatch(fetchMovies({ vars }));
+  action(vars);
 
-  useEffect(() => {
-    action(vars);
-  }, []);
+  const stateMovie = useStateSelector((state) => state.movie);
 
   return [stateMovie.fetchedMovies, action, stateMovie];
 };

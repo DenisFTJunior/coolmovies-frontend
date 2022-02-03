@@ -1,6 +1,5 @@
 import { Pagination } from "@mui/material";
-import React from "react"
-
+import React from "react";
 
 import { Movies } from "../../schema/api/Movies";
 import { useStateDispatch } from "../../utils/stateManager/hooks/useDispatch";
@@ -12,9 +11,9 @@ const TableFotter = ({ data }: { data: Movies }) => {
 
   return (
     <Pagination
-      count={Math.ceil(data.totalCount / 20)}
-      hideNextButton={!data.pageInfo?.hasNextPage}
-      hidePrevButton={!data.pageInfo?.hasPreviousPage}
+      count={Math.ceil(data?.allMovies.totalCount / 20)}
+      hideNextButton={!data?.allMovies.pageInfo?.hasNextPage}
+      hidePrevButton={!data?.allMovies.pageInfo?.hasPreviousPage}
       variant="outlined"
       shape="rounded"
       onChange={(event, page) => dispatch(setPage(page))}

@@ -1,17 +1,11 @@
-import type { NextPage } from "next";
 import React from "react";
-import { Stack } from "@mui/material";
 
-import Header from "../components/Header";
 import LandingPage from "./landingPage";
+import useFetchingMovies from "../utils/hooks/useFetchMovies";
 
-const Home: NextPage = () => {
-  return (
-    <>
-      <Header />
-      <LandingPage />
-    </>
-  );
+const Home = () => {
+  const [movies] = useFetchingMovies({ vars: {} });
+  return <LandingPage movies={movies} />;
 };
 
 export default Home;

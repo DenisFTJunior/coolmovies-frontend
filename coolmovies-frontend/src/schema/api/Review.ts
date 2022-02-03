@@ -5,7 +5,7 @@ export interface Review {
   nodeId: string;
   body: string;
   movieId: string;
-  rating: string;
+  rating: number;
   title: string;
   userReviewerId: string;
   movieByMovieId: Movie;

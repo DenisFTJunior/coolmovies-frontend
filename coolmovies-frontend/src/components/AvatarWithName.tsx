@@ -1,11 +1,14 @@
 import React from "react";
 import Avatar from "@mui/material/Avatar";
-import { Box, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 
 function stringAvatar(name: string) {
   return {
     sx: {
       bgcolor: "#dcdcdc",
+      width: 24,
+      height: 24,
+      fontSize: 10,
     },
     children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
   };
@@ -13,12 +16,15 @@ function stringAvatar(name: string) {
 
 const AvatarWithName = ({ name }: { name: string }) => {
   return (
-    <Box sx={{ display: "flex", flexDirection: "row", gap: 10 }}>
+    <Stack
+      gap={3}
+      direction="row"
+      alignItems="center"
+      justifyContent="flex-start"
+    >
       <Avatar {...stringAvatar(name)} />
-      <Typography variant="h5" component="h5">
-        {name}
-      </Typography>
-    </Box>
+      <Typography component="h5">{name}</Typography>
+    </Stack>
   );
 };
 

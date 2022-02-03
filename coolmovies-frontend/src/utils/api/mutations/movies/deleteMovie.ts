@@ -4,7 +4,7 @@ import { moviesClient } from "../../client/movieClient";
 import { DeleteMovieVars } from "../../../../schema/api/mutation/Movie";
 
 const DELETE_MOVIE_BY_ID_MUTATION = gql`
-  mutation DeleteMovieById($input: DeleteMovieByIdInput) {
+  mutation DeleteMovieById($input: DeleteMovieByIdInput!) {
     deleteMovieById(input: $input) {
       id: clientMutationId
     }
@@ -12,7 +12,7 @@ const DELETE_MOVIE_BY_ID_MUTATION = gql`
 `;
 
 const DELETE_MOVIE_BY_NODEID_MUTATION = gql`
-  mutation DeleteMovie($input: DeleteMovieInput) {
+  mutation DeleteMovie($input: DeleteMovieInput!) {
     deleteMovie(input: $input) {
       id: clientMutationId
     }

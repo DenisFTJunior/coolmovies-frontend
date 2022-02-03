@@ -8,7 +8,7 @@ const AleatoryMoviesPage = (): JSX.Element => {
     <Stack>
       <AleatoryMovies />
     </Stack>
-  )
+  );
 };
 
 export default AleatoryMoviesPage;

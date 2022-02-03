@@ -5,7 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 
 import dateFormatter from "../../components/helper/dateFormatter";
-import { ShowReviewById } from "../../components/show/ShowReview";
+import { ShowReview } from "../../components/show/ShowReview";
 import { ShowDirectorById } from "../../components/show/ShowDirector";
 import { Review } from "../../schema/api/Review";
 
@@ -30,7 +30,7 @@ const ReviewCard = ({ review }: { review: Review }) => (
           <Typography component="div" variant="h5">
             {review?.movieByMovieId?.title}
           </Typography>
-          <ShowReviewById id={review?.id} onlyRating />
+          <ShowReview review={review} onlyRating />
         </Box>
         <Box
           sx={{
@@ -51,7 +51,7 @@ const ReviewCard = ({ review }: { review: Review }) => (
             backgroundColor: "#d3d3d3",
           }}
         />
-        <ShowReviewById id={review?.id} gradient />
+        <ShowReview review={review} gradient />
       </Box>
     </CardContent>
   </Card>

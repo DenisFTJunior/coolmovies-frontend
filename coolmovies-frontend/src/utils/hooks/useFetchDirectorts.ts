@@ -10,10 +10,7 @@ const useFetchingDirectors = (id: string) => {
   const { fetchDirector } = directorActions;
 
   const action = (v: string) => dispatch(fetchDirector({ vars: { id: v } }));
-
-  useEffect(() => {
-    action(id);
-  }, []);
+  action(id);
 
   return [stateDirector.fetchDirector, action, stateDirector];
 };

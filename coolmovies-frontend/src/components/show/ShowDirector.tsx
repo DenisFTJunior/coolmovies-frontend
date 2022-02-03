@@ -1,18 +1,11 @@
 import React from "react";
-import { Alert } from "@mui/material";
 
 import Loading from "../Loading";
 import AvatarWithName from "../AvatarWithName";
-import useFetchingDirectors from "../../utils/hooks/useFetchDirectorts";
+import { Director } from "../../schema/api/Director";
 
-export const ShowDirectorById = ({ id }: { id: string }) => {
+export const ShowDirector = ({ director }: { director: Director }) => {
+  if (!director) return <Loading />;
 
-  const [directors, updateDirectorsQuery, state ] = useFetchingDirectors(id);
-
-  if (!directors) return <Loading />;
-  //error ---------------------------------------------------------------
-  if (state.error)
-    return <Alert severity="error">{state.error}</Alert>;
-  return <AvatarWithName name={directors.name} />;
+  return <AvatarWithName name={director.name} />;
 };
-

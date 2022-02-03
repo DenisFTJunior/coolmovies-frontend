@@ -11,6 +11,17 @@ const QUERY = gql`
       releaseDate
       title
       userCreatorId
+      director: movieDirectorByMovieDirectorId {
+        age
+        id
+        name
+        nodeId
+      }
+      user: userByUserCreatorId {
+        id
+        name
+        nodeId
+      }
     }
   }
 `;
