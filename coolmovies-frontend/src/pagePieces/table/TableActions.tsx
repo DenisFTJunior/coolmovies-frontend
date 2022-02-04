@@ -5,7 +5,8 @@ import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { Backdrop, Button } from "@mui/material";
+import { Backdrop, Button, IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 import { TableAction } from "../../schema/components/Table";
 
@@ -49,6 +50,9 @@ const TableActions = ({ item, actions }: TableAction) => {
           ))}
         </MenuList>
       </Paper>
+      <IconButton>
+        <CloseIcon />
+      </IconButton>
     </Backdrop>
   );
 };
