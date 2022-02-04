@@ -1,14 +1,13 @@
 import * as React from "react";
 import SaveIcon from "@mui/icons-material/Save";
 import Modal from "@mui/material/Modal";
+import { LoadingButton } from "@mui/lab";
 import { Alert, Stack, TextField } from "@mui/material";
 
-import { useStateDispatch } from "../../utils/stateManager/hooks/useDispatch";
 import useLocalValue from "../../utils/hooks/useLocalValue";
 import { Item } from "../../schema/components/Modal";
 import useModal from "../../utils/hooks/useModal";
 import Loading from "../Loading";
-import { LoadingButton } from "@mui/lab";
 
 const EditModal = ({
   name,
@@ -20,7 +19,6 @@ const EditModal = ({
   request: any;
 }) => {
   const [error, setError] = React.useState(false);
-  const dispatch = useStateDispatch();
 
   const [{ data, isOpen }, { closeModal }, state] = useModal(name);
 
@@ -48,7 +46,7 @@ const EditModal = ({
   };
 
   return (
-    <Modal open={isOpen} onClose={() => dispatch(closeModal())}>
+    <Modal open={isOpen} onClose={() => closeModal()}>
       <Stack
         direction="row"
         justifyContent="center"

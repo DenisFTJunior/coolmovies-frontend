@@ -20,28 +20,28 @@ export default function EditButton() {
       icon: <VideoCallIcon />,
       name: "add Movie",
       onClick: () => {
-        dispatch(toogleModal({ modal: "editMovie" }));
+        toogleModal({ modal: "editMovie" });
       },
     },
     {
       icon: <AddBoxIcon />,
       name: "add Review",
       onClick: () => {
-        dispatch(toogleModal({ modal: "editReview" }));
+        toogleModal({ modal: "editReview" });
       },
     },
     {
       icon: <GroupAddIcon />,
       name: "add User",
       onClick: () => {
-        dispatch(toogleModal({ modal: "editUser" }));
+        toogleModal({ modal: "editUser" });
       },
     },
     {
       icon: <PersonAddIcon />,
       name: "add Director",
       onClick: () => {
-        dispatch(toogleModal({ modal: "editDirector" }));
+        toogleModal({ modal: "editDirector" });
       },
     },
   ];
@@ -53,15 +53,11 @@ export default function EditButton() {
         transform: "translateZ(0px)",
         flexGrow: 1,
         position: "fixed",
-        bottom: "3rem",
-        right: "3rem",
+        bottom: 16,
+        right: 16,
       }}
     >
-      <SpeedDial
-        ariaLabel="SpeedDial basic example"
-        sx={{ position: "absolute", bottom: 16, right: 16 }}
-        icon={<SpeedDialIcon />}
-      >
+      <SpeedDial ariaLabel="Add button" icon={<SpeedDialIcon />}>
         {actions.map((action) => (
           <SpeedDialAction
             onClick={action.onClick}

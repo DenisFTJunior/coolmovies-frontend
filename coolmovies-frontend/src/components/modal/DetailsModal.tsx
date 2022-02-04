@@ -1,9 +1,7 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { Alert, Stack, Typography } from "@mui/material";
 
-import { useStateDispatch } from "../../utils/stateManager/hooks/useDispatch";
 import { DetailItem } from "../../schema/components/Modal";
 import Loading from "../Loading";
 import useModal from "../../utils/hooks/useModal";
@@ -15,13 +13,12 @@ const DetailsModal = ({
   name: string;
   items: DetailItem[];
 }) => {
-  const dispatch = useStateDispatch();
   const [{ data, isOpen }, { closeModal }, state] = useModal(name);
 
   if (!data) return <Loading />;
 
   return (
-    <Modal open={isOpen} onClose={() => dispatch(closeModal(name))}>
+    <Modal open={isOpen} onClose={() => closeModal()}>
       <Stack direction="column" justifyContent="center" alignItems="center">
         <Alert severity="error">Please, fill all fields!</Alert>
         <Stack

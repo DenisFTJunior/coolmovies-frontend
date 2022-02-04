@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-
 import { useStateDispatch } from "../stateManager/hooks/useDispatch";
 import { useStateSelector } from "../stateManager/hooks/useSelector";
 import { actions as reviewActions } from "../stateManager/slice/async/review/reviewSlice";
@@ -11,9 +9,7 @@ const useFetchingReviews = (vars: any = {}) => {
 
   const action = (v: object) => dispatch(fetchReviews({ vars }));
 
-  useEffect(() => {
-    action(vars);
-  }, []);
+  action(vars);
 
   return [stateReview.fetchedReview, action, stateReview];
 };
