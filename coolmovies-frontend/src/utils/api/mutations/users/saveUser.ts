@@ -4,7 +4,7 @@ import { moviesClient } from "../../client/movieClient";
 import { SaveUserVars } from "../../../../schema/api/mutation/User";
 
 const SAVE_USER_MUTATION = gql`
-  mutation CreateUser($input: CreateUserInput) {
+  mutation CreateUser($input: CreateUserInput!) {
     createUser(input: $input) {
       id: clientMutationId
     }

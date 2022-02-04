@@ -9,4 +9,18 @@ const Loading = () => (
   </Backdrop>
 );
 
+export const LocalLoading = () => (
+  <Backdrop
+    sx={{
+      backgroundColor: "#20A142",
+      color: "#fff",
+      zIndex: 1000,
+      position: "relative",
+    }}
+    open={true}
+  >
+    <CircularProgress color="inherit" />
+  </Backdrop>
+);
+
 export default Loading;

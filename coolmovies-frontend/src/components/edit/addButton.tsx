@@ -9,8 +9,10 @@ import VideoCallIcon from "@mui/icons-material/VideoCall";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
 import { actions as modalActions } from "../../utils/stateManager/slice/sync/modalSlice";
+import { useStateDispatch } from "../../utils/stateManager/hooks/useDispatch";
 
 export default function EditButton() {
+  const dispatch = useStateDispatch();
   const { toogleModal } = modalActions;
 
   const actions = [
@@ -18,28 +20,28 @@ export default function EditButton() {
       icon: <VideoCallIcon />,
       name: "add Movie",
       onClick: () => {
-        toogleModal({ modal: "editMovie" });
+        dispatch(toogleModal({ modal: "editMovie" }));
       },
     },
     {
       icon: <AddBoxIcon />,
       name: "add Review",
       onClick: () => {
-        toogleModal({ modal: "editReview" });
+        dispatch(toogleModal({ modal: "editReview" }));
       },
     },
     {
       icon: <GroupAddIcon />,
       name: "add User",
       onClick: () => {
-        toogleModal({ modal: "editUser" });
+        dispatch(toogleModal({ modal: "editUser" }));
       },
     },
     {
       icon: <PersonAddIcon />,
       name: "add Director",
       onClick: () => {
-        toogleModal({ modal: "editDirector" });
+        dispatch(toogleModal({ modal: "editDirector" }));
       },
     },
   ];
