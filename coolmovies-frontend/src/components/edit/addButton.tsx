@@ -9,10 +9,8 @@ import VideoCallIcon from "@mui/icons-material/VideoCall";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
 import { actions as modalActions } from "../../utils/stateManager/slice/sync/modalSlice";
-import { useStateDispatch } from "../../utils/stateManager/hooks/useDispatch";
 
 export default function EditButton() {
-  const dispatch = useStateDispatch();
   const { toogleModal } = modalActions;
 
   const actions = [

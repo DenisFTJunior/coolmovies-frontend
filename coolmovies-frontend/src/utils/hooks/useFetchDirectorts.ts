@@ -4,7 +4,7 @@ import { useStateDispatch } from "../stateManager/hooks/useDispatch";
 import { useStateSelector } from "../stateManager/hooks/useSelector";
 import { actions as directorActions } from "../stateManager/slice/async/director/directorSlice";
 
-const useFetchingDirectors = (id: string) => {
+const useFetchingDirector = (id: string) => {
   const dispatch = useStateDispatch();
   const stateDirector = useStateSelector((state) => state.director);
   const { fetchDirector } = directorActions;
@@ -15,4 +15,15 @@ const useFetchingDirectors = (id: string) => {
   return [stateDirector.fetchDirector, action, stateDirector];
 };
 
-export default useFetchingDirectors;
+export const useFetchingDirectors = (vars: Object = {}) => {
+  const dispatch = useStateDispatch();
+  const stateDirector = useStateSelector((state) => state.director);
+  const { fetchDirectors } = directorActions;
+
+  const action = (v: Object) => dispatch(fetchDirectors({ vars: v }));
+  action(vars);
+
+  return [stateDirector.fetchDirector, action, stateDirector];
+};
+
+export default useFetchingDirector;

@@ -9,7 +9,7 @@ const Row = ({ columns, data }: { columns: Column[]; data: Movie }) => {
   return (
     <>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-        {columns.map((column, columnIndex) => {
+        {columns.map((column) => {
           if (column.render) return column.render(data);
           return (
             <TableCell component="th" scope="row">

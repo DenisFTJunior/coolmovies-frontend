@@ -5,8 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { Button } from "@mui/material";
-import * as Icon from "@mui/icons-material";
+import { Backdrop, Button } from "@mui/material";
 
 import { TableAction } from "../../schema/components/Table";
 
@@ -15,7 +14,7 @@ const TableActions = ({ item, actions }: TableAction) => {
   if (!open)
     return (
       <Button
-        sx={{ width: "100%", height: "100%" }}
+        sx={{ width: "100%", height: "100%", marginTop: 1 }}
         variant="contained"
         disableElevation
         onClick={() => setOpen(true)}
@@ -25,16 +24,32 @@ const TableActions = ({ item, actions }: TableAction) => {
       </Button>
     );
   return (
-    <Paper sx={{ width: "20rem", maxWidth: "100%", position: "absolute" }}>
-      <MenuList>
-        {actions.map((action) => (
-          <MenuItem onClick={() => action.action(item)}>
-            <ListItemIcon>{(Icon as any)[action.Icon]}</ListItemIcon>
-            <ListItemText>{action.label}</ListItemText>
-          </MenuItem>
-        ))}
-      </MenuList>
-    </Paper>
+    <Backdrop
+      sx={{
+        backgroundColor: "#fff",
+        color: "#fff",
+        zIndex: 10,
+        position: "relative",
+      }}
+      open={open}
+      onClick={() => setOpen(false)}
+    >
+      <Paper
+        sx={{
+          width: "20rem",
+          maxWidth: "100%",
+        }}
+      >
+        <MenuList>
+          {actions.map((action) => (
+            <MenuItem onClick={() => action.action(item)}>
+              <ListItemIcon>{action.icon}</ListItemIcon>
+              <ListItemText>{action.label}</ListItemText>
+            </MenuItem>
+          ))}
+        </MenuList>
+      </Paper>
+    </Backdrop>
   );
 };
 

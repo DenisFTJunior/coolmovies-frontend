@@ -26,5 +26,5 @@ export interface TableAction {
 export interface Action {
   label: string;
   action: Function;
-  Icon: string;
+  icon: any;
 }

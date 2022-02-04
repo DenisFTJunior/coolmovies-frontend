@@ -9,6 +9,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import movieStore from "../utils/stateManager/movieStore";
 import coolestMoviesTheme from "../style/config/theme";
 import Header from "../components/Header";
+import EditButton from "../components/edit/addButton";
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
   const createdStore = movieStore();
@@ -25,6 +26,7 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
         <ReduxProvider store={createdStore}>
           <Header />
           <Component {...pageProps} />
+          <EditButton />
         </ReduxProvider>
       </ThemeProvider>
     </>

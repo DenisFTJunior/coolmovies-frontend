@@ -5,7 +5,7 @@ export interface SaveDirectorInput {
 export interface SaveDirectorVars {
   movieDirector: {
     name: string;
-    age: number;
+    age?: number;
   };
 }
 
