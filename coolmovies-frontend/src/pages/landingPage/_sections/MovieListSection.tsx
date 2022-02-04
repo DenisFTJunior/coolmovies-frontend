@@ -11,8 +11,7 @@ const columns = [
   {
     id: "titleMovie",
     label: "Title",
-    prop: (value: Movies, index: number) =>
-      path(["allMovies", "movies", index, "title"]),
+    prop: path(["title"]),
     sortOption: {
       entity: "TITLE",
       direction: "ASC",
@@ -21,7 +20,7 @@ const columns = [
   {
     id: "releaseDateMovie",
     label: "Release Data",
-    prop: path(["allMovies", "movies", "releaseDate"]),
+    prop: path(["releaseDate"]),
     sortOption: {
       entity: "RELEASE_DATE",
       direction: "ASC",
@@ -30,7 +29,13 @@ const columns = [
   {
     id: "ratingMovie",
     label: "Rating",
-    prop: path(["allReviews", "movies", "releaseDate"]),
+    prop: (data: Movie) => {
+      const ratings = data.reviewsQuery.reviews.reduce(
+        (acc, review) => acc + review.rating,
+        0
+      );
+      return ratings / data.reviewsQuery.totalCount;
+    },
     sortOption: {
       entity: "",
       direction: "",

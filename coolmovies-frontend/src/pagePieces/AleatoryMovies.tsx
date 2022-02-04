@@ -17,7 +17,6 @@ const AleatoryMovies = (): JSX.Element => {
   useEffect(() => {
     setData(movies);
     if (movies) setIndexs(recommendedFilmsIndex(movies));
-    console.log("indexs", indexs);
   }, [movies]);
 
   if (state.error && !data)

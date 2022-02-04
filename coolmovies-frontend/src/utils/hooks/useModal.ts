@@ -5,12 +5,18 @@ import { useStateSelector } from "../stateManager/hooks/useSelector";
 import { actions as modalActions } from "../stateManager/slice/sync/modalSlice";
 
 const useModal = (name: string) => {
+  const dispatch = useStateDispatch();
   const modalState = useStateSelector((state) => state.modal);
   const { closeModal, toogleModal } = modalActions;
-  const isOpen = modalState.modal.edit.isOpen;
-  const data = modalState.modal.edit.data;
 
-  return [modalState.modal[name],{closeModal, toogleModal}, modalState];
+  return [
+    modalState.modal[name],
+    {
+      closeModal: () => dispatch(closeModal({ modal: name })),
+      toogleModal: (data: Object) =>
+        dispatch(toogleModal({ modal: name, data })),
+    },
+  ];
 };
 
 export default useModal;

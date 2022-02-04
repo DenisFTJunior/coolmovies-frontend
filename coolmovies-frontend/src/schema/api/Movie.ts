@@ -1,4 +1,5 @@
 import { Director } from "./Director";
+import { ReviewsContent } from "./Reviews";
 import { User } from "./User";
 
 export interface Movie {
@@ -10,6 +11,7 @@ export interface Movie {
   releaseDate: Date;
   title: string;
   userCreatorId: string;
+  reviewsQuery: ReviewsContent;
 }
 
 export interface MovieVars {

@@ -9,16 +9,13 @@ const Row = ({ columns, data }: { columns: Column[]; data: Movie }) => {
   return (
     <>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
-        <TableCell></TableCell>
         {columns.map((column, columnIndex) => {
           if (column.render) return column.render(data);
-          if (columnIndex === 0)
-            return (
-              <TableCell component="th" scope="row">
-                {column.prop(data)}
-              </TableCell>
-            );
-          return <TableCell align="right">{column.prop(data)}</TableCell>;
+          return (
+            <TableCell component="th" scope="row">
+              {column.prop(data)}
+            </TableCell>
+          );
         })}
       </TableRow>
     </>
@@ -26,7 +23,6 @@ const Row = ({ columns, data }: { columns: Column[]; data: Movie }) => {
 };
 
 const TableContent = ({ columns, data }: TableProps) => {
-  useEffect(() => console.log("data", data), [data]);
   if (!data) return <Loading />;
   return (
     <>

@@ -15,6 +15,7 @@ const TableActions = ({ item, actions }: TableAction) => {
   if (!open)
     return (
       <Button
+        sx={{ width: "100%", height: "100%" }}
         variant="contained"
         disableElevation
         onClick={() => setOpen(true)}

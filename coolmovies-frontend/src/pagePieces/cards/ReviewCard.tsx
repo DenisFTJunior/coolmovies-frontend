@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 
 import dateFormatter from "../../components/helper/dateFormatter";
 import { ShowReview } from "../../components/show/ShowReview";
-import { ShowDirectorById } from "../../components/show/ShowDirector";
+import { ShowDirector } from "../../components/show/ShowDirector";
 import { Review } from "../../schema/api/Review";
 
 const ReviewCard = ({ review }: { review: Review }) => (
@@ -39,7 +39,7 @@ const ReviewCard = ({ review }: { review: Review }) => (
             justifyContent: "space-between",
           }}
         >
-          <ShowDirectorById id={review?.movieByMovieId?.movieDirectorId} />
+          <ShowDirector director={review?.movieByMovieId?.director} />
           <Typography component="span">
             {dateFormatter(review?.movieByMovieId?.releaseDate)}
           </Typography>

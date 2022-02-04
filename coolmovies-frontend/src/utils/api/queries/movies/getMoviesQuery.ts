@@ -38,7 +38,19 @@ const QUERY = gql`
           name
           nodeId
         }
+        reviewsQuery: movieReviewsByMovieId {
+          reviews: nodes {
+            rating
+            movieId
+            title
+            id
+            body
+            userReviewerId
+          }
+          totalCount
+        }
       }
+
       pageInfo {
         hasNextPage
         hasPreviousPage

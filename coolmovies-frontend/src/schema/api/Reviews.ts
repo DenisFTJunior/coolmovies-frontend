@@ -16,9 +16,11 @@ enum OrderType {
 }
 
 export interface Reviews {
-  allMovieReviews: {
-    reviews: Review[];
-  };
+  allMovieReviews: ReviewsContent;
+}
+
+export interface ReviewsContent {
+  reviews: Review[];
   totalCount: number;
   pageInfo: {
     hasNextPage: boolean;

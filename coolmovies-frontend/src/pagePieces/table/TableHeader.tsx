@@ -9,10 +9,7 @@ import { actions as generalActions } from "../../utils/stateManager/slice/sync/g
 const TableHeader = ({ columns }: { columns: Column[] }) => {
   const dispatch = useStateDispatch();
   const stateGeneral = useStateSelector((state) => state.general);
-  const { setSort, clearAllForTable } = generalActions;
-  if (stateGeneral.sort) clearAllForTable();
-
-  console.log(stateGeneral);
+  const { setSort } = generalActions;
 
   const sortDirectionHandler = (column: Column) =>
     column.sortOption.direction === "ASC" ? "asc" : "desc";
