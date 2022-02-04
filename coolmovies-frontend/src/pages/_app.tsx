@@ -11,6 +11,7 @@ import coolestMoviesTheme from "../style/config/theme";
 import Header from "../components/Header";
 import EditButton from "../components/edit/addButton";
 import EditUserModal from "../pagePieces/modals/edit/EditUserModal";
+import EditDirectorModal from "../pagePieces/modals/edit/EditDirectorModal";
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
   const createdStore = movieStore();
@@ -29,6 +30,7 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
           <Component {...pageProps} />
           <EditButton />
           <EditUserModal />
+          <EditDirectorModal />
         </ReduxProvider>
       </ThemeProvider>
     </>

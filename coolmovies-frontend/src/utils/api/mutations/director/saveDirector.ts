@@ -6,7 +6,7 @@ import {
 } from "../../../../schema/api/mutation/Director";
 
 const SAVE_DIRECTOR_MUTATION = gql`
-  mutation CreateMovieDirector($input: CreateMovieDirectorInput) {
+  mutation CreateMovieDirector($input: CreateMovieDirectorInput!) {
     createMovieDirector(input: $input) {
       id: clientMutationId
     }

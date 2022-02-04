@@ -1,10 +1,8 @@
 import * as React from "react";
 import SaveIcon from "@mui/icons-material/Save";
-import Modal from "@mui/material/Modal";
 import { LoadingButton } from "@mui/lab";
 import {
   Alert,
-  Backdrop,
   Box,
   ModalUnstyled,
   Stack,
@@ -16,7 +14,7 @@ import {
 import useLocalValue from "../../utils/hooks/useLocalValue";
 import { Item } from "../../schema/components/Modal";
 import useModal from "../../utils/hooks/useModal";
-import Loading, { LocalLoading } from "../Loading";
+import { LocalLoading } from "../Loading";
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -28,6 +26,17 @@ const StyledModal = styled(ModalUnstyled)`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const Backdrop = styled("div")`
+  z-index: -1;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  -webkit-tap-highlight-color: transparent;
 `;
 
 const EditModal = ({
@@ -70,7 +79,6 @@ const EditModal = ({
     const result = Object.keys(validatedItems).filter((v) =>
       RegExp(/__error$/).test(v)
     );
-    console.log("result", result.length > 0);
     return result.length > 0;
   };
 
@@ -104,15 +112,31 @@ const EditModal = ({
           width: "36rem",
           maxWidth: "100%",
           flexWrap: "wrap",
-          backgroundColor: "#D8BAFF",
+          backgroundColor: "#955DDC",
           padding: 3,
           borderRadius: 10,
         }}
       >
         {!!error && <Alert severity="error">Please, fill all fields!</Alert>}
-        <Typography variant="h5">
-          {`${isEditing ? "Editing" : "Creating"} ${entity}`}
-        </Typography>
+        <Box
+          sx={{
+            width: "80%",
+          }}
+        >
+          <Typography
+            variant="h5"
+            sx={{
+              width: "80%",
+              backgroundColor: "#ffffff",
+              borderRadius: 3,
+              padding: "10px 20px",
+            }}
+          >
+            {`${isEditing ? "Editing" : "Creating"} ${
+              entity === "movieDirector" ? "Movie Director" : entity
+            }`}
+          </Typography>
+        </Box>
         {items.map((item: Item) => {
           if (item.render) return item.render(data, item);
           return (
@@ -122,10 +146,14 @@ const EditModal = ({
               id={`${item.prop}-input`}
               label={item.label}
               variant="outlined"
+              type={item.typeInput || "text"}
               onChange={(e) =>
                 changeLocalValue({
                   ...localValue,
-                  [item.prop]: e.target.value,
+                  [item.prop]:
+                    item.typeInput === "number"
+                      ? parseInt(e.target.value)
+                      : e.target.value,
                 })
               }
             />

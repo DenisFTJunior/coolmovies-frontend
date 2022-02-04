@@ -9,6 +9,7 @@ export interface Item {
   label: string;
   render?: (data: any, item: Item) => JSX.Element;
   required?: boolean;
+  typeInput?: string;
 }
 
 export interface DetailItem {
