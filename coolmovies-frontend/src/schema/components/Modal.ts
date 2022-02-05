@@ -7,7 +7,11 @@ export interface Item {
   prop: string;
   style?: Style;
   label: string;
-  render?: (data: any, item: Item) => JSX.Element;
+  render?: (
+    data: any,
+    item: Item,
+    obj: { localValue: any; changeLocalValue: (arg: Object) => void }
+  ) => JSX.Element;
   required?: boolean;
   typeInput?: string;
 }

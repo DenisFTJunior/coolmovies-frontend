@@ -26,7 +26,6 @@ const DIRECTOR_BY_NODE_ID_QUERY = gql`
 `;
 
 const getDirectorQuery = (vars: DirectorVars) => {
-  console.log('vars', vars)
   const {nodeId, id} = vars
   const QUERY = nodeId ? DIRECTOR_BY_NODE_ID_QUERY : DIRECTOR_BY_ID_QUERY;
   return moviesClient.query({

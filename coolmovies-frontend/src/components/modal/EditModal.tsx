@@ -1,15 +1,18 @@
 import * as React from "react";
+import CloseIcon from "@mui/icons-material/Close";
 import SaveIcon from "@mui/icons-material/Save";
 import { LoadingButton } from "@mui/lab";
 import {
   Alert,
   Box,
+  IconButton,
   ModalUnstyled,
   Stack,
   styled,
   TextField,
   Typography,
 } from "@mui/material";
+import { dissoc } from "ramda";
 
 import useLocalValue from "../../utils/hooks/useLocalValue";
 import { Item } from "../../schema/components/Modal";
@@ -18,7 +21,7 @@ import { LocalLoading } from "../Loading";
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
-  z-index: 1500;
+  z-index: 200;
   right: 0;
   bottom: 0;
   top: 0;
@@ -26,17 +29,6 @@ const StyledModal = styled(ModalUnstyled)`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-const Backdrop = styled("div")`
-  z-index: -1;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  background-color: rgba(255, 255, 255, 0.5);
-  -webkit-tap-highlight-color: transparent;
 `;
 
 const EditModal = ({
@@ -57,7 +49,6 @@ const EditModal = ({
   const [localData, setLocalData] = React.useState(modalData);
   const [error, setError] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
-
   React.useEffect(() => setLocalData(modalData), [modalData]);
 
   const { data, isOpen } = localData;
@@ -87,10 +78,14 @@ const EditModal = ({
     setLoading(true);
     const hasError = validate();
     if (!hasError) {
-      setLoading(false);
       isEditing
-        ? updateRequest({ [entity]: localValue })
+        ? updateRequest({
+            id: localValue.id,
+            [`${entity}Patch`]: dissoc("id")(localValue),
+          })
         : request({ [entity]: localValue });
+      setLoading(false);
+      changeLocalValue({});
       return closeModal();
     }
     setLoading(false);
@@ -98,81 +93,86 @@ const EditModal = ({
   };
 
   return (
-    <StyledModal
-      open={isOpen}
-      onClose={() => closeModal()}
-      BackdropComponent={Backdrop}
-    >
-      <Stack
-        direction="column"
-        justifyContent="center"
-        alignItems="center"
-        spacing={2}
-        sx={{
-          width: "36rem",
-          maxWidth: "100%",
-          flexWrap: "wrap",
-          backgroundColor: "#955DDC",
-          padding: 3,
-          borderRadius: 10,
-        }}
-      >
-        {!!error && <Alert severity="error">Please, fill all fields!</Alert>}
-        <Box
+    <StyledModal open={isOpen}>
+      <>
+        <Stack
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+          spacing={2}
           sx={{
-            width: "80%",
+            width: "36rem",
+            maxWidth: "100%",
+            flexWrap: "wrap",
+            background: "linear-gradient(180deg, #955DDC 0%, rgba(149, 93, 220, 0) 100%)",
+            padding: 3,
+            borderRadius: 10,
           }}
         >
-          <Typography
-            variant="h5"
+          {!!error && <Alert severity="error">Please, fill all fields!</Alert>}
+          <Box
             sx={{
               width: "80%",
-              backgroundColor: "#ffffff",
-              borderRadius: 3,
-              padding: "10px 20px",
             }}
           >
-            {`${isEditing ? "Editing" : "Creating"} ${
-              entity === "movieDirector" ? "Movie Director" : entity
-            }`}
-          </Typography>
-        </Box>
-        {items.map((item: Item) => {
-          if (item.render) return item.render(data, item);
-          return (
-            <TextField
-              sx={{ backgroundColor: "#fff", width: "80%" }}
-              value={localValue ? (localValue as any)[item.prop] : ""}
-              id={`${item.prop}-input`}
-              label={item.label}
-              variant="outlined"
-              type={item.typeInput || "text"}
-              onChange={(e) =>
-                changeLocalValue({
-                  ...localValue,
-                  [item.prop]:
-                    item.typeInput === "number"
-                      ? parseInt(e.target.value)
-                      : e.target.value,
-                })
-              }
-            />
-          );
-        })}
-        <LoadingButton
-          sx={{
-            ":hover": { backgroundColor: "#fff" },
-            backgroundColor: "#DEDEDE",
-            width: "80%",
-          }}
-          onClick={handleClick}
-          loading={loading}
-          loadingPosition="start"
-          startIcon={<SaveIcon />}
+            <Typography
+              variant="h5"
+              sx={{
+                width: "80%",
+                backgroundColor: "#ffffff",
+                borderRadius: 3,
+                padding: "10px 20px",
+              }}
+            >
+              {`${isEditing ? "Editing" : "Creating"} ${
+                entity === "movieDirector" ? "Movie Director" : entity
+              }`}
+            </Typography>
+          </Box>
+          {items.map((item: Item) => {
+            if (item.render)
+              return item.render(data, item, { changeLocalValue, localValue });
+            return (
+              <TextField
+                sx={{ backgroundColor: "#fff", width: "80%" }}
+                value={localValue ? (localValue as any)[item.prop] : ""}
+                id={`${item.prop}-input`}
+                label={item.label}
+                variant="outlined"
+                type={item.typeInput || "text"}
+                onChange={(e) =>
+                  changeLocalValue({
+                    ...localValue,
+                    [item.prop]:
+                      item.typeInput === "number"
+                        ? parseInt(e.target.value)
+                        : e.target.value,
+                  })
+                }
+              />
+            );
+          })}
+          <LoadingButton
+            sx={{
+              ":hover": { backgroundColor: "#fff" },
+              backgroundColor: "#DEDEDE",
+              width: "80%",
+            }}
+            onClick={handleClick}
+            loading={loading}
+            loadingPosition="start"
+            startIcon={<SaveIcon />}
+          >
+            Save
+          </LoadingButton>
+        </Stack>
+        <IconButton
+          sx={{ position: "relative", top: "-25%", backgroundColor: "#fff" }}
+          onClick={() => closeModal()}
         >
-          Save
-        </LoadingButton>
-      </Stack>
+          <CloseIcon />
+        </IconButton>
+      </>
     </StyledModal>
   );
 };

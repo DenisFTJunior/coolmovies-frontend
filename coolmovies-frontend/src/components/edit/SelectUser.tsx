@@ -9,21 +9,31 @@ import Button from "@mui/material/Button";
 import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 import useFetchingUsers from "../../utils/hooks/useFetchUsers";
 import useMutateUsers from "../../utils/hooks/useMutateUsers";
+import { Box } from "@mui/material";
 
 const filter = createFilterOptions<UserOptionType>();
 
-const SelectUser = () => {
+const SelectUser = ({
+  onBlur,
+}: {
+  onBlur: (e: React.FocusEvent<HTMLInputElement>, value: any) => void;
+}) => {
   const [users, updateUsers, state] = useFetchingUsers({});
   const { save } = useMutateUsers();
 
   const [value, setValue] = useState<UserOptionType | null>(null);
+  const [data, setData] = useState(users);
   const [open, toggleOpen] = useState(false);
   const [dialogValue, setDialogValue] = useState<UserOptionType>({
+    id: "",
     name: "",
   });
 
+  useEffect(() => setData(users), [users]);
+
   const handleClose = () => {
     setDialogValue({
+      id: "",
       name: "",
     });
     toggleOpen(false);
@@ -38,8 +48,10 @@ const SelectUser = () => {
     handleClose();
   };
 
+  if (!data) return <></>;
+
   return (
-    <>
+    <Box sx={{ backgroundColor: "#fff", width: "80%" }}>
       <Autocomplete
         value={value}
         onChange={(event, newValue) => {
@@ -59,7 +71,8 @@ const SelectUser = () => {
             setValue(newValue);
           }
         }}
-        loading={!users}
+        onBlur={(e: React.FocusEvent<HTMLInputElement>) => onBlur(e, value)}
+        loading={!data}
         filterOptions={(options, params) => {
           const filtered = filter(options, params);
 
@@ -72,7 +85,7 @@ const SelectUser = () => {
 
           return filtered;
         }}
-        options={users}
+        options={data.allUsers.users}
         getOptionLabel={(option) => {
           if (typeof option === "string") {
             return option;
@@ -83,12 +96,15 @@ const SelectUser = () => {
           return option.name;
         }}
         selectOnFocus
-        clearOnBlur
-        handleHomeEndKeys
         renderOption={(props, option) => <li {...props}>{option.name}</li>}
-        sx={{ width: 300 }}
-        freeSolo
-        renderInput={(params) => <TextField {...params} label="User Select" />}
+        sx={{ width: "100%", zIndex: 300 }}
+        renderInput={(params) => (
+          <TextField
+            sx={{ position: "relative", zIndex: 1500 }}
+            {...params}
+            label="User Select"
+          />
+        )}
       />
       <Dialog open={open} onClose={handleClose}>
         <form onSubmit={handleSubmit}>
@@ -119,7 +135,7 @@ const SelectUser = () => {
           </DialogActions>
         </form>
       </Dialog>
-    </>
+    </Box>
   );
 };
 

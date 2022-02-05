@@ -12,6 +12,7 @@ import Header from "../components/Header";
 import EditButton from "../components/edit/addButton";
 import EditUserModal from "../pagePieces/modals/edit/EditUserModal";
 import EditDirectorModal from "../pagePieces/modals/edit/EditDirectorModal";
+import EditMovieModal from "../pagePieces/modals/edit/EditMovieModal";
 
 const App: FC<AppProps> = ({ Component, pageProps }) => {
   const createdStore = movieStore();
@@ -31,6 +32,7 @@ const App: FC<AppProps> = ({ Component, pageProps }) => {
           <EditButton />
           <EditUserModal />
           <EditDirectorModal />
+          <EditMovieModal />
         </ReduxProvider>
       </ThemeProvider>
     </>

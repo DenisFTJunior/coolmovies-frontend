@@ -14,6 +14,7 @@ const AleatoryMovies = (): JSX.Element => {
   const [movies, updateQuery, state] = useFetchingMovies();
   const [data, setData] = useState(movies);
   const [indexs, setIndexs] = useState([1, 2, 3]);
+  
   useEffect(() => {
     setData(movies);
     if (movies) setIndexs(recommendedFilmsIndex(movies));

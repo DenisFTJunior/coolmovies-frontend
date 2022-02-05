@@ -9,8 +9,8 @@ const QUERY = gql`
     $offset: Int
     $last: Int
     $first: Int
-    $filter: MovieDirectorFilter = {}
-    $condition: MovieDirectorCondition = {}
+    $filter: MovieDirectorFilter
+    $condition: MovieDirectorCondition
   ) {
     allMovieDirectors(
       orderBy: $orderBy
@@ -34,11 +34,11 @@ const QUERY = gql`
   }
 `;
 
-const getDirectorsQuery = (vars: DirectorsVars) =>   moviesClient.query({
-  query: QUERY,
-  variables: vars,
-  fetchPolicy: "network-only",
-});
-
+const getDirectorsQuery = (vars: DirectorsVars) =>
+  moviesClient.query({
+    query: QUERY,
+    variables: vars,
+    fetchPolicy: "network-only",
+  });
 
 export default getDirectorsQuery;

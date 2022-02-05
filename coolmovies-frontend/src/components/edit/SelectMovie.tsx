@@ -1,21 +1,17 @@
 import React, { FormEvent, useState } from "react";
 import TextField from "@mui/material/TextField";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogActions from "@mui/material/DialogActions";
-import Button from "@mui/material/Button";
 import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
+
 import useFetchingMovies from "../../utils/hooks/useFetchMovies";
+import { Box } from "@mui/material";
 
 const filter = createFilterOptions<MovieOptionType>();
 
-const SelectUser = () => {
+//fix
+const SelectMovie = () => {
   const [movies, updateMovies, state] = useFetchingMovies({});
 
   const [value, setValue] = useState<MovieOptionType | null>(null);
-  const [open, toggleOpen] = useState(false);
   const [dialogValue, setDialogValue] = useState<MovieOptionType>({
     id: "",
     title: "",
@@ -45,7 +41,7 @@ const SelectUser = () => {
   };
 
   return (
-    <>
+    <Box sx={{width:"100%", backgroundColor:"#fff"}}>
       <Autocomplete
         value={value}
         onChange={(event, newValue) => {
@@ -66,18 +62,7 @@ const SelectUser = () => {
           }
         }}
         loading={!movies}
-        filterOptions={(options, params) => {
-          const filtered = filter(options, params);
-
-          if (params.inputValue !== "") {
-            filtered.push({
-              inputValue: params.inputValue,
-              title: `Add "${params.inputValue}"`,
-            });
-          }
-
-          return filtered;
-        }}
+        filterOptions={(options, params) => filter(options, params)}
         options={movies}
         getOptionLabel={(option) => {
           if (typeof option === "string") {
@@ -96,8 +81,7 @@ const SelectUser = () => {
         freeSolo
         renderInput={(params) => <TextField {...params} label="Movie Select" />}
       />
-      {/* modal */}
-    </>
+    </Box>
   );
 };
 
@@ -109,4 +93,4 @@ interface MovieOptionType {
   releaseDate?: Date;
 }
 
-export default SelectUser;
+export default SelectMovie;

@@ -4,7 +4,7 @@ import { moviesClient } from "../../client/movieClient";
 import { SaveMovieVars } from "../../../../schema/api/mutation/Movie";
 
 const SAVE_MOVIE_MUTATION = gql`
-  mutation CreateMovie($input: CreateMovieInput) {
+  mutation CreateMovie($input: CreateMovieInput!) {
     createMovie(input: $input) {
       id: clientMutationId
     }

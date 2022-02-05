@@ -6,8 +6,8 @@ import { Users, UsersVars } from "../../../../schema/api/Users";
 const QUERY = gql`
   query Users(
     $orderBy: [UsersOrderBy!]
-    $condition: UserCondition = {}
-    $filter: UserFilter = {}
+    $condition: UserCondition
+    $filter: UserFilter
     $offset: Int
     $last: Int
     $first: Int
@@ -23,10 +23,7 @@ const QUERY = gql`
       users: nodes {
         id
         nodeId
-        movieDirectorId
-        releaseDate
-        title
-        userCreatorId
+        name
       }
       pageInfo {
         hasNextPage

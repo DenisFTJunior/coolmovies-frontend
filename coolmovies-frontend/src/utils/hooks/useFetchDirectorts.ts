@@ -23,7 +23,7 @@ export const useFetchingDirectors = (vars: Object = {}) => {
   const action = (v: Object) => dispatch(fetchDirectors({ vars: v }));
   action(vars);
 
-  return [stateDirector.fetchDirector, action, stateDirector];
+  return [stateDirector.fetchedDirectors, action, stateDirector];
 };
 
 export default useFetchingDirector;

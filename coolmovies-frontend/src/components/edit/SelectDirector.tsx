@@ -6,22 +6,31 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
+import { Box } from "@mui/material";
+
 import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 import { useFetchingDirectors } from "../../utils/hooks/useFetchDirectorts";
 import useMutateDirector from "../../utils/hooks/useMutateDirector";
 
 const filter = createFilterOptions<DirectorOptionType>();
 
-const SelectUser = () => {
-  const [directors, updateDirectors, state] = useFetchingDirectors();
+const SelectDirector = ({
+  onBlur,
+}: {
+  onBlur: (e: React.FocusEvent<HTMLInputElement>, value: any) => void;
+}) => {
+  const [directors] = useFetchingDirectors();
   const { save } = useMutateDirector();
 
+  const [data, setData] = useState(directors);
   const [value, setValue] = useState<DirectorOptionType | null>(null);
   const [open, toggleOpen] = useState(false);
   const [dialogValue, setDialogValue] = useState<DirectorOptionType>({
     name: "",
     age: 0,
   });
+
+  useEffect(() => setData(directors), [directors]);
 
   const handleClose = () => {
     setDialogValue({
@@ -42,7 +51,7 @@ const SelectUser = () => {
   };
 
   return (
-    <>
+    <Box sx={{ backgroundColor: "#fff", width: "80%" }}>
       <Autocomplete
         value={value}
         onChange={(event, newValue) => {
@@ -62,7 +71,8 @@ const SelectUser = () => {
             setValue(newValue);
           }
         }}
-        loading={!directors}
+        onBlur={(e: React.FocusEvent<HTMLInputElement>) => onBlur(e, value)}
+        loading={!data}
         filterOptions={(options, params) => {
           const filtered = filter(options, params);
 
@@ -75,7 +85,7 @@ const SelectUser = () => {
 
           return filtered;
         }}
-        options={directors}
+        options={data?.allMovieDirectors.directors}
         getOptionLabel={(option) => {
           if (typeof option === "string") {
             return option;
@@ -86,12 +96,15 @@ const SelectUser = () => {
           return option.name;
         }}
         selectOnFocus
-        clearOnBlur
-        handleHomeEndKeys
         renderOption={(props, option) => <li {...props}>{option.name}</li>}
-        sx={{ width: 300 }}
-        freeSolo
-        renderInput={(params) => <TextField {...params} label="User Select" />}
+        sx={{ width: "100%", zIndex: 300 }}
+        renderInput={(params) => (
+          <TextField
+            sx={{ position: "relative", zIndex: 1500 }}
+            {...params}
+            label="Director Select"
+          />
+        )}
       />
       <Dialog open={open} onClose={handleClose}>
         <form onSubmit={handleSubmit}>
@@ -137,7 +150,7 @@ const SelectUser = () => {
           </DialogActions>
         </form>
       </Dialog>
-    </>
+    </Box>
   );
 };
 
@@ -148,4 +161,4 @@ interface DirectorOptionType {
   age?: number;
 }
 
-export default SelectUser;
+export default SelectDirector;
