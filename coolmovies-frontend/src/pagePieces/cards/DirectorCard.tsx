@@ -12,6 +12,7 @@ const DirectorCard = ({ director }: { director: Director }) => (
       justifyContent: "center",
       alignItems: "center",
       width: "20rem",
+      minWidth: "18rem",
     }}
   >
     <CardContent sx={{ flex: "1 0 auto" }}>

@@ -48,7 +48,7 @@ const SelectDirector = ({
   };
 
   return (
-    <Box sx={{ backgroundColor: "#fff", width: "80%" }}>
+    <Box sx={{ backgroundColor: "#fff"}}>
       <Autocomplete
         value={value}
         onChange={(event, newValue) => {

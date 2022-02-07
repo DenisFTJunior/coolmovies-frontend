@@ -12,11 +12,7 @@ import { Stack } from "@mui/material";
 import { Action } from "../../schema/components/Card";
 import movieListActions from "../_actions/movieListActions";
 
-const MovieCard = ({
-  movie
-}: {
-  movie: Movie
-}) => {
+const MovieCard = ({ movie }: { movie: Movie }) => {
   if (!movie) return <></>;
 
   return (
@@ -25,7 +21,8 @@ const MovieCard = ({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        width: "24rem",
+        width: { xs: "18rem", md: "24rem" },
+        minWidth: "18rem",
         margin: 2,
       }}
     >
@@ -36,7 +33,11 @@ const MovieCard = ({
             justifyItems="space-between"
             justifyContent="space-between"
           >
-            <Typography component="h5" variant="h5">
+            <Typography
+              component="span"
+              variant="h5"
+              sx={{ fontSize: { xs: "1rem", md: "1.5rem" } }}
+            >
               {movie?.title}
             </Typography>
             <CardActions item={movie} actions={movieListActions()} />
@@ -57,7 +58,10 @@ const MovieCard = ({
               }}
             >
               {" "}
-              <Typography component="span">
+              <Typography
+                component="span"
+                sx={{ fontSize: { xs: ".6rem", md: "1rem" } }}
+              >
                 {dateFormatter(movie?.releaseDate)}
               </Typography>
             </Box>

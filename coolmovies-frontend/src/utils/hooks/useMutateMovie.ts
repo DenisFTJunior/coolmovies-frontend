@@ -4,11 +4,11 @@ import {
   UpdateMovieVars,
 } from "../../schema/api/mutation/Movie";
 import { useStateDispatch } from "../stateManager/hooks/useDispatch";
-import { actions as userActions } from "../stateManager/slice/async/movie/movieSlice";
+import { actions as movieActions } from "../stateManager/slice/async/movie/movieSlice";
 
 const useMutateMovie = () => {
   const dispatch = useStateDispatch();
-  const { saveMovie, deleteMovie, updateMovie } = userActions;
+  const { saveMovie, deleteMovie, updateMovie } = movieActions;
 
   const update = (vars: UpdateMovieVars) => dispatch(updateMovie({ vars }));
   const remove = (vars: DeleteMovieVars) => dispatch(deleteMovie({ vars }));

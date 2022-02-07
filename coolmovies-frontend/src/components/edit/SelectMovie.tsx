@@ -5,20 +5,24 @@ import Autocomplete from "@mui/material/Autocomplete";
 
 import useFetchingMovies from "../../utils/hooks/useFetchMovies";
 import { SelectProps } from "../../schema/components/Select";
+import { Movie } from "../../schema/api/Movie";
+import { Review } from "../../schema/api/Review";
 
 const SelectMovie = ({ onBlur }: SelectProps) => {
-  const [value, setValue] = useState(null);
+  const [value, setValue] = useState<Review | null>(null);
   const [movies] = useFetchingMovies({});
 
   return (
-    <Box sx={{ backgroundColor: "#fff", width: "80%" }}>
+    <Box sx={{ backgroundColor: "#fff"}}>
       <Autocomplete
         value={value}
         onChange={(e, v) => setValue(v)}
-        disablePortal
-        options={movies}
+        loading={!movies}
+        getOptionLabel={(option) => option.title}
+        options={movies.allMovies.movies}
         sx={{ width: "100%", zIndex: 300 }}
         onBlur={(e: React.FocusEvent<HTMLInputElement>) => onBlur(e, value)}
+        renderOption={(props, option) => <li {...props}>{option?.title}</li>}
         renderInput={(params) => (
           <TextField
             sx={{ position: "relative", zIndex: 1500 }}
@@ -30,13 +34,5 @@ const SelectMovie = ({ onBlur }: SelectProps) => {
     </Box>
   );
 };
-
-interface MovieOptionType {
-  inputValue?: string;
-  id?: string;
-  title: string;
-  movieDirectorId?: string;
-  releaseDate?: Date;
-}
 
 export default SelectMovie;

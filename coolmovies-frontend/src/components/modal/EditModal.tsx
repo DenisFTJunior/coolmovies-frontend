@@ -3,8 +3,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import SaveIcon from "@mui/icons-material/Save";
 import { LoadingButton } from "@mui/lab";
 import {
-  Alert,
-  Box,
   IconButton,
   ModalUnstyled,
   Stack,
@@ -46,7 +44,6 @@ const EditModal = ({
 }) => {
   const [modalData, { closeModal }, state] = useModal(name);
 
-  const [error, setError] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
 
   const { data, isOpen } = modalData;
@@ -56,7 +53,15 @@ const EditModal = ({
 
   if (!data && isOpen && isEditing) return <LocalLoading />;
 
+  const cleanError = () =>
+    items.map((v) =>
+      localValue && (localValue as any)[`${v.prop}__error`]
+        ? dissoc(`${v.prop}__error`)(localValue)
+        : {}
+    );
+
   const validate = () => {
+    cleanError();
     const validatedItems = items.reduce(
       (acc: Object, v: Item) =>
         !localValue || (v.required && !(localValue as any)[v.prop])
@@ -64,7 +69,7 @@ const EditModal = ({
           : { error: false },
       { error: false }
     );
-    console.log("validatedItems", validatedItems);
+    changeLocalValue({ ...localValue, ...validatedItems });
     const result = Object.keys(validatedItems).filter((v) =>
       RegExp(/__error$/).test(v)
     );
@@ -72,7 +77,6 @@ const EditModal = ({
   };
 
   const handleClick = () => {
-    setError(false);
     setLoading(true);
     const hasError = validate();
     if (!hasError) {
@@ -87,7 +91,6 @@ const EditModal = ({
       return closeModal();
     }
     setLoading(false);
-    setError(true);
   };
 
   return (
@@ -104,12 +107,13 @@ const EditModal = ({
             flexWrap: "wrap",
             background:
               "linear-gradient(180deg, #301553 0%, rgba(149, 93, 220, 0) 100%)",
-            padding: 3,
+            padding: "2rem 1rem",
             borderRadius: 10,
           }}
         >
-          {!!error && <Alert severity="error">Please, fill all fields!</Alert>}
-          <Box
+          <Stack
+            direction="row"
+            justifyContent="flex-start"
             sx={{
               width: "80%",
             }}
@@ -131,28 +135,72 @@ const EditModal = ({
                   : entity
               }`}
             </Typography>
-          </Box>
+            <IconButton
+              sx={{
+                position: "relative",
+                left: "6.5rem",
+                width: 36,
+                height: 36,
+                backgroundColor: "#fff",
+              }}
+              onClick={() => {
+                changeLocalValue({});
+                closeModal();
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+          </Stack>
           {items.map((item: Item) => {
             if (item.render)
-              return item.render(data, item, { changeLocalValue, localValue });
+              return (
+                <Stack
+                  direction="column"
+                  justifyContent="flex-start"
+                  sx={{ width: "80%" }}
+                >
+                  {item.render(data, item, { changeLocalValue, localValue })}
+                  {localValue && (localValue as any)[`${item.prop}__error`] && (
+                    <Typography sx={{ color: "#ff6347" }}>
+                      Fill this required field!
+                    </Typography>
+                  )}
+                </Stack>
+              );
             return (
-              <TextField
-                sx={{ backgroundColor: "#fff", width: "80%" }}
-                value={localValue ? (localValue as any)[item.prop] : ""}
-                id={`${item.prop}-input`}
-                label={item.label}
-                variant="outlined"
-                type={item.typeInput || "text"}
-                onChange={(e) =>
-                  changeLocalValue({
-                    ...localValue,
-                    [item.prop]:
-                      item.typeInput === "number"
-                        ? parseInt(e.target.value)
-                        : e.target.value,
-                  })
-                }
-              />
+              <Stack
+                sx={{ width: "80%" }}
+                direction="column"
+                justifyContent="flex-start"
+              >
+                <TextField
+                  sx={{
+                    backgroundColor: "#fff",
+                    borderTopLeftRadius: 5,
+                    borderTopRightRadius: 5,
+                  }}
+                  variant="filled"
+                  value={localValue ? (localValue as any)[item.prop] : ""}
+                  id={`${item.prop}-input`}
+                  label={item.label}
+                  type={item.typeInput || "text"}
+                  focused
+                  onChange={(e) =>
+                    changeLocalValue({
+                      ...localValue,
+                      [item.prop]:
+                        item.typeInput === "number"
+                          ? parseInt(e.target.value)
+                          : e.target.value,
+                    })
+                  }
+                />
+                {localValue && (localValue as any)[`${item.prop}__error`] && (
+                  <Typography sx={{ color: "#ff6347" }}>
+                    Fill this required field!
+                  </Typography>
+                )}
+              </Stack>
             );
           })}
           <LoadingButton
@@ -169,12 +217,6 @@ const EditModal = ({
             Save
           </LoadingButton>
         </Stack>
-        <IconButton
-          sx={{ position: "relative", top: "-25%", backgroundColor: "#fff" }}
-          onClick={() => closeModal()}
-        >
-          <CloseIcon />
-        </IconButton>
       </>
     </StyledModal>
   );

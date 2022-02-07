@@ -17,14 +17,15 @@ const ReviewCard = ({ review }: { review: Review }) => (
     sx={{
       display: "flex",
       justifyContent: "center",
-      justifyItems:"center",
+      justifyItems: "center",
       alignItems: "center",
-      width: "20rem",
-      maxWidth: "100%",
+      width: { xs: "18rem", md: "24rem" },
+      maxHeight: "40rem",
+      minWidth: "18rem",
       margin: 2,
     }}
   >
-    <CardContent >
+    <CardContent>
       <CardActions item={review} actions={reviewActions()} />
       <ShowReview review={review} gradient rating />
     </CardContent>

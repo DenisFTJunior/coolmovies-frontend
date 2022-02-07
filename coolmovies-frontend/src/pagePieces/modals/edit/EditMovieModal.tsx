@@ -6,7 +6,12 @@ import useMutateMovie from "../../../utils/hooks/useMutateMovie";
 
 const editModalItems: Item[] = [
   { prop: "title", label: "Title", required: true },
-  { prop: "releaseDate", label: "Release Date", typeInput: "Date" },
+  {
+    prop: "releaseDate",
+    label: "Release Date",
+    typeInput: "Date",
+    required: true,
+  },
   {
     prop: "directorId",
     label: "Director",
@@ -20,6 +25,7 @@ const editModalItems: Item[] = [
         }
       />
     ),
+    required: true,
   },
   {
     prop: "userCreatorId",
@@ -34,6 +40,7 @@ const editModalItems: Item[] = [
         }
       />
     ),
+    required: true,
   },
 ];
 

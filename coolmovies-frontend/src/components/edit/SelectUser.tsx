@@ -48,7 +48,7 @@ const SelectUser = ({
   };
 
   return (
-    <Box sx={{ backgroundColor: "#fff", width: "80%" }}>
+    <Box sx={{ backgroundColor: "#fff"}}>
       <Autocomplete
         value={value}
         onChange={(event, newValue) => {
@@ -82,7 +82,7 @@ const SelectUser = ({
 
           return filtered;
         }}
-        options={users.allUsers.users}
+        options={users?.allUsers?.users}
         getOptionLabel={(option) => {
           if (typeof option === "string") {
             return option;
