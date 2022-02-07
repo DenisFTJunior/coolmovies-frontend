@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -22,15 +22,12 @@ const SelectDirector = ({
   const [directors] = useFetchingDirectors();
   const { save } = useMutateDirector();
 
-  const [data, setData] = useState(directors);
   const [value, setValue] = useState<DirectorOptionType | null>(null);
   const [open, toggleOpen] = useState(false);
   const [dialogValue, setDialogValue] = useState<DirectorOptionType>({
     name: "",
     age: 0,
   });
-
-  useEffect(() => setData(directors), [directors]);
 
   const handleClose = () => {
     setDialogValue({
@@ -72,7 +69,7 @@ const SelectDirector = ({
           }
         }}
         onBlur={(e: React.FocusEvent<HTMLInputElement>) => onBlur(e, value)}
-        loading={!data}
+        loading={!directors}
         filterOptions={(options, params) => {
           const filtered = filter(options, params);
 
@@ -85,7 +82,7 @@ const SelectDirector = ({
 
           return filtered;
         }}
-        options={data?.allMovieDirectors.directors}
+        options={directors?.allMovieDirectors.directors}
         getOptionLabel={(option) => {
           if (typeof option === "string") {
             return option;

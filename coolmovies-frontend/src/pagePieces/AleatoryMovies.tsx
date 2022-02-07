@@ -12,15 +12,13 @@ const aleatoryFilmsIndex = (data: Movies) =>
 
 const AleatoryMovies = (): JSX.Element => {
   const [movies, updateQuery, state] = useFetchingMovies();
-  const [data, setData] = useState(movies);
   const [indexs, setIndexs] = useState([1, 2, 3]);
 
   useEffect(() => {
-    setData(movies);
     if (movies) setIndexs(aleatoryFilmsIndex(movies));
   }, [movies]);
 
-  if (state.error && !data)
+  if (state.error && !movies)
     return <Alert severity="error">{state.error}</Alert>;
 
   return (
@@ -34,7 +32,7 @@ const AleatoryMovies = (): JSX.Element => {
       flexWrap="wrap"
     >
       {indexs.map((v) => (
-        <MovieCard movie={data?.allMovies?.movies[v]} />
+        <MovieCard movie={movies?.allMovies?.movies[v]} />
       ))}
     </Stack>
   );

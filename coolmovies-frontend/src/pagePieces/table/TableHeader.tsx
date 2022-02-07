@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { TableCell, TableHead, TableRow, TableSortLabel } from "@mui/material";
 
 import { Column } from "../../schema/components/Table";

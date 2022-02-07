@@ -1,19 +1,24 @@
-import React, { FormEvent, useState } from "react";
+import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
-import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
+import { Box } from "@mui/material";
+import Autocomplete from "@mui/material/Autocomplete";
 
 import useFetchingMovies from "../../utils/hooks/useFetchMovies";
-import { Box } from "@mui/material";
+import { SelectProps } from "../../schema/components/Select";
 
-const SelectMovie = () => {
+const SelectMovie = ({ onBlur }: SelectProps) => {
+  const [value, setValue] = useState(null);
   const [movies] = useFetchingMovies({});
 
   return (
     <Box sx={{ backgroundColor: "#fff", width: "80%" }}>
       <Autocomplete
+        value={value}
+        onChange={(e, v) => setValue(v)}
         disablePortal
         options={movies}
         sx={{ width: "100%", zIndex: 300 }}
+        onBlur={(e: React.FocusEvent<HTMLInputElement>) => onBlur(e, value)}
         renderInput={(params) => (
           <TextField
             sx={{ position: "relative", zIndex: 1500 }}

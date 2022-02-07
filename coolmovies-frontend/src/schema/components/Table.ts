@@ -18,9 +18,8 @@ export interface Column {
   render?: (data: any) => JSX.Element;
 }
 
-export interface TableAction {
-  item: Movie | Review;
-  actions: Action[];
+export interface TableActionProps {
+  item: any
 }
 
 export interface Action {

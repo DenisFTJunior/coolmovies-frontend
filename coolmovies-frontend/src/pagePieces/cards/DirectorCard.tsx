@@ -2,7 +2,7 @@ import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 
-import { ShowDirectorById } from "../../components/show/ShowDirector";
+import { ShowDirector } from "../../components/show/ShowDirector";
 import { Director } from "../../schema/api/Director";
 
 const DirectorCard = ({ director }: { director: Director }) => (
@@ -15,7 +15,7 @@ const DirectorCard = ({ director }: { director: Director }) => (
     }}
   >
     <CardContent sx={{ flex: "1 0 auto" }}>
-      <ShowDirectorById id={director?.id} />
+      <ShowDirector director={director} />
     </CardContent>
   </Card>
 );

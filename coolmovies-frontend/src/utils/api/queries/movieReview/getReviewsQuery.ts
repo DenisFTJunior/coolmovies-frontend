@@ -25,7 +25,7 @@ const QUERY = gql`
         hasNextPage
         hasPreviousPage
       }
-      nodes {
+      reviews: nodes {
         body
         id
         nodeId

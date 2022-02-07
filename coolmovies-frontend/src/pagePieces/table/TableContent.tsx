@@ -1,5 +1,5 @@
 import { TableCell, TableRow } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { Column, TableProps } from "../../schema/components/Table";
 import { Movie } from "../../schema/api/Movie";

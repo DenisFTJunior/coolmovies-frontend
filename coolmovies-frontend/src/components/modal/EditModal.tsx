@@ -46,12 +46,10 @@ const EditModal = ({
 }) => {
   const [modalData, { closeModal }, state] = useModal(name);
 
-  const [localData, setLocalData] = React.useState(modalData);
   const [error, setError] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
-  React.useEffect(() => setLocalData(modalData), [modalData]);
 
-  const { data, isOpen } = localData;
+  const { data, isOpen } = modalData;
   const isEditing = data?.id ? true : false;
 
   const [localValue, changeLocalValue] = useLocalValue(data);
@@ -126,7 +124,11 @@ const EditModal = ({
               }}
             >
               {`${isEditing ? "Editing" : "Creating"} ${
-                entity === "movieDirector" ? "Movie Director" : entity
+                entity === "movieDirector"
+                  ? "Movie Director"
+                  : entity === "movieReview"
+                  ? "Movie Review"
+                  : entity
               }`}
             </Typography>
           </Box>

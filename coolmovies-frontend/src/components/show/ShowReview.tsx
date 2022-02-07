@@ -1,5 +1,6 @@
 import React from "react";
-import { Rating, Stack, Typography } from "@mui/material";
+import { Icon, Rating, Stack, Typography, Box } from "@mui/material";
+import VideocamIcon from "@mui/icons-material/Videocam";
 
 import Loading from "../Loading";
 import useFetchingReviews from "../../utils/hooks/useFetchReview";
@@ -21,7 +22,7 @@ export const ShowReviewById = ({
   editPermited?: boolean;
 }) => {
   const condition = id ? { id } : { movieId };
-  const [review, updateReviewQuery, state] = useFetchingReviews({
+  const [review] = useFetchingReviews({
     condition: condition,
   });
   if (!review) return <Loading />;
@@ -29,33 +30,44 @@ export const ShowReviewById = ({
   return (
     <Stack
       direction="column"
-      justifyContent="center"
+      justifyContent="flex-start"
       alignItems="center"
       spacing={2}
       sx={{
+        width: "100%",
         backgroundImage: gradient
           ? "linear-gradient(to top, white ,transparent)"
           : "",
       }}
     >
-      <Stack direction="row" justifyContent="space-between">
-        <Typography variant="h6" gutterBottom component="div">
-          Review - {review.title}
-        </Typography>
-        {rating && <Rating value={review.rating} readOnly />}
-        {/* {editPermited} */}
-      </Stack>
-      <Typography component="div">{review.body}</Typography>
+      {!!rating && (
+        <Stack justifyContent="flex-end">
+          <Rating value={review.rating} readOnly />
+        </Stack>
+      )}
+
+      <Typography variant="h6" gutterBottom component="div">
+        Review - {review.title}
+      </Typography>
+
+      {!!review.movieByMovieId && (
+        <Stack direction="row" justifyContent="flex-start" gap={2}>
+          <Icon>
+            <VideocamIcon />
+          </Icon>
+          <Typography>{review.movieByMovieId.title}</Typography>
+        </Stack>
+      )}
+
+      <Typography component="p">{review.body}</Typography>
     </Stack>
   );
 };
 
 export const ShowReview = ({
   review,
-  onlyRating,
   rating,
   gradient,
-  editPermited,
 }: {
   review: Review;
   onlyRating?: boolean;
@@ -63,12 +75,10 @@ export const ShowReview = ({
   gradient?: boolean;
   editPermited?: boolean;
 }) => {
-  if (!review) return <Loading />;
-  if (onlyRating) return <Rating value={review.rating} readOnly />;
   return (
     <Stack
       direction="column"
-      justifyContent="center"
+      justifyContent="flex-start"
       alignItems="center"
       spacing={2}
       sx={{
@@ -77,14 +87,26 @@ export const ShowReview = ({
           : "",
       }}
     >
-      <Stack direction="row" justifyContent="space-between">
-        <Typography variant="h6" gutterBottom component="div">
-          Review - {review.title}
-        </Typography>
-        {rating && <Rating value={review.rating} readOnly />}
-        {/* {editPermited} */}
-      </Stack>
-      <Typography component="div">{review.body}</Typography>
+      {!!rating && (
+        <Stack justifyContent="flex-end">
+          <Rating value={review.rating} readOnly />
+        </Stack>
+      )}
+
+      <Typography variant="h6" gutterBottom component="div">
+        Review - {review.title}
+      </Typography>
+
+      {!!review.movieByMovieId && (
+        <Stack direction="row" justifyContent="flex-start" gap={2}>
+          <Icon>
+            <VideocamIcon />
+          </Icon>
+          <Typography>{review.movieByMovieId.title}</Typography>
+        </Stack>
+      )}
+
+      <Typography component="p">{review.body}</Typography>
     </Stack>
   );
 };

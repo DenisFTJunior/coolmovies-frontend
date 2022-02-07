@@ -15,11 +15,8 @@ const DetailsModal = ({
   items: DetailItem[];
 }) => {
   const [modalData, { closeModal }, state] = useModal(name);
-  const [localData, setLocalData] = React.useState(modalData);
 
-  React.useEffect(() => setLocalData(modalData), [modalData]);
-
-  const { data, isOpen } = localData;
+  const { data, isOpen } = modalData;
 
   if (!data) return <Loading />;
 

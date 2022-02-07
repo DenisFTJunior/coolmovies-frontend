@@ -7,8 +7,16 @@ import Typography from "@mui/material/Typography";
 import dateFormatter from "../../components/helper/dateFormatter";
 import { ShowDirector } from "../../components/show/ShowDirector";
 import { Movie } from "../../schema/api/Movie";
+import CardActions from "./CardActions";
+import { Stack } from "@mui/material";
+import { Action } from "../../schema/components/Card";
+import movieListActions from "../_actions/movieListActions";
 
-const MovieCard = ({ movie }: { movie: Movie }) => {
+const MovieCard = ({
+  movie
+}: {
+  movie: Movie
+}) => {
   if (!movie) return <></>;
 
   return (
@@ -23,17 +31,16 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
     >
       <CardContent sx={{ flex: "1 0 auto" }}>
         <Box sx={{ display: "flex", flexDirection: "column" }}>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
+          <Stack
+            direction="row"
+            justifyItems="space-between"
+            justifyContent="space-between"
           >
             <Typography component="h5" variant="h5">
               {movie?.title}
             </Typography>
-          </Box>
+            <CardActions item={movie} actions={movieListActions()} />
+          </Stack>
           <Box
             sx={{
               display: "flex",

@@ -10,6 +10,7 @@ import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 import useFetchingUsers from "../../utils/hooks/useFetchUsers";
 import useMutateUsers from "../../utils/hooks/useMutateUsers";
 import { Box } from "@mui/material";
+import { LocalLoading } from "../Loading";
 
 const filter = createFilterOptions<UserOptionType>();
 
@@ -18,18 +19,16 @@ const SelectUser = ({
 }: {
   onBlur: (e: React.FocusEvent<HTMLInputElement>, value: any) => void;
 }) => {
-  const [users, updateUsers, state] = useFetchingUsers({});
+  const [users] = useFetchingUsers({});
   const { save } = useMutateUsers();
 
   const [value, setValue] = useState<UserOptionType | null>(null);
-  const [data, setData] = useState(users);
+
   const [open, toggleOpen] = useState(false);
   const [dialogValue, setDialogValue] = useState<UserOptionType>({
     id: "",
     name: "",
   });
-
-  useEffect(() => setData(users), [users]);
 
   const handleClose = () => {
     setDialogValue({
@@ -47,8 +46,6 @@ const SelectUser = ({
     if (!(value === null)) save({ user: value });
     handleClose();
   };
-
-  if (!data) return <></>;
 
   return (
     <Box sx={{ backgroundColor: "#fff", width: "80%" }}>
@@ -72,7 +69,7 @@ const SelectUser = ({
           }
         }}
         onBlur={(e: React.FocusEvent<HTMLInputElement>) => onBlur(e, value)}
-        loading={!data}
+        loading={!users}
         filterOptions={(options, params) => {
           const filtered = filter(options, params);
 
@@ -85,7 +82,7 @@ const SelectUser = ({
 
           return filtered;
         }}
-        options={data.allUsers.users}
+        options={users.allUsers.users}
         getOptionLabel={(option) => {
           if (typeof option === "string") {
             return option;

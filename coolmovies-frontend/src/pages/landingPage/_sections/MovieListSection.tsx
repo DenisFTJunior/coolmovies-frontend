@@ -1,12 +1,10 @@
-import { Box } from "@mui/material";
 import { path } from "ramda";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import Table from "../../../pagePieces/table";
 import TableActions from "../../../pagePieces/table/TableActions";
 import { Movie } from "../../../schema/api/Movie";
 import { Movies } from "../../../schema/api/Movies";
-import movieListActions from "./_actions/movieListActions";
 
 const columns = [
   {
@@ -51,16 +49,13 @@ const columns = [
       direction: "",
     },
     render: (data: Movie) => {
-      const actions = movieListActions();
-      return <TableActions item={data} actions={actions} />;
+      return <TableActions item={data} />;
     },
   },
 ];
 
 const MovieListSection = ({ movies }: { movies: Movies }) => {
-  const [data, setData] = useState(movies);
-  useEffect(() => setData(movies), [movies]);
-  return <Table data={data} columns={columns} />;
+  return <Table data={movies} columns={columns} />;
 };
 
 export default MovieListSection;

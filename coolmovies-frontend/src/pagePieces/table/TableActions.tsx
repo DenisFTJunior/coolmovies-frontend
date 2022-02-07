@@ -5,9 +5,10 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Button, Menu, Stack } from "@mui/material";
 
-import { TableAction } from "../../schema/components/Table";
+import { TableActionProps } from "../../schema/components/Table";
+import movieListActions from "../_actions/movieListActions";
 
-const TableActions = ({ item, actions }: TableAction) => {
+const TableActions = ({ item }: TableActionProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: MouseEvent<HTMLElement>) => {
@@ -35,7 +36,7 @@ const TableActions = ({ item, actions }: TableAction) => {
           horizontal: "right",
         }}
       >
-        {actions.map((action) => (
+        {movieListActions().map((action) => (
           <MenuItem onClick={() => action.action(item)}>
             <ListItemIcon>{action.icon}</ListItemIcon>
             <ListItemText>{action.label}</ListItemText>
