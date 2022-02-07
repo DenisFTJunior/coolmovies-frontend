@@ -15,7 +15,7 @@ const editModalItems: Item[] = [
         onBlur={(e, value) =>
           changeLocalValue({
             ...localValue,
-            director: value,
+            directorId: value.id,
           })
         }
       />
@@ -29,7 +29,7 @@ const editModalItems: Item[] = [
         onBlur={(e, value) =>
           changeLocalValue({
             ...localValue,
-            user: value,
+            userCreatorId: value.id,
           })
         }
       />

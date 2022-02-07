@@ -1,59 +1,48 @@
-import React, { useState } from "react";
-import Paper from "@mui/material/Paper";
-import MenuList from "@mui/material/MenuList";
+import React, { MouseEvent, useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { Backdrop, Button, IconButton } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
+import { Button, Menu, Stack } from "@mui/material";
 
 import { TableAction } from "../../schema/components/Table";
 
 const TableActions = ({ item, actions }: TableAction) => {
-  const [open, setOpen] = useState(false);
-  if (!open)
-    return (
-      <Button
-        sx={{ width: "100%", height: "100%", marginTop: 1 }}
-        variant="contained"
-        disableElevation
-        onClick={() => setOpen(true)}
-        endIcon={<KeyboardArrowDownIcon />}
-      >
-        Options
-      </Button>
-    );
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
-    <Backdrop
-      sx={{
-        backgroundColor: "#fff",
-        color: "#fff",
-        zIndex: 10,
-        position: "relative",
-      }}
-      open={open}
-      onClick={() => setOpen(false)}
-    >
-      <Paper
-        sx={{
-          width: "20rem",
-          maxWidth: "100%",
+    <Stack justifyContent="flex-end">
+      <Button onClick={handleClick} endIcon={<KeyboardArrowDownIcon />}>
+        Actions
+      </Button>
+      <Menu
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
         }}
       >
-        <MenuList>
-          {actions.map((action) => (
-            <MenuItem onClick={() => action.action(item)}>
-              <ListItemIcon>{action.icon}</ListItemIcon>
-              <ListItemText>{action.label}</ListItemText>
-            </MenuItem>
-          ))}
-        </MenuList>
-      </Paper>
-      <IconButton>
-        <CloseIcon />
-      </IconButton>
-    </Backdrop>
+        {actions.map((action) => (
+          <MenuItem onClick={() => action.action(item)}>
+            <ListItemIcon>{action.icon}</ListItemIcon>
+            <ListItemText>{action.label}</ListItemText>
+          </MenuItem>
+        ))}
+      </Menu>
+    </Stack>
   );
 };
 

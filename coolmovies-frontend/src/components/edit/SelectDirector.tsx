@@ -102,7 +102,7 @@ const SelectDirector = ({
           <TextField
             sx={{ position: "relative", zIndex: 1500 }}
             {...params}
-            label="Director Select"
+            label="Directors"
           />
         )}
       />

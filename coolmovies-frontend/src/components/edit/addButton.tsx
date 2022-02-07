@@ -15,7 +15,11 @@ export default function EditButton() {
   const dispatch = useStateDispatch();
   const { toogleModal } = modalActions;
 
-  const actions = [
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const buttons = [
     {
       icon: <VideoCallIcon />,
       name: "add Movie",
@@ -51,19 +55,24 @@ export default function EditButton() {
       sx={{
         height: 320,
         transform: "translateZ(0px)",
-        flexGrow: 1,
         position: "fixed",
         bottom: 16,
         right: 16,
       }}
     >
-      <SpeedDial ariaLabel="Add button" icon={<SpeedDialIcon />}>
-        {actions.map((action) => (
+      <SpeedDial
+        ariaLabel="Add button"
+        icon={<SpeedDialIcon />}
+        onClose={handleClose}
+        onOpen={handleOpen}
+        open={open}
+      >
+        {buttons.map((button) => (
           <SpeedDialAction
-            onClick={action.onClick}
-            key={action.name}
-            icon={action.icon}
-            tooltipTitle={action.name}
+            onClick={button.onClick}
+            key={button.name}
+            icon={button.icon}
+            tooltipTitle={button.name}
           />
         ))}
       </SpeedDial>

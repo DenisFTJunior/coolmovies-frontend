@@ -104,7 +104,8 @@ const EditModal = ({
             width: "36rem",
             maxWidth: "100%",
             flexWrap: "wrap",
-            background: "linear-gradient(180deg, #955DDC 0%, rgba(149, 93, 220, 0) 100%)",
+            background:
+              "linear-gradient(180deg, #301553 0%, rgba(149, 93, 220, 0) 100%)",
             padding: 3,
             borderRadius: 10,
           }}

@@ -18,6 +18,7 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
         justifyContent: "center",
         alignItems: "center",
         width: "24rem",
+        margin: 2,
       }}
     >
       <CardContent sx={{ flex: "1 0 auto" }}>

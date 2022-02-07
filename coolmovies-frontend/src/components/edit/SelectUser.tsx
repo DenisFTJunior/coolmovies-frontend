@@ -102,7 +102,7 @@ const SelectUser = ({
           <TextField
             sx={{ position: "relative", zIndex: 1500 }}
             {...params}
-            label="User Select"
+            label="Users"
           />
         )}
       />

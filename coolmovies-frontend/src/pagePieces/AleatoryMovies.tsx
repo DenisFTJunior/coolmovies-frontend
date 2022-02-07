@@ -5,7 +5,7 @@ import MovieCard from "./cards/MovieCard";
 import useFetchingMovies from "../utils/hooks/useFetchMovies";
 import { Movies } from "../schema/api/Movies";
 
-const recommendedFilmsIndex = (data: Movies) =>
+const aleatoryFilmsIndex = (data: Movies) =>
   [1, 2, 3].map(() =>
     Math.ceil(Math.random() * data?.allMovies.totalCount - 1)
   );
@@ -14,10 +14,10 @@ const AleatoryMovies = (): JSX.Element => {
   const [movies, updateQuery, state] = useFetchingMovies();
   const [data, setData] = useState(movies);
   const [indexs, setIndexs] = useState([1, 2, 3]);
-  
+
   useEffect(() => {
     setData(movies);
-    if (movies) setIndexs(recommendedFilmsIndex(movies));
+    if (movies) setIndexs(aleatoryFilmsIndex(movies));
   }, [movies]);
 
   if (state.error && !data)
@@ -25,12 +25,12 @@ const AleatoryMovies = (): JSX.Element => {
 
   return (
     <Stack
-      sx={{ height: "100%", width: "90%" }}
+      sx={{ width: "100%" }}
       direction="row"
       justifyContent="center"
+      justifyItems="center"
       alignItems="center"
       id="aleatoryMovies"
-      spacing={3}
       flexWrap="wrap"
     >
       {indexs.map((v) => (
