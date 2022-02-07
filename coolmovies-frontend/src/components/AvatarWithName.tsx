@@ -3,6 +3,7 @@ import Avatar from "@mui/material/Avatar";
 import { Stack, Typography } from "@mui/material";
 
 function stringAvatar(name: string) {
+  console.log(name);
   return {
     sx: {
       bgcolor: "#dcdcdc",
@@ -10,7 +11,9 @@ function stringAvatar(name: string) {
       height: 24,
       fontSize: 10,
     },
-    children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
+    children: `${name?.split(" ")[0][0]}${
+      name?.split(" ")[1] ? name?.split(" ")[1][0] : ""
+    }`,
   };
 }
 
