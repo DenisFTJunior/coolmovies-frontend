@@ -1,6 +1,9 @@
+import { assoc, compose, pick } from "ramda";
+
 import SelectDirector from "../../../components/edit/SelectDirector";
 import SelectUser from "../../../components/edit/SelectUser";
 import EditModal from "../../../components/modal/EditModal";
+import { Movie } from "../../../schema/api/Movie";
 import { Item } from "../../../schema/components/Modal";
 import useMutateMovie from "../../../utils/hooks/useMutateMovie";
 
@@ -13,7 +16,7 @@ const editModalItems: Item[] = [
     required: true,
   },
   {
-    prop: "directorId",
+    prop: "movieDirectorId",
     label: "Director",
     render: (data, item, { localValue, changeLocalValue }) => (
       <SelectDirector
@@ -44,6 +47,14 @@ const editModalItems: Item[] = [
   },
 ];
 
+const cleanRequest = compose(
+  pick(["userCreatorId", "movieDirectorId", "releaseDate", "title"]),
+  (item: Movie) =>
+    assoc("movieDirectorId", item?.director.id || item?.movieDirectorId)(item),
+  (item: Movie) =>
+    assoc("userCreatorId", item?.user.id || item?.userCreatorId)(item)
+);
+
 const EditMovieModal = () => {
   const { save, update } = useMutateMovie();
   return (
@@ -53,6 +64,7 @@ const EditMovieModal = () => {
       items={editModalItems}
       request={save}
       updateRequest={update}
+      cleanRequest={cleanRequest}
     />
   );
 };

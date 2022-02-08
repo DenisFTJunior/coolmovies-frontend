@@ -1,3 +1,4 @@
+import { compose, pick } from "ramda";
 import React from "react";
 
 import { Item } from "../../../schema/components/Modal";
@@ -8,6 +9,8 @@ const editModalItems: Item[] = [
   { prop: "name", label: "Name", required: true },
 ];
 
+const cleanRequest = compose(pick(["name"]));
+
 const EditUserModal = () => {
   const { save, update } = useMutateUsers();
   return (
@@ -17,6 +20,7 @@ const EditUserModal = () => {
       items={editModalItems}
       request={save}
       updateRequest={update}
+      cleanRequest={cleanRequest}
     />
   );
 };

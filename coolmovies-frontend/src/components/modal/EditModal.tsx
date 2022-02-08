@@ -35,14 +35,16 @@ const EditModal = ({
   request,
   updateRequest,
   entity,
+  cleanRequest,
 }: {
   name: string;
   entity: string;
   items: Item[];
   request: any;
   updateRequest: any;
+  cleanRequest: any;
 }) => {
-  const [modalData, { closeModal }, state] = useModal(name);
+  const [modalData, { closeModal }] = useModal(name);
 
   const [loading, setLoading] = React.useState(false);
 
@@ -57,6 +59,7 @@ const EditModal = ({
     if (data) changeLocalValue(data);
   }, [data]);
 
+  console.log("data", data);
   const cleanError = () =>
     items.map((v) =>
       localValue && (localValue as any)[`${v.prop}__error`]
@@ -87,7 +90,7 @@ const EditModal = ({
       isEditing
         ? updateRequest({
             id: localValue.id,
-            [`${entity}Patch`]: dissoc("id")(localValue),
+            [`${entity}Patch`]: cleanRequest(localValue),
           })
         : request({ [entity]: localValue });
       setLoading(false);

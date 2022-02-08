@@ -36,7 +36,6 @@ const DetailsModal = ({
   const [modalData, { closeModal }] = useModal(name);
 
   const { data, isOpen } = modalData;
-  console.log("data", data);
 
   if (!data && isOpen) return <LocalLoading />;
 

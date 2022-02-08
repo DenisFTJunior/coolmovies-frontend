@@ -6,6 +6,8 @@ import SelectUser from "../../../components/edit/SelectUser";
 import EditModal from "../../../components/modal/EditModal";
 import { Item } from "../../../schema/components/Modal";
 import useMutateReview from "../../../utils/hooks/useMutateReview";
+import { assoc, compose, pick } from "ramda";
+import { Review } from "../../../schema/api/Review";
 
 const editModalItems: Item[] = [
   { prop: "title", label: "Title", required: true },
@@ -58,25 +60,27 @@ const editModalItems: Item[] = [
     prop: "body",
     label: "Review Body",
     render: (data, item, { localValue, changeLocalValue }) => (
-      
-        <TextField
-          sx={{ backgroundColor: "#fff", width: "100%" }}
-          label="Body"
-          multiline
-          rows={6}
-          value={localValue?.body}
-          onChange={(e) =>
-            changeLocalValue({
-              ...localValue,
-              body: e.target.value,
-            })
-          }
-        />
-
+      <TextField
+        sx={{ backgroundColor: "#fff", width: "100%" }}
+        label="Body"
+        multiline
+        rows={6}
+        value={localValue?.body}
+        onChange={(e) =>
+          changeLocalValue({
+            ...localValue,
+            body: e.target.value,
+          })
+        }
+      />
     ),
     required: true,
   },
 ];
+
+const cleanRequest = compose(
+  pick(["userCreatorId", "userReviewerId", "movieId", "title"])
+);
 
 const EditReviewModal = () => {
   const { save, update } = useMutateReview();
@@ -87,6 +91,7 @@ const EditReviewModal = () => {
       items={editModalItems}
       request={save}
       updateRequest={update}
+      cleanRequest={cleanRequest}
     />
   );
 };

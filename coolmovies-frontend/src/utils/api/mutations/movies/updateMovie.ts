@@ -4,7 +4,7 @@ import { moviesClient } from "../../client/movieClient";
 import { UpdateMovieVars } from "../../../../schema/api/mutation/Movie";
 
 const UPDATE_MOVIE_BY_ID_MUTATION = gql`
-  mutation UpdateMovieById($input: UpdateMovieByIdInput) {
+  mutation UpdateMovieById($input: UpdateMovieByIdInput!) {
     updateMovieById(input: $input) {
       id: clientMutationId
     }
@@ -12,7 +12,7 @@ const UPDATE_MOVIE_BY_ID_MUTATION = gql`
 `;
 
 const UPDATE_MOVIE_BY_NODEID_MUTATION = gql`
-  mutation updateMovie($input: UpdateMovieInput) {
+  mutation updateMovie($input: UpdateMovieInput!) {
     updateMovie(input: $input) {
       id: clientMutationId
     }

@@ -8,11 +8,22 @@ import { actions as movieActions } from "../stateManager/slice/async/movie/movie
 
 const useMutateMovie = () => {
   const dispatch = useStateDispatch();
-  const { saveMovie, deleteMovie, updateMovie } = movieActions;
+  const { saveMovie, deleteMovie, updateMovie, fetchMovies } = movieActions;
 
-  const update = (vars: UpdateMovieVars) => dispatch(updateMovie({ vars }));
-  const remove = (vars: DeleteMovieVars) => dispatch(deleteMovie({ vars }));
-  const save = (vars: SaveMovieVars) => dispatch(saveMovie({ vars }));
+  const action = (v: object) => dispatch(fetchMovies({ vars: v }));
+
+  const update = (vars: UpdateMovieVars) => {
+    dispatch(updateMovie({ vars }));
+    action({});
+  };
+  const remove = (vars: DeleteMovieVars) => {
+    dispatch(deleteMovie({ vars }));
+    action({});
+  };
+  const save = (vars: SaveMovieVars) => {
+    dispatch(saveMovie({ vars }));
+    action({});
+  };
 
   return { save, update, remove };
 };

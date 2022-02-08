@@ -1,4 +1,5 @@
 import React from "react";
+import { compose, pick } from "ramda";
 
 import { Item } from "../../../schema/components/Modal";
 import EditModal from "../../../components/modal/EditModal";
@@ -9,6 +10,8 @@ const editModalItems: Item[] = [
   { prop: "age", label: "Age", required: true, typeInput: "number" },
 ];
 
+const cleanRequest = compose(pick(["name", "age"]));
+
 const EditDirectorModal = () => {
   const { save, update } = useMutateDirector();
   return (
@@ -18,6 +21,7 @@ const EditDirectorModal = () => {
       items={editModalItems}
       request={save}
       updateRequest={update}
+      cleanRequest={cleanRequest}
     />
   );
 };
