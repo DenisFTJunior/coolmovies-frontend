@@ -2,12 +2,10 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface InitialState {
   search: string | undefined;
-  isSearching: boolean;
 }
 
 const initialState: InitialState = {
   search: "",
-  isSearching: false,
 };
 
 export const searchSlice = createSlice({
@@ -19,9 +17,6 @@ export const searchSlice = createSlice({
     },
     clearSearch: (state) => {
       state.search = undefined;
-    },
-    toogleSearch: (state) => {
-      state.isSearching = !state.isSearching;
     },
   },
 });

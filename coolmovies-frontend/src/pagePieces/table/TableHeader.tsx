@@ -4,12 +4,12 @@ import { TableCell, TableHead, TableRow, TableSortLabel } from "@mui/material";
 import { Column } from "../../schema/components/Table";
 import { useStateDispatch } from "../../utils/stateManager/hooks/useDispatch";
 import { useStateSelector } from "../../utils/stateManager/hooks/useSelector";
-import { actions as generalActions } from "../../utils/stateManager/slice/sync/generalSlice";
+import { actions as queryActions } from "../../utils/stateManager/slice/sync/querySlice";
 
 const TableHeader = ({ columns }: { columns: Column[] }) => {
   const dispatch = useStateDispatch();
   const stateGeneral = useStateSelector((state) => state.general);
-  const { setSort } = generalActions;
+  const { setSort } = queryActions;
 
   const sortDirectionHandler = (column: Column) =>
     column.sortOption.direction === "ASC" ? "asc" : "desc";

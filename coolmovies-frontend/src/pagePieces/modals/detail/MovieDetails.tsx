@@ -3,6 +3,7 @@ import DetailsModal from "../../../components/modal/DetailsModal";
 
 import { ShowDirector } from "../../../components/show/ShowDirector";
 import { ShowReview } from "../../../components/show/ShowReview";
+import { Review } from "../../../schema/api/Review";
 import { DetailItem } from "../../../schema/components/Modal";
 
 const ITEMS: DetailItem[] = [
@@ -11,17 +12,18 @@ const ITEMS: DetailItem[] = [
   {
     prop: "directorId",
     label: "Director",
-    render: (data, item) => <ShowDirector director={data.director} />,
+    render: (data, item) => <ShowDirector director={data?.director} />,
   },
   {
-    prop: "reviewId",
-    label: "Review",
-    render: (data, item) => <ShowReview review={data.review} />,
+    prop: "reviews",
+    label: "Reviews",
+    render: (data, item) =>
+      data?.reviewsQuery.reviews.map((review:Review) => <ShowReview review={review} />),
   },
 ];
 
-const DetailMovieModal = () =>{
-  <DetailsModal name="detailMovie" items={ITEMS}/> 
-}
+const DetailMovieModal = () => (
+  <DetailsModal name="detailMovie" items={ITEMS} />
+);
 
-export default DetailMovieModal
+export default DetailMovieModal;

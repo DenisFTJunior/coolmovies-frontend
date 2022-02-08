@@ -26,7 +26,7 @@ const MovieCard = ({ movie }: { movie: Movie }) => {
         margin: 2,
       }}
     >
-      <CardContent sx={{ flex: "1 0 auto" }}>
+      <CardContent sx={{ flex: "1" }}>
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           <Stack
             direction="row"

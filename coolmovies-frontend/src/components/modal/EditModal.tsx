@@ -47,11 +47,15 @@ const EditModal = ({
   const [loading, setLoading] = React.useState(false);
 
   const { data, isOpen } = modalData;
-  const isEditing = data?.id ? true : false;
+  const isEditing = data && data?.id ? true : false;
 
   const [localValue, changeLocalValue] = useLocalValue(data);
 
   if (!data && isOpen && isEditing) return <LocalLoading />;
+
+  React.useEffect(() => {
+    if (data) changeLocalValue(data);
+  }, [data]);
 
   const cleanError = () =>
     items.map((v) =>

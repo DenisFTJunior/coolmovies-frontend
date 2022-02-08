@@ -18,7 +18,7 @@ const reviewActions = (): Action[] => {
       icon: <EditIcon />,
       label: "Update",
       action: (item: Movie) => {
-        toogleModal({ modal: "editReview", data: item });
+        dispatch(toogleModal({ modal: "editReview", data: item }));
       },
     },
     {

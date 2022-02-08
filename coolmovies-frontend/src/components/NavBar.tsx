@@ -5,15 +5,10 @@ import CasinoIcon from "@mui/icons-material/Casino";
 import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 
 import { actions } from "../utils/stateManager/slice/sync/searchSlice";
-import useFetchingMovies from "../utils/hooks/useFetchMovies";
 import { useDispatch } from "react-redux";
 import { StateDispatch } from "../schema/stateManager/StoreType";
 
 const NavBar = () => {
-  const dispatch = useDispatch<StateDispatch>();
-  const { toogleSearch, setSearch } = actions;
-
-  const stateMovie = useFetchingMovies();
 
   return (
     <>

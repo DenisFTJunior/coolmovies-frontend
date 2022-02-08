@@ -16,8 +16,10 @@ const filter = createFilterOptions<UserOptionType>();
 
 const SelectUser = ({
   onBlur,
+  id,
 }: {
   onBlur: (e: React.FocusEvent<HTMLInputElement>, value: any) => void;
+  id?: string;
 }) => {
   const [users] = useFetchingUsers({});
   const { save } = useMutateUsers();
@@ -48,7 +50,7 @@ const SelectUser = ({
   };
 
   return (
-    <Box sx={{ backgroundColor: "#fff"}}>
+    <Box sx={{ backgroundColor: "#fff" }}>
       <Autocomplete
         value={value}
         onChange={(event, newValue) => {

@@ -19,14 +19,14 @@ const movieListActions = (): Action[]  => {
       icon: <AssignmentIcon />,
       label: "See Details",
       action: (item: Movie) => {
-        toogleModal({ modal: "detailMovie", data: item });
+        dispatch(toogleModal({ modal: "detailMovie", data: item }));
       },
     },
     {
       icon: <EditIcon />,
       label: "Update",
       action: (item: Movie) => {
-        toogleModal({ modal: "editMovie", data: item });
+        dispatch(toogleModal({ modal: "editMovie", data: item }));
       },
     },
     {
