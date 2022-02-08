@@ -26,6 +26,7 @@ const editModalItems: Item[] = [
             movieDirectorId: value?.id,
           })
         }
+        id={data?.movieDirectorId}
       />
     ),
     required: true,
@@ -41,19 +42,19 @@ const editModalItems: Item[] = [
             userCreatorId: value?.id,
           })
         }
+        id={data?.userCreatorId}
       />
     ),
     required: true,
   },
 ];
 
-const cleanRequest = compose(
-  pick(["userCreatorId", "movieDirectorId", "releaseDate", "title"]),
-  (item: Movie) =>
-    assoc("movieDirectorId", item?.director.id || item?.movieDirectorId)(item),
-  (item: Movie) =>
-    assoc("userCreatorId", item?.user.id || item?.userCreatorId)(item)
-);
+const cleanRequest = pick([
+  "userCreatorId",
+  "movieDirectorId",
+  "releaseDate",
+  "title",
+]);
 
 const EditMovieModal = () => {
   const { save, update } = useMutateMovie();

@@ -10,7 +10,7 @@ const editModalItems: Item[] = [
   { prop: "age", label: "Age", required: true, typeInput: "number" },
 ];
 
-const cleanRequest = compose(pick(["name", "age"]));
+const cleanRequest = pick(["name", "age"]);
 
 const EditDirectorModal = () => {
   const { save, update } = useMutateDirector();

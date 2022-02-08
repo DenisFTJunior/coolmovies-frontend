@@ -60,6 +60,7 @@ const EditModal = ({
   }, [data]);
 
   console.log("data", data);
+  
   const cleanError = () =>
     items.map((v) =>
       localValue && (localValue as any)[`${v.prop}__error`]

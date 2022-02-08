@@ -8,11 +8,22 @@ import { actions as userActions } from "../stateManager/slice/async/user/userSli
 
 const useMutateUsers = () => {
   const dispatch = useStateDispatch();
-  const { saveUser, deleteUser, updateUser } = userActions;
+  const { saveUser, deleteUser, updateUser, fetchUsers } = userActions;
 
-  const update = (vars: UpdateUserVars) => dispatch(updateUser({ vars }));
-  const remove = (vars: DeleteUserVars) => dispatch(deleteUser({ vars }));
-  const save = (vars: SaveUserVars) => dispatch(saveUser({ vars }));
+  const action = (v: object) => dispatch(fetchUsers({ vars: v }));
+
+  const update = (vars: UpdateUserVars) => {
+    dispatch(updateUser({ vars }));
+    action({});
+  };
+  const remove = (vars: DeleteUserVars) => {
+    dispatch(deleteUser({ vars }));
+    action({});
+  };
+  const save = (vars: SaveUserVars) => {
+    dispatch(saveUser({ vars }));
+    action({});
+  };
 
   return { save, update, remove };
 };

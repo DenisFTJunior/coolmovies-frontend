@@ -7,30 +7,34 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
 import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
+import { Box } from "@mui/material";
+
 import useFetchingUsers from "../../utils/hooks/useFetchUsers";
 import useMutateUsers from "../../utils/hooks/useMutateUsers";
-import { Box } from "@mui/material";
-import { LocalLoading } from "../Loading";
+import { User } from "../../schema/api/User";
+import { SelectProps } from "../../schema/components/Select";
 
 const filter = createFilterOptions<UserOptionType>();
 
-const SelectUser = ({
-  onBlur,
-  id,
-}: {
-  onBlur: (e: React.FocusEvent<HTMLInputElement>, value: any) => void;
-  id?: string;
-}) => {
+const SelectUser = ({ onBlur, id }: SelectProps) => {
   const [users] = useFetchingUsers({});
   const { save } = useMutateUsers();
 
   const [value, setValue] = useState<UserOptionType | null>(null);
-
   const [open, toggleOpen] = useState(false);
   const [dialogValue, setDialogValue] = useState<UserOptionType>({
     id: "",
     name: "",
   });
+
+  const selectUserForUpdate = users?.allUsers?.users.filter(
+    (user: User) => user.id === id
+  );
+
+  useEffect(() => {
+    if (value === null && selectUserForUpdate)
+      setValue(selectUserForUpdate[0] || null);
+  }, [users]);
 
   const handleClose = () => {
     setDialogValue({

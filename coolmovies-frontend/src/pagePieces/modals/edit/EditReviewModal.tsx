@@ -22,6 +22,7 @@ const editModalItems: Item[] = [
             movieId: value?.id,
           })
         }
+        id={data?.movieId}
       />
     ),
     required: true,
@@ -37,6 +38,7 @@ const editModalItems: Item[] = [
             userReviewerId: value?.id,
           })
         }
+        id={data?.userReviewerId}
       />
     ),
     required: true,
@@ -52,6 +54,7 @@ const editModalItems: Item[] = [
             rating: value,
           })
         }
+        defaultValue={data?.rating || 0}
       />
     ),
     required: true,
@@ -72,15 +75,19 @@ const editModalItems: Item[] = [
             body: e.target.value,
           })
         }
+        defaultValue={data?.body || ""}
       />
     ),
     required: true,
   },
 ];
 
-const cleanRequest = compose(
-  pick(["userCreatorId", "userReviewerId", "movieId", "title"])
-);
+const cleanRequest = pick([
+  "userCreatorId",
+  "userReviewerId",
+  "movieId",
+  "title",
+]);
 
 const EditReviewModal = () => {
   const { save, update } = useMutateReview();

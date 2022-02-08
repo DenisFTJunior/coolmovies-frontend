@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -11,14 +11,12 @@ import { Box } from "@mui/material";
 import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 import { useFetchingDirectors } from "../../utils/hooks/useFetchDirectorts";
 import useMutateDirector from "../../utils/hooks/useMutateDirector";
+import { Director } from "../../schema/api/Director";
+import { SelectProps } from "../../schema/components/Select";
 
 const filter = createFilterOptions<DirectorOptionType>();
 
-const SelectDirector = ({
-  onBlur,
-}: {
-  onBlur: (e: React.FocusEvent<HTMLInputElement>, value: any) => void;
-}) => {
+const SelectDirector = ({ onBlur, id }: SelectProps) => {
   const [directors] = useFetchingDirectors();
   const { save } = useMutateDirector();
 
@@ -28,6 +26,14 @@ const SelectDirector = ({
     name: "",
     age: 0,
   });
+
+  const selectDirectorForUpdate = directors?.allMovieDirectors.directors.filter(
+    (director: Director) => director.id === id
+  );
+  useEffect(() => {
+    if (value === null && selectDirectorForUpdate)
+      setValue(selectDirectorForUpdate[0] || null);
+  }, [directors]);
 
   const handleClose = () => {
     setDialogValue({
@@ -48,7 +54,7 @@ const SelectDirector = ({
   };
 
   return (
-    <Box sx={{ backgroundColor: "#fff"}}>
+    <Box sx={{ backgroundColor: "#fff" }}>
       <Autocomplete
         value={value}
         onChange={(event, newValue) => {

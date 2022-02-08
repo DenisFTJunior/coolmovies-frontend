@@ -8,11 +8,21 @@ import { actions as userActions } from "../stateManager/slice/async/review/revie
 
 const useMutateReview = () => {
   const dispatch = useStateDispatch();
-  const { saveReview, deleteReview, updateReview } = userActions;
+  const { saveReview, deleteReview, updateReview, fetchReviews } = userActions;
+  const action = (v: object) => dispatch(fetchReviews({ vars: v }));
 
-  const update = (vars: UpdateReviewVars) => dispatch(updateReview({ vars }));
-  const remove = (vars: DeleteReviewVars) => dispatch(deleteReview({ vars }));
-  const save = (vars: SaveReviewVars) => dispatch(saveReview({ vars }));
+  const update = (vars: UpdateReviewVars) => {
+    dispatch(updateReview({ vars }));
+    action({});
+  };
+  const remove = (vars: DeleteReviewVars) => {
+    dispatch(deleteReview({ vars }));
+    action({});
+  };
+  const save = (vars: SaveReviewVars) => {
+    dispatch(saveReview({ vars }));
+    action({});
+  };
 
   return { save, update, remove };
 };

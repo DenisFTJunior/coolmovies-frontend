@@ -9,7 +9,7 @@ const editModalItems: Item[] = [
   { prop: "name", label: "Name", required: true },
 ];
 
-const cleanRequest = compose(pick(["name"]));
+const cleanRequest = pick(["name"]);
 
 const EditUserModal = () => {
   const { save, update } = useMutateUsers();
