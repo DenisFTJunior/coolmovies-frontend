@@ -20,5 +20,6 @@ export const epicDeleteMovie: Epic = (
         return actions.loadMovieError({
           error: "Sorry, cannot delete item :(",
         });
+      return actions.processedRequest();
     })
   );

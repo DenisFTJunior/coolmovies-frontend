@@ -42,6 +42,9 @@ export const movieSlice = createSlice({
     ) => {
       state.fetchedMovies = action.payload.data;
     },
+    processedRequest: (state) => {
+      state.error = undefined;
+    },
     loadMovieError: (state, action: PayloadAction<{ error: string }>) => {
       state.error = action.payload.error;
     },

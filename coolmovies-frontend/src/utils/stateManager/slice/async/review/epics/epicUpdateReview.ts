@@ -20,5 +20,6 @@ export const epicUpdateReview: Epic = (
         return actions.loadReviewError({
           error: "Sorry, cannot update item :(",
         });
+      return actions.processedRequest();
     })
   );

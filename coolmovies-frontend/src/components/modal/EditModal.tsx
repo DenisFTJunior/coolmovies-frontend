@@ -58,8 +58,6 @@ const EditModal = ({
   React.useEffect(() => {
     if (data) changeLocalValue(data);
   }, [data]);
-
-  console.log("data", data);
   
   const cleanError = () =>
     items.map((v) =>

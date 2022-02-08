@@ -20,5 +20,6 @@ export const epicUpdateDirector: Epic = (
         return actions.loadDirectorError({
           error: "Sorry, cannot update item :(",
         });
+      return actions.processedRequest();
     })
   );

@@ -19,5 +19,6 @@ export const epicSaveComment: Epic = (
         return actions.loadCommentError({
           error: "Sorry, cannot save item :(",
         });
+      return actions.processedRequest();
     })
   );

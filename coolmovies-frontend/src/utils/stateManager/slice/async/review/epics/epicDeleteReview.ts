@@ -20,5 +20,6 @@ export const epicDeleteReview: Epic = (
         return actions.loadReviewError({
           error: "Sorry, cannot delete item :(",
         });
+      return actions.processedRequest();
     })
   );

@@ -20,5 +20,6 @@ export const epicSaveUser: Epic = (
         return actions.loadUserError({
           error: "Sorry, cannot save item :(",
         });
+      return actions.processedRequest();
     })
   );

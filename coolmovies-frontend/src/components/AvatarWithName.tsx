@@ -3,7 +3,6 @@ import Avatar from "@mui/material/Avatar";
 import { Stack, Typography } from "@mui/material";
 
 function stringAvatar(name: string) {
-  console.log(name);
   return {
     sx: {
       bgcolor: "#dcdcdc",

@@ -20,5 +20,6 @@ export const epicUpdateMovie: Epic = (
         return actions.loadMovieError({
           error: "Sorry, cannot update item :(",
         });
+      return actions.processedRequest()
     })
   );

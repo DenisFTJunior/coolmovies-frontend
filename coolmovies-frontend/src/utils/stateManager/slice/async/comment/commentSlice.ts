@@ -21,10 +21,7 @@ export const commentSlice = createSlice({
   name: "comment",
   reducers: {
     fetchComment: (state, action: PayloadAction<{ vars: CommentVars }>) => {},
-    fetchComments: (
-      state,
-      action: PayloadAction<{ vars: CommentsVars }>
-    ) => {},
+    fetchComments: (state, action: PayloadAction<{ vars: CommentsVars }>) => {},
     saveComment: (
       state,
       action: PayloadAction<{ vars: SaveCommentVars }>
@@ -39,6 +36,9 @@ export const commentSlice = createSlice({
     ) => {},
     clearCommentData: (state) => {
       state.fetchedComments = undefined;
+      state.error = undefined;
+    },
+    processedRequest: (state) => {
       state.error = undefined;
     },
     loadedComment: (

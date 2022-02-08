@@ -20,5 +20,6 @@ export const epicDeleteDirector: Epic = (
         return actions.loadDirectorError({
           error: "Sorry, cannot delete item :(",
         });
+      return actions.processedRequest();
     })
   );

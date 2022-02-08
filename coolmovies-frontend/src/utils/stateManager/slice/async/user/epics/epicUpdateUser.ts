@@ -20,5 +20,6 @@ export const epicUpdateUser: Epic = (
         return actions.loadUserError({
           error: "Sorry, cannot update item :(",
         });
+      return actions.processedRequest();
     })
   );

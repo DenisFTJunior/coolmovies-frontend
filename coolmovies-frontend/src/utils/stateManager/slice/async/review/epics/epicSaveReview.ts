@@ -20,5 +20,6 @@ export const epicSaveReview: Epic = (
         return actions.loadReviewError({
           error: "Sorry, cannot save item :(",
         });
+      return actions.processedRequest();
     })
   );

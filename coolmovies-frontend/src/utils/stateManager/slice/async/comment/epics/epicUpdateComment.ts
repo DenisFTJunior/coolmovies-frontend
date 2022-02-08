@@ -19,5 +19,6 @@ export const epicUpdateComment: Epic = (
         return actions.loadCommentError({
           error: "Sorry, cannot update item :(",
         });
+      return actions.processedRequest();
     })
   );

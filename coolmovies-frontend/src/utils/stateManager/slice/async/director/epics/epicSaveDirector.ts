@@ -20,5 +20,6 @@ export const epicSaveDirector: Epic = (
         return actions.loadDirectorError({
           error: "Sorry, cannot save item :(",
         });
+      return actions.processedRequest();
     })
   );

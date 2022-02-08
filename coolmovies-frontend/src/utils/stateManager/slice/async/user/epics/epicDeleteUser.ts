@@ -20,5 +20,6 @@ export const epicDeleteUser: Epic = (
         return actions.loadUserError({
           error: "Sorry, cannot delete item :(",
         });
+      return actions.processedRequest();
     })
   );

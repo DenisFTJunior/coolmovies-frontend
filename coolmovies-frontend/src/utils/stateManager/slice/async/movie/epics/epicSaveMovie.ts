@@ -20,5 +20,6 @@ export const epicSaveMovie: Epic = (
         return actions.loadMovieError({
           error: "Sorry, cannot save item :(",
         });
+      return actions.processedRequest();
     })
   );

@@ -42,6 +42,9 @@ export const directorSlice = createSlice({
       state.fetchedDirectors = undefined;
       state.error = undefined;
     },
+    processedRequest: (state) => {
+      state.error = undefined;
+    },
     loadedDirector: (
       state,
       action: PayloadAction<{ data: Directors | Director | undefined }>

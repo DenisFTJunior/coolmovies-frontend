@@ -22,10 +22,7 @@ export const reviewSlice = createSlice({
   name: "review",
   reducers: {
     fetchReview: (state, action: PayloadAction<{ vars: ReviewVars }>) => {},
-    fetchReviews: (
-      state,
-      action: PayloadAction<{ vars: ReviewsVars }>
-    ) => {},
+    fetchReviews: (state, action: PayloadAction<{ vars: ReviewsVars }>) => {},
     saveReview: (state, action: PayloadAction<{ vars: SaveReviewVars }>) => {},
     deleteReview: (
       state,
@@ -37,6 +34,9 @@ export const reviewSlice = createSlice({
     ) => {},
     clearReviewData: (state) => {
       state.fetchedReview = undefined;
+      state.error = undefined;
+    },
+    processedRequest: (state) => {
       state.error = undefined;
     },
     loadedReview: (

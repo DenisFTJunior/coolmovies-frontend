@@ -19,5 +19,6 @@ export const epicDeleteComment: Epic = (
         return actions.loadCommentError({
           error: "Sorry, cannot delete item :(",
         });
+      return actions.processedRequest();
     })
   );
