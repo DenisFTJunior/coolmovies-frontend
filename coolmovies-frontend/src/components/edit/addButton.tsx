@@ -59,6 +59,7 @@ export default function EditButton() {
         bottom: 16,
         right: 16,
       }}
+      data-testid="addButton"
     >
       <SpeedDial
         ariaLabel="Add button"
@@ -69,6 +70,7 @@ export default function EditButton() {
       >
         {buttons.map((button) => (
           <SpeedDialAction
+            data-testid="buttonAddOption"
             onClick={button.onClick}
             key={button.name}
             icon={button.icon}

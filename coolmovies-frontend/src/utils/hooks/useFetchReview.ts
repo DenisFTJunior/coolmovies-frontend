@@ -15,3 +15,15 @@ const useFetchingReviews = (vars: any = {}) => {
 };
 
 export default useFetchingReviews;
+
+export const useFetchingReview = (id: string) => {
+  const dispatch = useStateDispatch();
+  const { fetchReview } = reviewActions;
+  const stateReview = useStateSelector((state) => state.review);
+
+  const action = (v: string) => dispatch(fetchReview({ vars: { id: v } }));
+
+  action(id);
+
+  return [stateReview.fetchedReview, action, stateReview];
+};

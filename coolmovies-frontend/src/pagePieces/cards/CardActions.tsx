@@ -18,7 +18,7 @@ const CardActions = ({ item, actions }: CardProps) => {
   };
 
   return (
-    <Box sx={{ position: "relative", top: 1, right: 1 }}>
+    <Box sx={{ position: "relative", top: 1, right: 1 }} role="cardActions">
       <IconButton onClick={handleClick}>
         <MoreVertIcon />
       </IconButton>

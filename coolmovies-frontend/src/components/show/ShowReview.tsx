@@ -86,19 +86,30 @@ export const ShowReview = ({
           ? "linear-gradient(to top, white ,transparent)"
           : "",
       }}
+      data-testid="showReview"
     >
       {!!rating && (
-        <Stack justifyContent="flex-end">
+        <Stack justifyContent="flex-end" data-testid="reviewRating">
           <Rating value={review.rating} readOnly />
         </Stack>
       )}
 
-      <Typography variant="h6" gutterBottom component="div">
+      <Typography
+        variant="h6"
+        gutterBottom
+        component="div"
+        data-testid="reviewTitle"
+      >
         Review - {review.title}
       </Typography>
 
       {!!review.movieByMovieId && (
-        <Stack direction="row" justifyContent="flex-start" gap={2}>
+        <Stack
+          direction="row"
+          justifyContent="flex-start"
+          gap={2}
+          data-testid="reviewMovie"
+        >
           <Icon>
             <VideocamIcon />
           </Icon>
@@ -106,7 +117,9 @@ export const ShowReview = ({
         </Stack>
       )}
 
-      <Typography component="p">{review.body}</Typography>
+      <Typography component="p" data-testid="reviewBody">
+        {review.body}
+      </Typography>
     </Stack>
   );
 };

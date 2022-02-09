@@ -1,3 +1,4 @@
+import 'cross-fetch/polyfill';
 import { ApolloClient, DefaultOptions, InMemoryCache } from "@apollo/client";
 
 const cache = new InMemoryCache();
@@ -18,7 +19,7 @@ const defaultOptions: DefaultOptions = {
 };
 
 export const moviesClient = new ApolloClient({
-  uri: "http://localhost:5000/graphql", // CHANGE TO ENV
+  uri: process.env.API_GRAPHQL,
   cache,
   defaultOptions,
 });
