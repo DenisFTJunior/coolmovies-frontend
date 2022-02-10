@@ -21,10 +21,8 @@ export const useFetchingDirectors = (vars: DirectorsVars) => {
   const queryVars = cleanRequest(queryState.queries.director);
   const { fetchDirectors } = directorActions;
 
-  console.log("queryVars", queryVars);
-
   const action = (v: DirectorsVars = queryVars) =>
-    dispatch(fetchDirectors({ vars: { first: 20, ...v, ...vars } }));
+    dispatch(fetchDirectors({ vars: { first: 10, ...v, ...vars } }));
   action();
 
   return [stateDirector.fetchedDirectors, action, stateDirector];

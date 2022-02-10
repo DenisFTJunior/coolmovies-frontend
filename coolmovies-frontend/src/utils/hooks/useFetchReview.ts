@@ -13,7 +13,7 @@ const useFetchingReviews = (vars: ReviewsVars) => {
   const queryVars = cleanRequest(queryState.queries.review);
 
   const action = (v: ReviewsVars = queryVars) =>
-    dispatch(fetchReviews({ vars: { first: 20, ...v, ...vars } }));
+    dispatch(fetchReviews({ vars: { first: 10, ...v, ...vars } }));
 
   action();
 

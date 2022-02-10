@@ -1,8 +1,6 @@
 import * as React from "react";
-import Modal from "@mui/material/Modal";
 import CloseIcon from "@mui/icons-material/Close";
 import {
-  Box,
   IconButton,
   ModalUnstyled,
   Stack,

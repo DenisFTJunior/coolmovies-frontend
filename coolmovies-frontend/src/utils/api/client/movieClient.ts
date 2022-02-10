@@ -18,7 +18,7 @@ const defaultOptions: DefaultOptions = {
 };
 
 export const moviesClient = new ApolloClient({
-  uri: process.env.API_GRAPHQL,
+  uri:  process.env.API_GRAPHQL,
   cache,
   defaultOptions,
 });

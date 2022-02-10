@@ -4,9 +4,6 @@ import HomeIcon from "@mui/icons-material/Home";
 import CasinoIcon from "@mui/icons-material/Casino";
 import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 
-import { actions } from "../utils/stateManager/slice/sync/searchSlice";
-import { useDispatch } from "react-redux";
-import { StateDispatch } from "../schema/stateManager/StoreType";
 
 const NavBar = () => {
 

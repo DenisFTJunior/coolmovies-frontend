@@ -1,5 +1,6 @@
 import { Box, Paper, Typography } from "@mui/material";
 import { Comment } from "../schema/api/Comment";
+import React from "react";
 
 const MovieComment = ({ comment }: { comment: Comment }) => {
   return (

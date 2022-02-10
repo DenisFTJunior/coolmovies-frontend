@@ -1,6 +1,7 @@
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import React from "react";
 
 import { Movie } from "../../schema/api/Movie";
 import { Action } from "../../schema/components/Table";
