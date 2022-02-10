@@ -14,8 +14,8 @@ export interface Column {
   prop: any;
   sortOption: {
     entity: string;
-    direction: string;
   };
+  disableSortOption?: boolean;
   render?: (data: any) => JSX.Element;
 }
 

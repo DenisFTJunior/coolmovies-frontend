@@ -39,6 +39,7 @@ const columns = [
       entity: "",
       direction: "",
     },
+    disableSortOption: true,
   },
   {
     id: "actions",
@@ -48,6 +49,7 @@ const columns = [
       entity: "",
       direction: "",
     },
+    disableSortOption: true,
     render: (data: Movie) => {
       return <TableActions item={data} />;
     },

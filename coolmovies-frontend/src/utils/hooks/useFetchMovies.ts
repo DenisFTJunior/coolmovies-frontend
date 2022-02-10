@@ -13,7 +13,6 @@ const useFetchingMovies = (vars: MoviesVars) => {
   const action = (v: MoviesVars = queryVars) =>
     dispatch(fetchMovies({ vars: { first: 10, ...v, ...vars } }));
   action();
-
   const stateMovie = useStateSelector((state) => state.movie);
 
   return [stateMovie.fetchedMovies, action, stateMovie];

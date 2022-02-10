@@ -14,43 +14,48 @@ const TableHeader = ({
   refetch: any;
 }) => {
   const dispatch = useStateDispatch();
-  const stateGeneral = useStateSelector((state) => state.general);
+  const stateQuery = useStateSelector((state) => state.query);
   const { setSort } = queryActions;
 
-  const sortDirectionHandler = (column: Column) =>
-    column.sortOption.direction === "ASC" ? "asc" : "desc";
+  const sortDirectionHandler = () => {
+    if (stateQuery.queries.movie.sort?.direction)
+      return stateQuery.queries.movie.sort.direction;
+    return "ASC";
+  };
 
   return (
     <TableHead>
       <TableRow>
         {columns.map((column) => (
-          <TableCell
-            key={column.id}
-            sortDirection={sortDirectionHandler(column)}
-          >
-            <TableSortLabel
-              active={column.sortOption.entity === stateGeneral?.sort?.entity}
-              direction={sortDirectionHandler(column)}
-              onClick={() => {
-                dispatch(
-                  setSort({
-                    data: {
-                      entity: column.sortOption.entity,
-                      direction:
-                        column.sortOption === stateGeneral.sort
-                          ? stateGeneral.sort.direction === "ASC"
+          <TableCell key={column.id} sortDirection={sortDirectionHandler()}>
+            {!column.disableSortOption ? (
+              <TableSortLabel
+                active={
+                  column.sortOption.entity ===
+                  stateQuery?.queries.movie?.sort?.entity
+                }
+                direction={stateQuery?.queries?.movie?.sort?.direction || "ASC"}
+                onClick={() => {
+                  dispatch(
+                    setSort({
+                      data: {
+                        entity: column.sortOption.entity,
+                        direction:
+                          stateQuery?.queries.movie?.sort?.direction === "ASC"
                             ? "DESC"
-                            : "ASC"
-                          : "ASC",
-                    },
-                    query: "movie",
-                  })
-                );
-                refetch();
-              }}
-            >
-              {column.label}
-            </TableSortLabel>
+                            : "ASC",
+                      },
+                      query: "movie",
+                    })
+                  );
+                  refetch();
+                }}
+              >
+                {column.label}
+              </TableSortLabel>
+            ) : (
+              column.label
+            )}
           </TableCell>
         ))}
       </TableRow>
