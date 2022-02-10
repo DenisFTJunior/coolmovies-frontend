@@ -1,20 +1,21 @@
+import { ReviewsVars } from "../../schema/api/Reviews";
 import { useStateDispatch } from "../stateManager/hooks/useDispatch";
 import { useStateSelector } from "../stateManager/hooks/useSelector";
 import { actions as reviewActions } from "../stateManager/slice/async/review/reviewSlice";
 import { cleanRequest } from "./helpers/cleanRequest";
 
-const useFetchingReviews = () => {
+const useFetchingReviews = (vars: ReviewsVars) => {
   const dispatch = useStateDispatch();
   const { fetchReviews } = reviewActions;
   const queryState = useStateSelector((state) => state.query);
   const stateReview = useStateSelector((state) => state.review);
 
-  const queryVars = cleanRequest(queryState.review);
+  const queryVars = cleanRequest(queryState.queries.review);
 
-  const action = (v: object) =>
-    dispatch(fetchReviews({ vars: { first: 20, ...v } }));
+  const action = (v: ReviewsVars = queryVars) =>
+    dispatch(fetchReviews({ vars: { first: 20, ...v, ...vars } }));
 
-  action(queryVars);
+  action();
 
   return [stateReview.fetchedReview, action, stateReview];
 };

@@ -54,8 +54,14 @@ const columns = [
   },
 ];
 
-const MovieListSection = ({ movies }: { movies: Movies }) => {
-  return <Table data={movies} columns={columns} />;
+const MovieListSection = ({
+  movies,
+  refetch,
+}: {
+  movies: Movies;
+  refetch: any;
+}) => {
+  return <Table data={movies} columns={columns} refetch={refetch} />;
 };
 
 export default MovieListSection;

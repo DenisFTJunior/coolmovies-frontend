@@ -5,7 +5,7 @@ import { Movies } from "../../schema/api/Movies";
 import { useStateDispatch } from "../../utils/stateManager/hooks/useDispatch";
 import { actions as queryActions } from "../../utils/stateManager/slice/sync/querySlice";
 
-const TableFotter = ({ data }: { data: Movies }) => {
+const TableFotter = ({ data, refetch }: { data: Movies; refetch: any }) => {
   const dispatch = useStateDispatch();
   const { setPage } = queryActions;
 
@@ -17,9 +17,10 @@ const TableFotter = ({ data }: { data: Movies }) => {
       hidePrevButton={!data?.allMovies.pageInfo?.hasPreviousPage}
       variant="outlined"
       shape="rounded"
-      onChange={(event, page) =>
-        dispatch(setPage({ data: page, query: "movie" }))
-      }
+      onChange={(event, page) => {
+        dispatch(setPage({ data: page, query: "movie" }));
+        refetch();
+      }}
     />
   );
 };

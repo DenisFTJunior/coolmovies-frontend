@@ -6,7 +6,13 @@ import { useStateDispatch } from "../../utils/stateManager/hooks/useDispatch";
 import { useStateSelector } from "../../utils/stateManager/hooks/useSelector";
 import { actions as queryActions } from "../../utils/stateManager/slice/sync/querySlice";
 
-const TableHeader = ({ columns }: { columns: Column[] }) => {
+const TableHeader = ({
+  columns,
+  refetch,
+}: {
+  columns: Column[];
+  refetch: any;
+}) => {
   const dispatch = useStateDispatch();
   const stateGeneral = useStateSelector((state) => state.general);
   const { setSort } = queryActions;
@@ -25,7 +31,7 @@ const TableHeader = ({ columns }: { columns: Column[] }) => {
             <TableSortLabel
               active={column.sortOption.entity === stateGeneral?.sort?.entity}
               direction={sortDirectionHandler(column)}
-              onClick={() =>
+              onClick={() => {
                 dispatch(
                   setSort({
                     data: {
@@ -39,8 +45,9 @@ const TableHeader = ({ columns }: { columns: Column[] }) => {
                     },
                     query: "movie",
                   })
-                )
-              }
+                );
+                refetch();
+              }}
             >
               {column.label}
             </TableSortLabel>

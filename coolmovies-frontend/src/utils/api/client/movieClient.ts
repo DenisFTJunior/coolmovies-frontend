@@ -1,4 +1,3 @@
-import 'cross-fetch/polyfill';
 import { ApolloClient, DefaultOptions, InMemoryCache } from "@apollo/client";
 
 const cache = new InMemoryCache();

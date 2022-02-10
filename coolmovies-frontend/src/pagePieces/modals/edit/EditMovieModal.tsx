@@ -1,9 +1,9 @@
-import { assoc, compose, pick } from "ramda";
+import { pick } from "ramda";
+import React from "react";
 
 import SelectDirector from "../../../components/edit/SelectDirector";
 import SelectUser from "../../../components/edit/SelectUser";
 import EditModal from "../../../components/modal/EditModal";
-import { Movie } from "../../../schema/api/Movie";
 import { Item } from "../../../schema/components/Modal";
 import useMutateMovie from "../../../utils/hooks/useMutateMovie";
 

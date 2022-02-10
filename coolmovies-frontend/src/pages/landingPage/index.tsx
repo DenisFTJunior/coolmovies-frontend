@@ -8,7 +8,7 @@ import useFetchingMovies from "../../utils/hooks/useFetchMovies";
 import { Movie } from "../../schema/api/Movie";
 
 const LandingPage = () => {
-  const [movies] = useFetchingMovies({ vars: {} });
+  const [movies, action] = useFetchingMovies({});
   if (!movies) return <Loading />;
   return (
     <>
@@ -21,7 +21,7 @@ const LandingPage = () => {
           margin: "0 auto",
         }}
       >
-        <MovieListSection movies={movies} />
+        <MovieListSection movies={movies} refetch={action} />
       </Box>
 
       <Stack

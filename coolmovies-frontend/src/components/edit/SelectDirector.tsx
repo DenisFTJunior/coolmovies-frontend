@@ -17,7 +17,7 @@ import { SelectProps } from "../../schema/components/Select";
 const filter = createFilterOptions<DirectorOptionType>();
 
 const SelectDirector = ({ onBlur, id }: SelectProps) => {
-  const [directors] = useFetchingDirectors();
+  const [directors] = useFetchingDirectors({});
   const { save } = useMutateDirector();
 
   const [value, setValue] = useState<DirectorOptionType | null>(null);

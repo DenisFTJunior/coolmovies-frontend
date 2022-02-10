@@ -5,6 +5,7 @@ import { Review } from "../api/Review";
 export interface TableProps {
   columns: Column[];
   data: Movies;
+  refetch?: any;
 }
 
 export interface Column {
@@ -19,7 +20,7 @@ export interface Column {
 }
 
 export interface TableActionProps {
-  item: any
+  item: any;
 }
 
 export interface Action {

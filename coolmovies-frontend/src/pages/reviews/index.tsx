@@ -7,7 +7,7 @@ import { Review } from "../../schema/api/Review";
 import useFetchingReviews from "../../utils/hooks/useFetchReview";
 
 const Reviews = () => {
-  const [reviews] = useFetchingReviews({ vars: {} });
+  const [reviews] = useFetchingReviews({});
   if (!reviews) return <Loading />;
 
   return (

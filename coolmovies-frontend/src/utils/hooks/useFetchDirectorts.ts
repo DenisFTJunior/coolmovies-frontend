@@ -1,3 +1,4 @@
+import { DirectorsVars } from "../../schema/api/Directors";
 import { useStateDispatch } from "../stateManager/hooks/useDispatch";
 import { useStateSelector } from "../stateManager/hooks/useSelector";
 import { actions as directorActions } from "../stateManager/slice/async/director/directorSlice";
@@ -10,20 +11,21 @@ const useFetchingDirector = (id: string) => {
 
   const action = (v: string) => dispatch(fetchDirector({ vars: { id: v } }));
   action(id);
-
   return [stateDirector.fetchDirector, action, stateDirector];
 };
 
-export const useFetchingDirectors = (vars: Object = {}) => {
+export const useFetchingDirectors = (vars: DirectorsVars) => {
   const dispatch = useStateDispatch();
   const queryState = useStateSelector((state) => state.query);
   const stateDirector = useStateSelector((state) => state.director);
-  const queryVars = cleanRequest(queryState.movie);
+  const queryVars = cleanRequest(queryState.queries.director);
   const { fetchDirectors } = directorActions;
 
-  const action = (v: Object) =>
-    dispatch(fetchDirectors({ vars: { first: 20, ...v } }));
-  action(queryVars);
+  console.log("queryVars", queryVars);
+
+  const action = (v: DirectorsVars = queryVars) =>
+    dispatch(fetchDirectors({ vars: { first: 20, ...v, ...vars } }));
+  action();
 
   return [stateDirector.fetchedDirectors, action, stateDirector];
 };
