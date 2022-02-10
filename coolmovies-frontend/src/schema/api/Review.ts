@@ -8,7 +8,7 @@ export interface Review {
   rating: number;
   title: string;
   userReviewerId: string;
-  movieByMovieId: Movie;
+  movieByMovieId?: Movie;
 }
 
 export interface ReviewVars {
