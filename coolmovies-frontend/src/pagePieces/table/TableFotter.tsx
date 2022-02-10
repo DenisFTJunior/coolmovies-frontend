@@ -3,11 +3,11 @@ import React from "react";
 
 import { Movies } from "../../schema/api/Movies";
 import { useStateDispatch } from "../../utils/stateManager/hooks/useDispatch";
-import { actions as generalActions } from "../../utils/stateManager/slice/sync/generalSlice";
+import { actions as queryActions } from "../../utils/stateManager/slice/sync/querySlice";
 
 const TableFotter = ({ data }: { data: Movies }) => {
   const dispatch = useStateDispatch();
-  const { setPage } = generalActions;
+  const { setPage } = queryActions;
 
   return (
     <Pagination
@@ -17,7 +17,9 @@ const TableFotter = ({ data }: { data: Movies }) => {
       hidePrevButton={!data?.allMovies.pageInfo?.hasPreviousPage}
       variant="outlined"
       shape="rounded"
-      onChange={(event, page) => dispatch(setPage(page))}
+      onChange={(event, page) =>
+        dispatch(setPage({ data: page, query: "movie" }))
+      }
     />
   );
 };

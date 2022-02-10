@@ -1,50 +1,62 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import queryHandlerItems from "./config/queryHandlerItems";
 
 interface InitialState {
-  filter: Object | undefined;
-  sort: {
-    entity: string;
-    direction: string;
+  queries: {
+    [key: string]: {
+      filter: Object | undefined;
+      sort:
+        | {
+            entity: string;
+            direction: string;
+          }
+        | undefined;
+      page: number;
+    };
   };
-  page: number;
 }
 
 const initialState: InitialState = {
-  filter: undefined,
-  sort: {
-    entity: "",
-    direction: "ASC",
-  },
-  page: 1,
+  queries: queryHandlerItems,
 };
 
-export const generalSlice = createSlice({
+export const querySlice = createSlice({
   initialState,
   name: "query",
   reducers: {
     setSort: (
       state,
       action: PayloadAction<{
-        entity: string;
-        direction: string;
+        data: {
+          entity:string,
+          direction:string
+        };
+        query: string;
       }>
     ) => {
-      state.sort = action.payload;
+      (state.queries as any)[action.payload.query].sort = action.payload.data;
     },
-    setFilter: (state, action: PayloadAction<Object>) => {
-      state.filter = action.payload;
+    setFilter: (
+      state,
+      action: PayloadAction<{
+        data: Object;
+        query: string;
+      }>
+    ) => {
+      (state.queries as any)[action.payload.query].filter = action.payload;
     },
-    setPage: (state, action: PayloadAction<number>) => {
-      state.page = action.payload;
-    },
-    clearAll: (state) => {
-      state.filter = initialState.filter;
-      state.sort = initialState.sort;
-      state.page = 1;
+    setPage: (
+      state,
+      action: PayloadAction<{
+        data: number;
+        query: string;
+      }>
+    ) => {
+      (state.queries as any)[action.payload.query].page = action.payload;
     },
   },
 });
 
-export const { actions } = generalSlice;
-export type GeneralSliceAction = typeof actions;
-export default generalSlice.reducer;
+export const { actions } = querySlice;
+export type QuerySliceAction = typeof actions;
+export default querySlice.reducer;

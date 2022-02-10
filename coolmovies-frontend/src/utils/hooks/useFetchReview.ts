@@ -1,15 +1,20 @@
 import { useStateDispatch } from "../stateManager/hooks/useDispatch";
 import { useStateSelector } from "../stateManager/hooks/useSelector";
 import { actions as reviewActions } from "../stateManager/slice/async/review/reviewSlice";
+import { cleanRequest } from "./helpers/cleanRequest";
 
-const useFetchingReviews = (vars: any = {}) => {
+const useFetchingReviews = () => {
   const dispatch = useStateDispatch();
   const { fetchReviews } = reviewActions;
+  const queryState = useStateSelector((state) => state.query);
   const stateReview = useStateSelector((state) => state.review);
 
-  const action = (v: object) => dispatch(fetchReviews({ vars }));
+  const queryVars = cleanRequest(queryState.review);
 
-  action(vars);
+  const action = (v: object) =>
+    dispatch(fetchReviews({ vars: { first: 20, ...v } }));
+
+  action(queryVars);
 
   return [stateReview.fetchedReview, action, stateReview];
 };

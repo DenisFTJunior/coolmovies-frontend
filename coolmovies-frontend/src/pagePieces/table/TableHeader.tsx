@@ -28,13 +28,16 @@ const TableHeader = ({ columns }: { columns: Column[] }) => {
               onClick={() =>
                 dispatch(
                   setSort({
-                    entity: column.sortOption.entity,
-                    direction:
-                      column.sortOption === stateGeneral.sort
-                        ? stateGeneral.sort.direction === "ASC"
-                          ? "DESC"
-                          : "ASC"
-                        : "ASC",
+                    data: {
+                      entity: column.sortOption.entity,
+                      direction:
+                        column.sortOption === stateGeneral.sort
+                          ? stateGeneral.sort.direction === "ASC"
+                            ? "DESC"
+                            : "ASC"
+                          : "ASC",
+                    },
+                    query: "movie",
                   })
                 )
               }
