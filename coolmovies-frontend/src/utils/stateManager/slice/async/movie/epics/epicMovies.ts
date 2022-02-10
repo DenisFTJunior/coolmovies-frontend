@@ -13,7 +13,6 @@ export const epicFetchMovies: Epic = (
   return action$.pipe(
     filter(actions.fetchMovies.match),
     switchMap(async (action) => {
-      console.log("action.payload.vars", action.payload.vars);
       const { data, error } = await getMoviesQuery(action.payload.vars);
       if (error)
         return actions.loadMovieError({ error: "Sorry, cannot fetch data" });

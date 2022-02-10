@@ -15,7 +15,6 @@ const useFetchingUsers = (vars: UsersVars) => {
   const action = (v: UsersVars = queryVars) =>
     dispatch(fetchUsers({ vars: { first: 10, ...v, ...vars } }));
 
-  console.log("queryUsers", queryState);
   action();
 
   return [stateUser.fetchedUsers, action, stateUser];

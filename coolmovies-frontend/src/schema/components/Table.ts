@@ -1,6 +1,4 @@
-import { Movie } from "../api/Movie";
 import { Movies } from "../api/Movies";
-import { Review } from "../api/Review";
 
 export interface TableProps {
   columns: Column[];
